@@ -1,0 +1,3552 @@
+{
+  "TG-2026-000001": {
+    "case_id": "TG-2026-000001",
+    "verdict": "GENUINE",
+    "trust_score": 98.9,
+    "risk_level": "LOW",
+    "scam_probability": 0.2,
+    "genuine_probability": 99.5,
+    "suspicious_probability": 0.3,
+    "confidence": 99.5,
+    "top_reasons": [
+      "Organization recognized in official database: Union Public Service Commission",
+      "Official government domain confirmed: upsc.gov.in",
+      "Notification index matched active official gazette: 05/2026-CSP"
+    ],
+    "recommended_action": "SAFE TO CONTINUE. Ensure you submit your application solely through the official portal URL verified above and pay fees via authorized banking channels.",
+    "evidence_summary": {
+      "verified_count": 4,
+      "suspicious_count": 0,
+      "missing_count": 0,
+      "conflicting_count": 0,
+      "total_extracted": 14
+    },
+    "extracted_evidence": {
+      "organization": "Union Public Service Commission (UPSC)",
+      "department": "Department of Personnel and Training",
+      "notification_number": "05/2026-CSP",
+      "job_title": "CIVIL SERVICES",
+      "website": "https://upsc.gov.in",
+      "domain": "upsc.gov.in",
+      "email": "facilitation@upsc.gov.in",
+      "phone": null,
+      "application_fee": 100.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "payment of fee) are required to pay a fee of Rs",
+      "upi_id": null,
+      "bank_details": null,
+      "qr_detected": false,
+      "qr_data": null,
+      "social_media_handles": [],
+      "contact_person": null,
+      "source_platform": "Official Gazette / Web Portal"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-BCF6F94DE279",
+      "similarity_score": 95.0,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "Union Public Service Commission (UPSC)",
+          "claimed_department": "Department of Personnel and Training",
+          "is_central_or_state": "CENTRAL",
+          "entity_normalized_id": "4d6eebc766c3f4394dd20d63e6baf149a7e38ddf0edf9e5c3eea6632149e581a"
+        },
+        "notification_signature": {
+          "notification_number": "05/2026-CSP",
+          "has_standard_format": true,
+          "advt_fingerprint": "98742503040a16666698637240dcc6435315b98001555045fb451c00b65f2f3c"
+        },
+        "domain_signature": {
+          "domain": "upsc.gov.in",
+          "tld": "in",
+          "is_gov_in": true,
+          "is_suspicious_tld": false,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "facilitation@upsc.gov.in",
+          "email_domain": "upsc.gov.in",
+          "is_public_mailbox": false,
+          "phone": "",
+          "contact_channel": "Official Gazette / Web Portal"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": false,
+          "qr_type": "NONE"
+        },
+        "writing_signature": {
+          "linguistic_style": "FORMAL_RECRUITMENT",
+          "urgency_markers_count": 0,
+          "guaranteed_job_claim": false,
+          "nlp_risk_score": 0.0
+        },
+        "layout_signature": {
+          "format_type": "GAZETTE_OFFICIAL",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 100.0,
+          "is_personal_upi": false,
+          "upi_handle": "",
+          "payment_mechanism": "OFFICIAL_BANK_GATEWAY"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [
+        "Official Government Apex Domain (.gov.in / .nic.in)",
+        "No personal payment or unauthorized UPI collection detected",
+        "Official Government email host: @upsc.gov.in",
+        "Conforms to formal notification indexing: 05/2026-CSP",
+        "Formal administrative tone without coercive urgency",
+        "No unauthorized payment QR codes embedded"
+      ],
+      "mismatching_features": [],
+      "missing_features": [
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "upsc.gov.in",
+          "trusted_val": "*.gov.in / *.nic.in",
+          "status": "MATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "Official Gateway / Standard Fee",
+          "trusted_val": "Official Treasury / SBI e-Pay Portal",
+          "status": "MATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "facilitation@upsc.gov.in",
+          "trusted_val": "@*.gov.in or @*.nic.in",
+          "status": "MATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "05/2026-CSP",
+          "trusted_val": "Standard Gazette Format (e.g. 05/2026-CSP)",
+          "status": "MATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Formal administrative style",
+          "trusted_val": "Formal administrative style",
+          "status": "MATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "Safe / None",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000001",
+            "label": "05/2026-CSP",
+            "type": "Notification",
+            "status": "DEMO VERIFIED",
+            "title": "CIVIL SERVICES",
+            "fee": 100.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000001",
+            "label": "Union Public Service Commission (UPSC)",
+            "type": "Organization",
+            "status": "VERIFIED",
+            "dept": "Department of Personnel and Training"
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000001",
+            "label": "upsc.gov.in",
+            "type": "Domain",
+            "status": "DEMO VERIFIED",
+            "url": "https://upsc.gov.in",
+            "is_gov_in": true
+          }
+        },
+        {
+          "data": {
+            "id": "email_TG-2026-000001",
+            "label": "facilitation@upsc.gov.in",
+            "type": "Email",
+            "status": "DEMO VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000001",
+            "label": "Source: Official Gazette / Web Portal",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000001_org_TG-2026-000001_PUBLISHED_BY",
+            "source": "notif_TG-2026-000001",
+            "target": "org_TG-2026-000001",
+            "label": "PUBLISHED_BY",
+            "status": "VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000001_dom_TG-2026-000001_USES_DOMAIN",
+            "source": "notif_TG-2026-000001",
+            "target": "dom_TG-2026-000001",
+            "label": "USES_DOMAIN",
+            "status": "DEMO VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000001_email_TG-2026-000001_USES_EMAIL",
+            "source": "notif_TG-2026-000001",
+            "target": "email_TG-2026-000001",
+            "label": "USES_EMAIL",
+            "status": "DEMO VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000001_notif_TG-2026-000001_APPEARS_IN",
+            "source": "src_TG-2026-000001",
+            "target": "notif_TG-2026-000001",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        }
+      ],
+      "total_nodes": 5,
+      "total_edges": 4,
+      "suspicious_edges_count": 0,
+      "degree_centrality": {
+        "notif_TG-2026-000001": 1.0,
+        "org_TG-2026-000001": 0.25,
+        "dom_TG-2026-000001": 0.25,
+        "email_TG-2026-000001": 0.25,
+        "src_TG-2026-000001": 0.25
+      }
+    },
+    "verification_details": {
+      "organization_matched": true,
+      "organization_name": "Union Public Service Commission",
+      "org_key": "UPSC",
+      "organization_status": "VERIFIED",
+      "website_status": "VERIFIED",
+      "domain_status": "DEMO VERIFIED",
+      "email_status": "DEMO VERIFIED",
+      "notification_status": "DEMO VERIFIED",
+      "payment_channel_status": "NO_PERSONAL_UPI_DETECTED",
+      "official_portal": "upsc.gov.in",
+      "official_email_pattern": "@upsc.gov.in",
+      "verified_notification": {
+        "notification_number": "05/2026-CSP",
+        "title": "Civil Services (Preliminary) Examination 2026",
+        "department": "Department of Personnel and Training",
+        "website": "https://upsc.gov.in",
+        "application_fee": 100,
+        "payment_methods": [
+          "SBI Net Banking",
+          "Visa/Mastercard/Rupay Debit",
+          "SBI Challan"
+        ],
+        "source_url": "https://upsc.gov.in/examinations/active-examinations"
+      },
+      "conflicts": [],
+      "source_benchmark_available": true
+    },
+    "contradiction_findings": [],
+    "scam_network_findings": [],
+    "explainability": {
+      "top_factors": [
+        {
+          "feature": "organization_verified",
+          "label": "Official Department Recognition",
+          "contribution": 0.35,
+          "direction": "SUPPORTING",
+          "explanation": "Claim matches an existing constitutional or statutory hiring body (Union Public Service Commission)."
+        },
+        {
+          "feature": "domain_verified",
+          "label": "Official Apex Domain (.gov.in)",
+          "contribution": 0.4,
+          "direction": "SUPPORTING",
+          "explanation": "Portal is hosted on official National Informatics Centre (NIC) / Government of India infrastructure."
+        },
+        {
+          "feature": "notification_verified",
+          "label": "Gazette Notification Index Matched",
+          "contribution": 0.3,
+          "direction": "SUPPORTING",
+          "explanation": "Advertisement reference and vacancy cycle are actively indexed in the official registry."
+        }
+      ],
+      "supporting_evidence": [
+        "Organization recognized in official database: Union Public Service Commission",
+        "Official government domain confirmed: upsc.gov.in",
+        "Notification index matched active official gazette: 05/2026-CSP",
+        "High Recruitment DNA alignment (95.0%) with trusted civil service pattern."
+      ],
+      "risk_evidence": [],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "DEMO_CASE",
+      "raw_text_preview": "UNION PUBLIC SERVICE COMMISSION\nEXAMINATION NOTICE NO. 05/2026-CSP\nDATE: 14/02/2026\nCIVIL SERVICES (PRELIMINARY) EXAMINATION, 2026\n\nCandidates to ensure their eligibility for the Examination:\nAll candidates (male/female/transgender) are requested to ",
+      "file_info": {},
+      "source_platform": "Official Gazette / Web Portal"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:15:34.968959"
+  },
+  "TG-2026-000002": {
+    "case_id": "TG-2026-000002",
+    "verdict": "SCAM",
+    "trust_score": 1.0,
+    "risk_level": "HIGH",
+    "scam_probability": 99.6,
+    "genuine_probability": 0.2,
+    "suspicious_probability": 0.2,
+    "confidence": 99.6,
+    "top_reasons": [
+      "Personal UPI payment address requested: recruitment.officer@okaxis",
+      "Embedded direct money transfer QR code in document.",
+      "Unofficial non-government domain: indiapost-gds-apply.xyz",
+      "Free public webmail used: indiapost.gds.helpline@gmail.com"
+    ],
+    "recommended_action": "DO NOT PAY any registration fee. Do not click links or share Aadhaar/PAN cards. Official Indian government recruitments never collect fees via personal UPI handles or third-party web domains.",
+    "evidence_summary": {
+      "verified_count": 1,
+      "suspicious_count": 11,
+      "missing_count": 1,
+      "conflicting_count": 7,
+      "total_extracted": 18
+    },
+    "extracted_evidence": {
+      "organization": "Department of Posts (India Post)",
+      "department": "Ministry of Communications",
+      "notification_number": null,
+      "job_title": "ficer Sharma",
+      "website": "https://indiapost-gds-apply.xyz",
+      "domain": "indiapost-gds-apply.xyz",
+      "email": "indiapost.gds.helpline@gmail.com",
+      "phone": "+919876543210",
+      "application_fee": 500.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "Pay refundable security deposit of Rs",
+      "upi_id": "recruitment.officer@okaxis",
+      "bank_details": null,
+      "qr_detected": true,
+      "qr_data": "upi://pay?pa=recruitment.officer@okaxis&pn=RecruitmentOfficer",
+      "social_media_handles": [
+        "Telegram: okaxis",
+        "Telegram: gmail"
+      ],
+      "contact_person": "Senior Recruitment Officer Sharma",
+      "source_platform": "WhatsApp"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-C3A4E67D21BB",
+      "similarity_score": 0.0,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "Department of Posts (India Post)",
+          "claimed_department": "Ministry of Communications",
+          "is_central_or_state": "CENTRAL",
+          "entity_normalized_id": "5be9f417aed0017ae4d44b7bc27a2598471ccf53ff03cd50507ceb52169077b6"
+        },
+        "notification_signature": {
+          "notification_number": null,
+          "has_standard_format": false,
+          "advt_fingerprint": "c627c09c14e58e44bc51622dac392958ec88244e414b508020634f53cfcd1e69"
+        },
+        "domain_signature": {
+          "domain": "indiapost-gds-apply.xyz",
+          "tld": "xyz",
+          "is_gov_in": false,
+          "is_suspicious_tld": true,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "indiapost.gds.helpline@gmail.com",
+          "email_domain": "gmail.com",
+          "is_public_mailbox": true,
+          "phone": "+919876543210",
+          "contact_channel": "WhatsApp"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": true,
+          "qr_type": "UPI_PAYMENT"
+        },
+        "writing_signature": {
+          "linguistic_style": "COERCIVE_SCAM_STYLE",
+          "urgency_markers_count": 0,
+          "guaranteed_job_claim": true,
+          "nlp_risk_score": 75.0
+        },
+        "layout_signature": {
+          "format_type": "UNOFFICIAL_CIRCULAR",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 500.0,
+          "is_personal_upi": true,
+          "upi_handle": "recruitment.officer@okaxis",
+          "payment_mechanism": "PERSONAL_UPI"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [],
+      "mismatching_features": [
+        "Suspicious Unofficial Domain TLD: indiapost-gds-apply.xyz",
+        "Direct personal UPI payment handle requested: recruitment.officer@okaxis",
+        "Public free email provider used for official communications: @gmail.com",
+        "Contains deceptive '100% Guaranteed Job' claims strictly prohibited in civil service recruitment",
+        "Direct UPI Payment QR code embedded in document"
+      ],
+      "missing_features": [
+        "Notice lacks formal advertisement / gazette number",
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "indiapost-gds-apply.xyz",
+          "trusted_val": "*.gov.in / *.nic.in",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "recruitment.officer@okaxis",
+          "trusted_val": "Official Treasury / SBI e-Pay Portal",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "indiapost.gds.helpline@gmail.com",
+          "trusted_val": "@*.gov.in or @*.nic.in",
+          "status": "MISMATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "Missing",
+          "trusted_val": "Official Notification Number",
+          "status": "MISSING",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Direct selection / Guaranteed job claim detected",
+          "trusted_val": "Merit-based competitive exam guidelines",
+          "status": "MISMATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "UPI Payment QR Code",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MISMATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000002",
+            "label": "Notice-TG-2026-000002",
+            "type": "Notification",
+            "status": "MISSING",
+            "title": "ficer Sharma",
+            "fee": 500.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000002",
+            "label": "Department of Posts (India Post)",
+            "type": "Organization",
+            "status": "VERIFIED",
+            "dept": "Ministry of Communications"
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000002",
+            "label": "indiapost-gds-apply.xyz",
+            "type": "Domain",
+            "status": "SUSPICIOUS_NON_GOV_DOMAIN",
+            "url": "https://indiapost-gds-apply.xyz",
+            "is_gov_in": false
+          }
+        },
+        {
+          "data": {
+            "id": "email_TG-2026-000002",
+            "label": "indiapost.gds.helpline@gmail.com",
+            "type": "Email",
+            "status": "PUBLIC_PROVIDER_CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "phone_TG-2026-000002",
+            "label": "+919876543210",
+            "type": "Phone",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "qr_TG-2026-000002",
+            "label": "Payment QR Code",
+            "type": "QR",
+            "status": "CONFLICT",
+            "qr_data": "upi://pay?pa=recruitment.officer@okaxis&pn=RecruitmentOfficer"
+          }
+        },
+        {
+          "data": {
+            "id": "upi_TG-2026-000002",
+            "label": "recruitment.officer@okaxis",
+            "type": "UPI",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000002",
+            "label": "Source: WhatsApp",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge",
+            "strength": "KNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees",
+            "strength": "KNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants",
+            "strength": "KNOWN"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000002_org_TG-2026-000002_PUBLISHED_BY",
+            "source": "notif_TG-2026-000002",
+            "target": "org_TG-2026-000002",
+            "label": "PUBLISHED_BY",
+            "status": "VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000002_dom_TG-2026-000002_USES_DOMAIN",
+            "source": "notif_TG-2026-000002",
+            "target": "dom_TG-2026-000002",
+            "label": "USES_DOMAIN",
+            "status": "SUSPICIOUS_NON_GOV_DOMAIN"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000002_email_TG-2026-000002_USES_EMAIL",
+            "source": "notif_TG-2026-000002",
+            "target": "email_TG-2026-000002",
+            "label": "USES_EMAIL",
+            "status": "PUBLIC_PROVIDER_CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000002_phone_TG-2026-000002_CONTACTED_BY",
+            "source": "notif_TG-2026-000002",
+            "target": "phone_TG-2026-000002",
+            "label": "CONTACTED_BY",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000002_qr_TG-2026-000002_HAS_QR",
+            "source": "notif_TG-2026-000002",
+            "target": "qr_TG-2026-000002",
+            "label": "HAS_QR",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_qr_TG-2026-000002_upi_TG-2026-000002_POINTS_TO",
+            "source": "qr_TG-2026-000002",
+            "target": "upi_TG-2026-000002",
+            "label": "POINTS_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000002_notif_TG-2026-000002_APPEARS_IN",
+            "source": "src_TG-2026-000002",
+            "target": "notif_TG-2026-000002",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "e_phone_TG-2026-000002_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "phone_TG-2026-000002",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_upi_TG-2026-000002_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "upi_TG-2026-000002",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_dom_TG-2026-000002_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "dom_TG-2026-000002",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        }
+      ],
+      "total_nodes": 11,
+      "total_edges": 10,
+      "suspicious_edges_count": 6,
+      "degree_centrality": {
+        "notif_TG-2026-000002": 0.75,
+        "org_TG-2026-000002": 0.125,
+        "dom_TG-2026-000002": 0.25,
+        "email_TG-2026-000002": 0.125,
+        "phone_TG-2026-000002": 0.25,
+        "qr_TG-2026-000002": 0.25,
+        "upi_TG-2026-000002": 0.25,
+        "src_TG-2026-000002": 0.125,
+        "prev_case_TG-2026-DEMO-003": 0.375
+      }
+    },
+    "verification_details": {
+      "organization_matched": true,
+      "organization_name": "Department of Posts (India Post)",
+      "org_key": "INDIA_POST",
+      "organization_status": "VERIFIED",
+      "website_status": "NOT_FOUND",
+      "domain_status": "SUSPICIOUS_NON_GOV_DOMAIN",
+      "email_status": "PUBLIC_PROVIDER_CONFLICT",
+      "notification_status": "MISSING",
+      "payment_channel_status": "CRITICAL_CONFLICT_PERSONAL_UPI",
+      "official_portal": "indiapostgdsonline.gov.in",
+      "official_email_pattern": "@indiapost.gov.in",
+      "verified_notification": null,
+      "conflicts": [
+        {
+          "type": "SUSPICIOUS_DOMAIN",
+          "description": "Recruitment claims to be from Department of Posts (India Post), but directs applicants to an unofficial domain 'indiapost-gds-apply.xyz' instead of 'indiapostgdsonline.gov.in'."
+        },
+        {
+          "type": "PUBLIC_EMAIL_USED",
+          "description": "Recruitment for Department of Posts (India Post) lists a generic public email address (@gmail.com). Indian government recruitment bodies strictly use official .gov.in or .nic.in mail servers."
+        },
+        {
+          "type": "PERSONAL_UPI_PAYMENT",
+          "description": "Personal UPI ID 'recruitment.officer@okaxis' found. Indian government departments NEVER accept examination fees via personal UPI handles or direct money transfers. All payments must go through authorized treasury/banking gateways (SBI e-Pay/Bharatkosh)."
+        }
+      ],
+      "source_benchmark_available": true
+    },
+    "contradiction_findings": [
+      {
+        "rule_id": "RULE_CONTRADICTION_01_EMAIL_MISMATCH",
+        "factor": "Claimed Government Institution vs Public Email Provider",
+        "evidence": "Organization claimed: 'Department of Posts (India Post)', Contact Email provided: 'indiapost.gds.helpline@gmail.com'",
+        "severity": "HIGH",
+        "confidence": 0.95,
+        "explanation": "All official recruitment communications from Department of Posts (India Post) must originate from official institutional email gateways (*.gov.in or *.nic.in). Free public mailboxes (@gmail.com) are never authorized for official recruitment."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_02_PERSONAL_PAYMENT",
+        "factor": "Government Recruitment vs Personal UPI Payment Channel",
+        "evidence": "Fee collector: 'recruitment.officer@okaxis'",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "Official recruitment boards collect exam fees strictly through authorized cyber treasuries or SBI online portals. Individual UPI IDs or direct UPI QR codes are universally indicative of fraud."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_04_MISSING_ADVT_NUMBER",
+        "factor": "Absence of Formal Notification Reference Number",
+        "evidence": "No formal advertisement or notification number identified in message text",
+        "severity": "MEDIUM",
+        "confidence": 0.8,
+        "explanation": "Legitimate government recruitment notices always carry a specific notification/CEN reference code."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_05_DOMAIN_DECEPTION",
+        "factor": "Government Body Identity vs Commercial/Unofficial Domain",
+        "evidence": "Recruitment portal URL points to non-governmental domain: 'indiapost-gds-apply.xyz'",
+        "severity": "HIGH",
+        "confidence": 0.94,
+        "explanation": "Under Indian Central Government digital guidelines, all central and state recruitment portals must be hosted on *.gov.in or *.nic.in domains. The domain 'indiapost-gds-apply.xyz' is hosted outside official infrastructure."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_06_DIRECT_JOINING_CLAIM",
+        "factor": "Guaranteed Employment / Bypass of Statutory Competitive Exam",
+        "evidence": "Phrases promising 100% selection or direct appointment without examination",
+        "severity": "CRITICAL",
+        "confidence": 0.98,
+        "explanation": "Articles 14 and 16 of the Constitution of India mandate transparent, merit-based selection processes for public employment. Claims of direct joining without competitive examination violate statutory recruitment policy."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: PHONE",
+        "evidence": "Phone '+919876543210' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: UPI",
+        "evidence": "Upi 'recruitment.officer@okaxis' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: DOMAIN",
+        "evidence": "Domain 'indiapost-gds-apply.xyz' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants."
+      }
+    ],
+    "scam_network_findings": [
+      {
+        "entity_type": "phone",
+        "entity_value": "+919876543210",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge"
+      },
+      {
+        "entity_type": "upi",
+        "entity_value": "recruitment.officer@okaxis",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees"
+      },
+      {
+        "entity_type": "domain",
+        "entity_value": "indiapost-gds-apply.xyz",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants"
+      }
+    ],
+    "explainability": {
+      "top_factors": [
+        {
+          "feature": "organization_verified",
+          "label": "Official Department Recognition",
+          "contribution": 0.35,
+          "direction": "SUPPORTING",
+          "explanation": "Claim matches an existing constitutional or statutory hiring body (Department of Posts (India Post))."
+        },
+        {
+          "feature": "personal_upi_id",
+          "label": "Direct Personal Payment Handle",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Recruitment fee requests using personal UPI (@okaxis, @paytm, @ybl) are illegal for public recruitment."
+        },
+        {
+          "feature": "suspicious_domain",
+          "label": "Unofficial Web Domain",
+          "contribution": -0.45,
+          "direction": "RISK",
+          "explanation": "Indian government portals never operate on commercial TLDs (.xyz, .online, .site) for official exam registrations."
+        },
+        {
+          "feature": "public_email",
+          "label": "Public Webmail Used for Official Comms",
+          "contribution": -0.3,
+          "direction": "RISK",
+          "explanation": "Government departments do not conduct official recruitment communications via free public mail services."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (PHONE)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (UPI)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (DOMAIN)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        }
+      ],
+      "supporting_evidence": [
+        "Organization recognized in official database: Department of Posts (India Post)"
+      ],
+      "risk_evidence": [
+        "Personal UPI payment address requested: recruitment.officer@okaxis",
+        "Embedded direct money transfer QR code in document.",
+        "Unofficial non-government domain: indiapost-gds-apply.xyz",
+        "Free public webmail used: indiapost.gds.helpline@gmail.com",
+        "Entity matched known scam infrastructure: Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge",
+        "Entity matched known scam infrastructure: UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees",
+        "Entity matched known scam infrastructure: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants"
+      ],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "DEMO_CASE",
+      "raw_text_preview": "*INDIA POST RECRUITMENT CELL (GDS 2026)*\nMinistry of Communications, Government of India\n\nDirect Selection for 38,926 Gramin Dak Sevak (Branch Postmaster / Assistant Branch Postmaster) across all postal circles!\nDirect appointment letter based on 10t",
+      "file_info": {},
+      "source_platform": "WhatsApp"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:15:34.985095"
+  },
+  "TG-2026-000003": {
+    "case_id": "TG-2026-000003",
+    "verdict": "SCAM",
+    "trust_score": 1.0,
+    "risk_level": "HIGH",
+    "scam_probability": 96.6,
+    "genuine_probability": 1.2,
+    "suspicious_probability": 2.3,
+    "confidence": 96.6,
+    "top_reasons": [
+      "Unofficial non-government domain: rrb-recruitment-gov.online",
+      "Free public webmail used: rrb.support.desk@gmail.com",
+      "Entity matched known scam infrastructure: Phone number previously reported in case TG-2026-DEMO-002: Used in fake WhatsApp joining letter dispatch campaign",
+      "Entity matched known scam infrastructure: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-002: Typosquatting railway recruitment board domain with deceptive .online TLD"
+    ],
+    "recommended_action": "DO NOT PAY any registration fee. Do not click links or share Aadhaar/PAN cards. Official Indian government recruitments never collect fees via personal UPI handles or third-party web domains.",
+    "evidence_summary": {
+      "verified_count": 1,
+      "suspicious_count": 7,
+      "missing_count": 0,
+      "conflicting_count": 5,
+      "total_extracted": 15
+    },
+    "extracted_evidence": {
+      "organization": "Railway Recruitment Boards (RRB)",
+      "department": "Ministry of Railways",
+      "notification_number": "CEN 09/2026",
+      "job_title": "Assistant Station Master, Ticket Collector, Junior Clerk",
+      "website": "https://rrb-recruitment-gov.online",
+      "domain": "rrb-recruitment-gov.online",
+      "email": "rrb.support.desk@gmail.com",
+      "phone": "+918765432109",
+      "application_fee": 35.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "Pay: \u20b935,400 - \u20b962,000/-",
+      "upi_id": null,
+      "bank_details": null,
+      "qr_detected": false,
+      "qr_data": null,
+      "social_media_handles": [
+        "Telegram: gmail"
+      ],
+      "contact_person": null,
+      "source_platform": "Social Media"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-96882196B3E6",
+      "similarity_score": 32.5,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "Railway Recruitment Boards (RRB)",
+          "claimed_department": "Ministry of Railways",
+          "is_central_or_state": "CENTRAL",
+          "entity_normalized_id": "c05307b1579c371cb69af942f53b75c890881e86ac49939b29c2ef39fffd57db"
+        },
+        "notification_signature": {
+          "notification_number": "CEN 09/2026",
+          "has_standard_format": true,
+          "advt_fingerprint": "e466403b1df8a84f39cd44622eb522b529345eb75703878bac0cbc78eea9953f"
+        },
+        "domain_signature": {
+          "domain": "rrb-recruitment-gov.online",
+          "tld": "online",
+          "is_gov_in": false,
+          "is_suspicious_tld": true,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "rrb.support.desk@gmail.com",
+          "email_domain": "gmail.com",
+          "is_public_mailbox": true,
+          "phone": "+918765432109",
+          "contact_channel": "Social Media"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": false,
+          "qr_type": "NONE"
+        },
+        "writing_signature": {
+          "linguistic_style": "SUSPICIOUS_INFORMAL",
+          "urgency_markers_count": 2,
+          "guaranteed_job_claim": true,
+          "nlp_risk_score": 55.0
+        },
+        "layout_signature": {
+          "format_type": "UNOFFICIAL_CIRCULAR",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 35.0,
+          "is_personal_upi": false,
+          "upi_handle": "",
+          "payment_mechanism": "UNSPECIFIED"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [
+        "Conforms to formal notification indexing: CEN 09/2026",
+        "No unauthorized payment QR codes embedded"
+      ],
+      "mismatching_features": [
+        "Suspicious Unofficial Domain TLD: rrb-recruitment-gov.online",
+        "Public free email provider used for official communications: @gmail.com",
+        "Contains deceptive '100% Guaranteed Job' claims strictly prohibited in civil service recruitment"
+      ],
+      "missing_features": [
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "rrb-recruitment-gov.online",
+          "trusted_val": "*.gov.in / *.nic.in",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "Fee \u20b935.0",
+          "trusted_val": "Official Treasury",
+          "status": "UNVERIFIED",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "rrb.support.desk@gmail.com",
+          "trusted_val": "@*.gov.in or @*.nic.in",
+          "status": "MISMATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "CEN 09/2026",
+          "trusted_val": "Standard Gazette Format (e.g. 05/2026-CSP)",
+          "status": "MATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Direct selection / Guaranteed job claim detected",
+          "trusted_val": "Merit-based competitive exam guidelines",
+          "status": "MISMATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "Safe / None",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000003",
+            "label": "CEN 09/2026",
+            "type": "Notification",
+            "status": "VALID_FORMAT_NOT_IN_REGISTRY",
+            "title": "Assistant Station Master, Ticket Collector, Junior Clerk",
+            "fee": 35.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000003",
+            "label": "Railway Recruitment Boards (RRB)",
+            "type": "Organization",
+            "status": "VERIFIED",
+            "dept": "Ministry of Railways"
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000003",
+            "label": "rrb-recruitment-gov.online",
+            "type": "Domain",
+            "status": "SUSPICIOUS_NON_GOV_DOMAIN",
+            "url": "https://rrb-recruitment-gov.online",
+            "is_gov_in": false
+          }
+        },
+        {
+          "data": {
+            "id": "email_TG-2026-000003",
+            "label": "rrb.support.desk@gmail.com",
+            "type": "Email",
+            "status": "PUBLIC_PROVIDER_CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "phone_TG-2026-000003",
+            "label": "+918765432109",
+            "type": "Phone",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000003",
+            "label": "Source: Social Media",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-002",
+            "label": "Case: TG-2026-DEMO-002",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Phone number previously reported in case TG-2026-DEMO-002: Used in fake WhatsApp joining letter dispatch campaign",
+            "strength": "KNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-002",
+            "label": "Case: TG-2026-DEMO-002",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-002: Typosquatting railway recruitment board domain with deceptive .online TLD",
+            "strength": "KNOWN"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000003_org_TG-2026-000003_PUBLISHED_BY",
+            "source": "notif_TG-2026-000003",
+            "target": "org_TG-2026-000003",
+            "label": "PUBLISHED_BY",
+            "status": "VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000003_dom_TG-2026-000003_USES_DOMAIN",
+            "source": "notif_TG-2026-000003",
+            "target": "dom_TG-2026-000003",
+            "label": "USES_DOMAIN",
+            "status": "SUSPICIOUS_NON_GOV_DOMAIN"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000003_email_TG-2026-000003_USES_EMAIL",
+            "source": "notif_TG-2026-000003",
+            "target": "email_TG-2026-000003",
+            "label": "USES_EMAIL",
+            "status": "PUBLIC_PROVIDER_CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000003_phone_TG-2026-000003_CONTACTED_BY",
+            "source": "notif_TG-2026-000003",
+            "target": "phone_TG-2026-000003",
+            "label": "CONTACTED_BY",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000003_notif_TG-2026-000003_APPEARS_IN",
+            "source": "src_TG-2026-000003",
+            "target": "notif_TG-2026-000003",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "e_phone_TG-2026-000003_prev_case_TG-2026-DEMO-002_CONNECTED_TO",
+            "source": "phone_TG-2026-000003",
+            "target": "prev_case_TG-2026-DEMO-002",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_dom_TG-2026-000003_prev_case_TG-2026-DEMO-002_CONNECTED_TO",
+            "source": "dom_TG-2026-000003",
+            "target": "prev_case_TG-2026-DEMO-002",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        }
+      ],
+      "total_nodes": 8,
+      "total_edges": 7,
+      "suspicious_edges_count": 3,
+      "degree_centrality": {
+        "notif_TG-2026-000003": 0.833,
+        "org_TG-2026-000003": 0.167,
+        "dom_TG-2026-000003": 0.333,
+        "email_TG-2026-000003": 0.167,
+        "phone_TG-2026-000003": 0.333,
+        "src_TG-2026-000003": 0.167,
+        "prev_case_TG-2026-DEMO-002": 0.333
+      }
+    },
+    "verification_details": {
+      "organization_matched": true,
+      "organization_name": "Railway Recruitment Boards",
+      "org_key": "RRB",
+      "organization_status": "VERIFIED",
+      "website_status": "NOT_FOUND",
+      "domain_status": "SUSPICIOUS_NON_GOV_DOMAIN",
+      "email_status": "PUBLIC_PROVIDER_CONFLICT",
+      "notification_status": "VALID_FORMAT_NOT_IN_REGISTRY",
+      "payment_channel_status": "NO_PERSONAL_UPI_DETECTED",
+      "official_portal": "indianrailways.gov.in",
+      "official_email_pattern": "@railnet.gov.in",
+      "verified_notification": null,
+      "conflicts": [
+        {
+          "type": "SUSPICIOUS_DOMAIN",
+          "description": "Recruitment claims to be from Railway Recruitment Boards, but directs applicants to an unofficial domain 'rrb-recruitment-gov.online' instead of 'indianrailways.gov.in'."
+        },
+        {
+          "type": "PUBLIC_EMAIL_USED",
+          "description": "Recruitment for Railway Recruitment Boards lists a generic public email address (@gmail.com). Indian government recruitment bodies strictly use official .gov.in or .nic.in mail servers."
+        }
+      ],
+      "source_benchmark_available": true
+    },
+    "contradiction_findings": [
+      {
+        "rule_id": "RULE_CONTRADICTION_01_EMAIL_MISMATCH",
+        "factor": "Claimed Government Institution vs Public Email Provider",
+        "evidence": "Organization claimed: 'Railway Recruitment Boards (RRB)', Contact Email provided: 'rrb.support.desk@gmail.com'",
+        "severity": "HIGH",
+        "confidence": 0.95,
+        "explanation": "All official recruitment communications from Railway Recruitment Boards (RRB) must originate from official institutional email gateways (*.gov.in or *.nic.in). Free public mailboxes (@gmail.com) are never authorized for official recruitment."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_05_DOMAIN_DECEPTION",
+        "factor": "Government Body Identity vs Commercial/Unofficial Domain",
+        "evidence": "Recruitment portal URL points to non-governmental domain: 'rrb-recruitment-gov.online'",
+        "severity": "HIGH",
+        "confidence": 0.94,
+        "explanation": "Under Indian Central Government digital guidelines, all central and state recruitment portals must be hosted on *.gov.in or *.nic.in domains. The domain 'rrb-recruitment-gov.online' is hosted outside official infrastructure."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_06_DIRECT_JOINING_CLAIM",
+        "factor": "Guaranteed Employment / Bypass of Statutory Competitive Exam",
+        "evidence": "Phrases promising 100% selection or direct appointment without examination",
+        "severity": "CRITICAL",
+        "confidence": 0.98,
+        "explanation": "Articles 14 and 16 of the Constitution of India mandate transparent, merit-based selection processes for public employment. Claims of direct joining without competitive examination violate statutory recruitment policy."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: PHONE",
+        "evidence": "Phone '+918765432109' matches previously flagged scam case TG-2026-DEMO-002",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-002: Phone number previously reported in case TG-2026-DEMO-002: Used in fake WhatsApp joining letter dispatch campaign."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: DOMAIN",
+        "evidence": "Domain 'rrb-recruitment-gov.online' matches previously flagged scam case TG-2026-DEMO-002",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-002: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-002: Typosquatting railway recruitment board domain with deceptive .online TLD."
+      }
+    ],
+    "scam_network_findings": [
+      {
+        "entity_type": "phone",
+        "entity_value": "+918765432109",
+        "connected_case_id": "TG-2026-DEMO-002",
+        "connection_strength": "KNOWN",
+        "reason": "Phone number previously reported in case TG-2026-DEMO-002: Used in fake WhatsApp joining letter dispatch campaign"
+      },
+      {
+        "entity_type": "domain",
+        "entity_value": "rrb-recruitment-gov.online",
+        "connected_case_id": "TG-2026-DEMO-002",
+        "connection_strength": "KNOWN",
+        "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-002: Typosquatting railway recruitment board domain with deceptive .online TLD"
+      }
+    ],
+    "explainability": {
+      "top_factors": [
+        {
+          "feature": "organization_verified",
+          "label": "Official Department Recognition",
+          "contribution": 0.35,
+          "direction": "SUPPORTING",
+          "explanation": "Claim matches an existing constitutional or statutory hiring body (Railway Recruitment Boards)."
+        },
+        {
+          "feature": "suspicious_domain",
+          "label": "Unofficial Web Domain",
+          "contribution": -0.45,
+          "direction": "RISK",
+          "explanation": "Indian government portals never operate on commercial TLDs (.xyz, .online, .site) for official exam registrations."
+        },
+        {
+          "feature": "public_email",
+          "label": "Public Webmail Used for Official Comms",
+          "contribution": -0.3,
+          "direction": "RISK",
+          "explanation": "Government departments do not conduct official recruitment communications via free public mail services."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (PHONE)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-002."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (DOMAIN)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-002."
+        }
+      ],
+      "supporting_evidence": [
+        "Organization recognized in official database: Railway Recruitment Boards"
+      ],
+      "risk_evidence": [
+        "Unofficial non-government domain: rrb-recruitment-gov.online",
+        "Free public webmail used: rrb.support.desk@gmail.com",
+        "Entity matched known scam infrastructure: Phone number previously reported in case TG-2026-DEMO-002: Used in fake WhatsApp joining letter dispatch campaign",
+        "Entity matched known scam infrastructure: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-002: Typosquatting railway recruitment board domain with deceptive .online TLD"
+      ],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "DEMO_CASE",
+      "raw_text_preview": "RAILWAY RECRUITMENT BOARDS (RRB)\nSPECIAL RECRUITMENT NOTIFICATION 2026\nCentralized Employment Notice CEN 09/2026-RAIL\n\nUrgent hiring for 12,500 Posts: Assistant Station Master, Ticket Collector, Junior Clerk.\nMonthly Pay: \u20b935,400 - \u20b962,000/-\n\nHurry U",
+      "file_info": {},
+      "source_platform": "Social Media"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:15:34.993595"
+  },
+  "TG-2026-000004": {
+    "case_id": "TG-2026-000004",
+    "verdict": "SCAM",
+    "trust_score": 1.0,
+    "risk_level": "HIGH",
+    "scam_probability": 99.6,
+    "genuine_probability": 0.2,
+    "suspicious_probability": 0.2,
+    "confidence": 99.6,
+    "top_reasons": [
+      "Personal UPI payment address requested: recruitment.officer@okaxis",
+      "Embedded direct money transfer QR code in document.",
+      "Unofficial non-government domain: indiapost-gds-apply.xyz",
+      "Free public webmail used: indiapost.gds.helpline@gmail.com"
+    ],
+    "recommended_action": "DO NOT PAY any registration fee. Do not click links or share Aadhaar/PAN cards. Official Indian government recruitments never collect fees via personal UPI handles or third-party web domains.",
+    "evidence_summary": {
+      "verified_count": 1,
+      "suspicious_count": 11,
+      "missing_count": 1,
+      "conflicting_count": 7,
+      "total_extracted": 18
+    },
+    "extracted_evidence": {
+      "organization": "Department of Posts (India Post)",
+      "department": "Ministry of Communications",
+      "notification_number": null,
+      "job_title": "ficer Sharma",
+      "website": "https://indiapost-gds-apply.xyz",
+      "domain": "indiapost-gds-apply.xyz",
+      "email": "indiapost.gds.helpline@gmail.com",
+      "phone": "+919876543210",
+      "application_fee": 500.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "Pay refundable security deposit of Rs",
+      "upi_id": "recruitment.officer@okaxis",
+      "bank_details": null,
+      "qr_detected": true,
+      "qr_data": "upi://pay?pa=recruitment.officer@okaxis&pn=RecruitmentOfficer",
+      "social_media_handles": [
+        "Telegram: gmail",
+        "Telegram: okaxis"
+      ],
+      "contact_person": "Senior Recruitment Officer Sharma",
+      "source_platform": "WhatsApp"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-C3A4E67D21BB",
+      "similarity_score": 0.0,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "Department of Posts (India Post)",
+          "claimed_department": "Ministry of Communications",
+          "is_central_or_state": "CENTRAL",
+          "entity_normalized_id": "5be9f417aed0017ae4d44b7bc27a2598471ccf53ff03cd50507ceb52169077b6"
+        },
+        "notification_signature": {
+          "notification_number": null,
+          "has_standard_format": false,
+          "advt_fingerprint": "c627c09c14e58e44bc51622dac392958ec88244e414b508020634f53cfcd1e69"
+        },
+        "domain_signature": {
+          "domain": "indiapost-gds-apply.xyz",
+          "tld": "xyz",
+          "is_gov_in": false,
+          "is_suspicious_tld": true,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "indiapost.gds.helpline@gmail.com",
+          "email_domain": "gmail.com",
+          "is_public_mailbox": true,
+          "phone": "+919876543210",
+          "contact_channel": "WhatsApp"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": true,
+          "qr_type": "UPI_PAYMENT"
+        },
+        "writing_signature": {
+          "linguistic_style": "COERCIVE_SCAM_STYLE",
+          "urgency_markers_count": 0,
+          "guaranteed_job_claim": true,
+          "nlp_risk_score": 75.0
+        },
+        "layout_signature": {
+          "format_type": "UNOFFICIAL_CIRCULAR",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 500.0,
+          "is_personal_upi": true,
+          "upi_handle": "recruitment.officer@okaxis",
+          "payment_mechanism": "PERSONAL_UPI"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [],
+      "mismatching_features": [
+        "Suspicious Unofficial Domain TLD: indiapost-gds-apply.xyz",
+        "Direct personal UPI payment handle requested: recruitment.officer@okaxis",
+        "Public free email provider used for official communications: @gmail.com",
+        "Contains deceptive '100% Guaranteed Job' claims strictly prohibited in civil service recruitment",
+        "Direct UPI Payment QR code embedded in document"
+      ],
+      "missing_features": [
+        "Notice lacks formal advertisement / gazette number",
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "indiapost-gds-apply.xyz",
+          "trusted_val": "*.gov.in / *.nic.in",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "recruitment.officer@okaxis",
+          "trusted_val": "Official Treasury / SBI e-Pay Portal",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "indiapost.gds.helpline@gmail.com",
+          "trusted_val": "@*.gov.in or @*.nic.in",
+          "status": "MISMATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "Missing",
+          "trusted_val": "Official Notification Number",
+          "status": "MISSING",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Direct selection / Guaranteed job claim detected",
+          "trusted_val": "Merit-based competitive exam guidelines",
+          "status": "MISMATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "UPI Payment QR Code",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MISMATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000004",
+            "label": "Notice-TG-2026-000004",
+            "type": "Notification",
+            "status": "MISSING",
+            "title": "ficer Sharma",
+            "fee": 500.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000004",
+            "label": "Department of Posts (India Post)",
+            "type": "Organization",
+            "status": "VERIFIED",
+            "dept": "Ministry of Communications"
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000004",
+            "label": "indiapost-gds-apply.xyz",
+            "type": "Domain",
+            "status": "SUSPICIOUS_NON_GOV_DOMAIN",
+            "url": "https://indiapost-gds-apply.xyz",
+            "is_gov_in": false
+          }
+        },
+        {
+          "data": {
+            "id": "email_TG-2026-000004",
+            "label": "indiapost.gds.helpline@gmail.com",
+            "type": "Email",
+            "status": "PUBLIC_PROVIDER_CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "phone_TG-2026-000004",
+            "label": "+919876543210",
+            "type": "Phone",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "qr_TG-2026-000004",
+            "label": "Payment QR Code",
+            "type": "QR",
+            "status": "CONFLICT",
+            "qr_data": "upi://pay?pa=recruitment.officer@okaxis&pn=RecruitmentOfficer"
+          }
+        },
+        {
+          "data": {
+            "id": "upi_TG-2026-000004",
+            "label": "recruitment.officer@okaxis",
+            "type": "UPI",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000004",
+            "label": "Source: WhatsApp",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge",
+            "strength": "KNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees",
+            "strength": "KNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants",
+            "strength": "KNOWN"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000004_org_TG-2026-000004_PUBLISHED_BY",
+            "source": "notif_TG-2026-000004",
+            "target": "org_TG-2026-000004",
+            "label": "PUBLISHED_BY",
+            "status": "VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000004_dom_TG-2026-000004_USES_DOMAIN",
+            "source": "notif_TG-2026-000004",
+            "target": "dom_TG-2026-000004",
+            "label": "USES_DOMAIN",
+            "status": "SUSPICIOUS_NON_GOV_DOMAIN"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000004_email_TG-2026-000004_USES_EMAIL",
+            "source": "notif_TG-2026-000004",
+            "target": "email_TG-2026-000004",
+            "label": "USES_EMAIL",
+            "status": "PUBLIC_PROVIDER_CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000004_phone_TG-2026-000004_CONTACTED_BY",
+            "source": "notif_TG-2026-000004",
+            "target": "phone_TG-2026-000004",
+            "label": "CONTACTED_BY",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000004_qr_TG-2026-000004_HAS_QR",
+            "source": "notif_TG-2026-000004",
+            "target": "qr_TG-2026-000004",
+            "label": "HAS_QR",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_qr_TG-2026-000004_upi_TG-2026-000004_POINTS_TO",
+            "source": "qr_TG-2026-000004",
+            "target": "upi_TG-2026-000004",
+            "label": "POINTS_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000004_notif_TG-2026-000004_APPEARS_IN",
+            "source": "src_TG-2026-000004",
+            "target": "notif_TG-2026-000004",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "e_phone_TG-2026-000004_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "phone_TG-2026-000004",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_upi_TG-2026-000004_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "upi_TG-2026-000004",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_dom_TG-2026-000004_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "dom_TG-2026-000004",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        }
+      ],
+      "total_nodes": 11,
+      "total_edges": 10,
+      "suspicious_edges_count": 6,
+      "degree_centrality": {
+        "notif_TG-2026-000004": 0.75,
+        "org_TG-2026-000004": 0.125,
+        "dom_TG-2026-000004": 0.25,
+        "email_TG-2026-000004": 0.125,
+        "phone_TG-2026-000004": 0.25,
+        "qr_TG-2026-000004": 0.25,
+        "upi_TG-2026-000004": 0.25,
+        "src_TG-2026-000004": 0.125,
+        "prev_case_TG-2026-DEMO-003": 0.375
+      }
+    },
+    "verification_details": {
+      "organization_matched": true,
+      "organization_name": "Department of Posts (India Post)",
+      "org_key": "INDIA_POST",
+      "organization_status": "VERIFIED",
+      "website_status": "NOT_FOUND",
+      "domain_status": "SUSPICIOUS_NON_GOV_DOMAIN",
+      "email_status": "PUBLIC_PROVIDER_CONFLICT",
+      "notification_status": "MISSING",
+      "payment_channel_status": "CRITICAL_CONFLICT_PERSONAL_UPI",
+      "official_portal": "indiapostgdsonline.gov.in",
+      "official_email_pattern": "@indiapost.gov.in",
+      "verified_notification": null,
+      "conflicts": [
+        {
+          "type": "SUSPICIOUS_DOMAIN",
+          "description": "Recruitment claims to be from Department of Posts (India Post), but directs applicants to an unofficial domain 'indiapost-gds-apply.xyz' instead of 'indiapostgdsonline.gov.in'."
+        },
+        {
+          "type": "PUBLIC_EMAIL_USED",
+          "description": "Recruitment for Department of Posts (India Post) lists a generic public email address (@gmail.com). Indian government recruitment bodies strictly use official .gov.in or .nic.in mail servers."
+        },
+        {
+          "type": "PERSONAL_UPI_PAYMENT",
+          "description": "Personal UPI ID 'recruitment.officer@okaxis' found. Indian government departments NEVER accept examination fees via personal UPI handles or direct money transfers. All payments must go through authorized treasury/banking gateways (SBI e-Pay/Bharatkosh)."
+        }
+      ],
+      "source_benchmark_available": true
+    },
+    "contradiction_findings": [
+      {
+        "rule_id": "RULE_CONTRADICTION_01_EMAIL_MISMATCH",
+        "factor": "Claimed Government Institution vs Public Email Provider",
+        "evidence": "Organization claimed: 'Department of Posts (India Post)', Contact Email provided: 'indiapost.gds.helpline@gmail.com'",
+        "severity": "HIGH",
+        "confidence": 0.95,
+        "explanation": "All official recruitment communications from Department of Posts (India Post) must originate from official institutional email gateways (*.gov.in or *.nic.in). Free public mailboxes (@gmail.com) are never authorized for official recruitment."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_02_PERSONAL_PAYMENT",
+        "factor": "Government Recruitment vs Personal UPI Payment Channel",
+        "evidence": "Fee collector: 'recruitment.officer@okaxis'",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "Official recruitment boards collect exam fees strictly through authorized cyber treasuries or SBI online portals. Individual UPI IDs or direct UPI QR codes are universally indicative of fraud."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_04_MISSING_ADVT_NUMBER",
+        "factor": "Absence of Formal Notification Reference Number",
+        "evidence": "No formal advertisement or notification number identified in message text",
+        "severity": "MEDIUM",
+        "confidence": 0.8,
+        "explanation": "Legitimate government recruitment notices always carry a specific notification/CEN reference code."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_05_DOMAIN_DECEPTION",
+        "factor": "Government Body Identity vs Commercial/Unofficial Domain",
+        "evidence": "Recruitment portal URL points to non-governmental domain: 'indiapost-gds-apply.xyz'",
+        "severity": "HIGH",
+        "confidence": 0.94,
+        "explanation": "Under Indian Central Government digital guidelines, all central and state recruitment portals must be hosted on *.gov.in or *.nic.in domains. The domain 'indiapost-gds-apply.xyz' is hosted outside official infrastructure."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_06_DIRECT_JOINING_CLAIM",
+        "factor": "Guaranteed Employment / Bypass of Statutory Competitive Exam",
+        "evidence": "Phrases promising 100% selection or direct appointment without examination",
+        "severity": "CRITICAL",
+        "confidence": 0.98,
+        "explanation": "Articles 14 and 16 of the Constitution of India mandate transparent, merit-based selection processes for public employment. Claims of direct joining without competitive examination violate statutory recruitment policy."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: PHONE",
+        "evidence": "Phone '+919876543210' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: UPI",
+        "evidence": "Upi 'recruitment.officer@okaxis' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: DOMAIN",
+        "evidence": "Domain 'indiapost-gds-apply.xyz' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants."
+      }
+    ],
+    "scam_network_findings": [
+      {
+        "entity_type": "phone",
+        "entity_value": "+919876543210",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge"
+      },
+      {
+        "entity_type": "upi",
+        "entity_value": "recruitment.officer@okaxis",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees"
+      },
+      {
+        "entity_type": "domain",
+        "entity_value": "indiapost-gds-apply.xyz",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants"
+      }
+    ],
+    "explainability": {
+      "top_factors": [
+        {
+          "feature": "organization_verified",
+          "label": "Official Department Recognition",
+          "contribution": 0.35,
+          "direction": "SUPPORTING",
+          "explanation": "Claim matches an existing constitutional or statutory hiring body (Department of Posts (India Post))."
+        },
+        {
+          "feature": "personal_upi_id",
+          "label": "Direct Personal Payment Handle",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Recruitment fee requests using personal UPI (@okaxis, @paytm, @ybl) are illegal for public recruitment."
+        },
+        {
+          "feature": "suspicious_domain",
+          "label": "Unofficial Web Domain",
+          "contribution": -0.45,
+          "direction": "RISK",
+          "explanation": "Indian government portals never operate on commercial TLDs (.xyz, .online, .site) for official exam registrations."
+        },
+        {
+          "feature": "public_email",
+          "label": "Public Webmail Used for Official Comms",
+          "contribution": -0.3,
+          "direction": "RISK",
+          "explanation": "Government departments do not conduct official recruitment communications via free public mail services."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (PHONE)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (UPI)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (DOMAIN)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        }
+      ],
+      "supporting_evidence": [
+        "Organization recognized in official database: Department of Posts (India Post)"
+      ],
+      "risk_evidence": [
+        "Personal UPI payment address requested: recruitment.officer@okaxis",
+        "Embedded direct money transfer QR code in document.",
+        "Unofficial non-government domain: indiapost-gds-apply.xyz",
+        "Free public webmail used: indiapost.gds.helpline@gmail.com",
+        "Entity matched known scam infrastructure: Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge",
+        "Entity matched known scam infrastructure: UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees",
+        "Entity matched known scam infrastructure: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-003: Cloned application portal targeting rural applicants"
+      ],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "DEMO_CASE",
+      "raw_text_preview": "*INDIA POST RECRUITMENT CELL (GDS 2026)*\nMinistry of Communications, Government of India\n\nDirect Selection for 38,926 Gramin Dak Sevak (Branch Postmaster / Assistant Branch Postmaster) across all postal circles!\nDirect appointment letter based on 10t",
+      "file_info": {},
+      "source_platform": "WhatsApp"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:32:05.079671"
+  },
+  "TG-2026-000005": {
+    "case_id": "TG-2026-000005",
+    "verdict": "SCAM",
+    "trust_score": 2.0,
+    "risk_level": "HIGH",
+    "scam_probability": 92.0,
+    "genuine_probability": 4.8,
+    "suspicious_probability": 3.2,
+    "confidence": 92.0,
+    "top_reasons": [
+      "Personal UPI payment address requested: recruitment.officer@okaxis",
+      "Embedded direct money transfer QR code in document.",
+      "Entity matched known scam infrastructure: Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge",
+      "Entity matched known scam infrastructure: UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees"
+    ],
+    "recommended_action": "DO NOT PAY any registration fee. Do not click links or share Aadhaar/PAN cards. Official Indian government recruitments never collect fees via personal UPI handles or third-party web domains.",
+    "evidence_summary": {
+      "verified_count": 0,
+      "suspicious_count": 9,
+      "missing_count": 1,
+      "conflicting_count": 6,
+      "total_extracted": 16
+    },
+    "extracted_evidence": {
+      "organization": "Unspecified Government Body",
+      "department": null,
+      "notification_number": null,
+      "job_title": null,
+      "website": "https://example-recruitment-site.com",
+      "domain": "example-recruitment-site.com",
+      "email": "defencerecruitment.cell@yahoo.com",
+      "phone": "+919876543210",
+      "application_fee": 650.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "paying document verification fee of Rs",
+      "upi_id": "recruitment.officer@okaxis",
+      "bank_details": null,
+      "qr_detected": true,
+      "qr_data": "upi://pay?pa=recruitment.officer@okaxis&pn=RecruitmentOfficer",
+      "social_media_handles": [
+        "Telegram: yahoo",
+        "Telegram: okaxis"
+      ],
+      "contact_person": "Major V",
+      "source_platform": "Telegram"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-EEC7C411A9DB",
+      "similarity_score": 10.0,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "Unspecified Government Body",
+          "claimed_department": "UNSPECIFIED",
+          "is_central_or_state": "STATE_OR_OTHER",
+          "entity_normalized_id": "b726a3708b99ec503cec742142534598322c44fe78d40bbbb23d9f7241b3e619"
+        },
+        "notification_signature": {
+          "notification_number": null,
+          "has_standard_format": false,
+          "advt_fingerprint": "c627c09c14e58e44bc51622dac392958ec88244e414b508020634f53cfcd1e69"
+        },
+        "domain_signature": {
+          "domain": "example-recruitment-site.com",
+          "tld": "com",
+          "is_gov_in": false,
+          "is_suspicious_tld": false,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "defencerecruitment.cell@yahoo.com",
+          "email_domain": "yahoo.com",
+          "is_public_mailbox": true,
+          "phone": "+919876543210",
+          "contact_channel": "Telegram"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": true,
+          "qr_type": "UPI_PAYMENT"
+        },
+        "writing_signature": {
+          "linguistic_style": "FORMAL_RECRUITMENT",
+          "urgency_markers_count": 0,
+          "guaranteed_job_claim": false,
+          "nlp_risk_score": 0.0
+        },
+        "layout_signature": {
+          "format_type": "UNOFFICIAL_CIRCULAR",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 650.0,
+          "is_personal_upi": true,
+          "upi_handle": "recruitment.officer@okaxis",
+          "payment_mechanism": "PERSONAL_UPI"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [
+        "Formal administrative tone without coercive urgency"
+      ],
+      "mismatching_features": [
+        "Suspicious Unofficial Domain TLD: example-recruitment-site.com",
+        "Direct personal UPI payment handle requested: recruitment.officer@okaxis",
+        "Public free email provider used for official communications: @yahoo.com",
+        "Direct UPI Payment QR code embedded in document"
+      ],
+      "missing_features": [
+        "Notice lacks formal advertisement / gazette number",
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "example-recruitment-site.com",
+          "trusted_val": "*.gov.in / *.nic.in",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "recruitment.officer@okaxis",
+          "trusted_val": "Official Treasury / SBI e-Pay Portal",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "defencerecruitment.cell@yahoo.com",
+          "trusted_val": "@*.gov.in or @*.nic.in",
+          "status": "MISMATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "Missing",
+          "trusted_val": "Official Notification Number",
+          "status": "MISSING",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Formal administrative style",
+          "trusted_val": "Formal administrative style",
+          "status": "MATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "UPI Payment QR Code",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MISMATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000005",
+            "label": "Notice-TG-2026-000005",
+            "type": "Notification",
+            "status": "UNAVAILABLE",
+            "title": null,
+            "fee": 650.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000005",
+            "label": "Unspecified Government Body",
+            "type": "Organization",
+            "status": "UNKNOWN",
+            "dept": null
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000005",
+            "label": "example-recruitment-site.com",
+            "type": "Domain",
+            "status": "UNAVAILABLE",
+            "url": "https://example-recruitment-site.com",
+            "is_gov_in": false
+          }
+        },
+        {
+          "data": {
+            "id": "email_TG-2026-000005",
+            "label": "defencerecruitment.cell@yahoo.com",
+            "type": "Email",
+            "status": "UNAVAILABLE"
+          }
+        },
+        {
+          "data": {
+            "id": "phone_TG-2026-000005",
+            "label": "+919876543210",
+            "type": "Phone",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "qr_TG-2026-000005",
+            "label": "Payment QR Code",
+            "type": "QR",
+            "status": "CONFLICT",
+            "qr_data": "upi://pay?pa=recruitment.officer@okaxis&pn=RecruitmentOfficer"
+          }
+        },
+        {
+          "data": {
+            "id": "upi_TG-2026-000005",
+            "label": "recruitment.officer@okaxis",
+            "type": "UPI",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000005",
+            "label": "Source: Telegram",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge",
+            "strength": "KNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-003",
+            "label": "Case: TG-2026-DEMO-003",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees",
+            "strength": "KNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-004",
+            "label": "Case: TG-2026-DEMO-004",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment",
+            "strength": "KNOWN"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000005_org_TG-2026-000005_PUBLISHED_BY",
+            "source": "notif_TG-2026-000005",
+            "target": "org_TG-2026-000005",
+            "label": "PUBLISHED_BY",
+            "status": "UNKNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000005_dom_TG-2026-000005_USES_DOMAIN",
+            "source": "notif_TG-2026-000005",
+            "target": "dom_TG-2026-000005",
+            "label": "USES_DOMAIN",
+            "status": "UNAVAILABLE"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000005_email_TG-2026-000005_USES_EMAIL",
+            "source": "notif_TG-2026-000005",
+            "target": "email_TG-2026-000005",
+            "label": "USES_EMAIL",
+            "status": "UNAVAILABLE"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000005_phone_TG-2026-000005_CONTACTED_BY",
+            "source": "notif_TG-2026-000005",
+            "target": "phone_TG-2026-000005",
+            "label": "CONTACTED_BY",
+            "status": "SUSPICIOUS"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000005_qr_TG-2026-000005_HAS_QR",
+            "source": "notif_TG-2026-000005",
+            "target": "qr_TG-2026-000005",
+            "label": "HAS_QR",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_qr_TG-2026-000005_upi_TG-2026-000005_POINTS_TO",
+            "source": "qr_TG-2026-000005",
+            "target": "upi_TG-2026-000005",
+            "label": "POINTS_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000005_notif_TG-2026-000005_APPEARS_IN",
+            "source": "src_TG-2026-000005",
+            "target": "notif_TG-2026-000005",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "e_phone_TG-2026-000005_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "phone_TG-2026-000005",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_upi_TG-2026-000005_prev_case_TG-2026-DEMO-003_CONNECTED_TO",
+            "source": "upi_TG-2026-000005",
+            "target": "prev_case_TG-2026-DEMO-003",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_dom_TG-2026-000005_prev_case_TG-2026-DEMO-004_CONNECTED_TO",
+            "source": "dom_TG-2026-000005",
+            "target": "prev_case_TG-2026-DEMO-004",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        }
+      ],
+      "total_nodes": 11,
+      "total_edges": 10,
+      "suspicious_edges_count": 6,
+      "degree_centrality": {
+        "notif_TG-2026-000005": 0.667,
+        "org_TG-2026-000005": 0.111,
+        "dom_TG-2026-000005": 0.222,
+        "email_TG-2026-000005": 0.111,
+        "phone_TG-2026-000005": 0.222,
+        "qr_TG-2026-000005": 0.222,
+        "upi_TG-2026-000005": 0.222,
+        "src_TG-2026-000005": 0.111,
+        "prev_case_TG-2026-DEMO-003": 0.222,
+        "prev_case_TG-2026-DEMO-004": 0.111
+      }
+    },
+    "verification_details": {
+      "organization_matched": false,
+      "organization_name": "Unspecified Government Body",
+      "org_key": null,
+      "organization_status": "UNKNOWN",
+      "website_status": "UNAVAILABLE",
+      "domain_status": "UNAVAILABLE",
+      "email_status": "UNAVAILABLE",
+      "notification_status": "UNAVAILABLE",
+      "payment_channel_status": "UNVERIFIED",
+      "official_portal": null,
+      "official_email_pattern": null,
+      "verified_notification": null,
+      "conflicts": [
+        {
+          "type": "UNKNOWN_ORGANIZATION",
+          "description": "The organization 'Unspecified Government Body' is not listed in the verified government recruitment registry."
+        }
+      ],
+      "source_benchmark_available": false
+    },
+    "contradiction_findings": [
+      {
+        "rule_id": "RULE_CONTRADICTION_01_EMAIL_MISMATCH",
+        "factor": "Claimed Government Institution vs Public Email Provider",
+        "evidence": "Organization claimed: 'Unspecified Government Body', Contact Email provided: 'defencerecruitment.cell@yahoo.com'",
+        "severity": "HIGH",
+        "confidence": 0.95,
+        "explanation": "All official recruitment communications from Unspecified Government Body must originate from official institutional email gateways (*.gov.in or *.nic.in). Free public mailboxes (@yahoo.com) are never authorized for official recruitment."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_02_PERSONAL_PAYMENT",
+        "factor": "Government Recruitment vs Personal UPI Payment Channel",
+        "evidence": "Fee collector: 'recruitment.officer@okaxis'",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "Official recruitment boards collect exam fees strictly through authorized cyber treasuries or SBI online portals. Individual UPI IDs or direct UPI QR codes are universally indicative of fraud."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_05_DOMAIN_DECEPTION",
+        "factor": "Government Body Identity vs Commercial/Unofficial Domain",
+        "evidence": "Recruitment portal URL points to non-governmental domain: 'example-recruitment-site.com'",
+        "severity": "HIGH",
+        "confidence": 0.94,
+        "explanation": "Under Indian Central Government digital guidelines, all central and state recruitment portals must be hosted on *.gov.in or *.nic.in domains. The domain 'example-recruitment-site.com' is hosted outside official infrastructure."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: PHONE",
+        "evidence": "Phone '+919876543210' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: UPI",
+        "evidence": "Upi 'recruitment.officer@okaxis' matches previously flagged scam case TG-2026-DEMO-003",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-003: UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: DOMAIN",
+        "evidence": "Domain 'example-recruitment-site.com' matches previously flagged scam case TG-2026-DEMO-004",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-004: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment."
+      }
+    ],
+    "scam_network_findings": [
+      {
+        "entity_type": "phone",
+        "entity_value": "+919876543210",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge"
+      },
+      {
+        "entity_type": "upi",
+        "entity_value": "recruitment.officer@okaxis",
+        "connected_case_id": "TG-2026-DEMO-003",
+        "connection_strength": "KNOWN",
+        "reason": "UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees"
+      },
+      {
+        "entity_type": "domain",
+        "entity_value": "example-recruitment-site.com",
+        "connected_case_id": "TG-2026-DEMO-004",
+        "connection_strength": "KNOWN",
+        "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment"
+      }
+    ],
+    "explainability": {
+      "top_factors": [
+        {
+          "feature": "personal_upi_id",
+          "label": "Direct Personal Payment Handle",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Recruitment fee requests using personal UPI (@okaxis, @paytm, @ybl) are illegal for public recruitment."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (PHONE)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (UPI)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-003."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (DOMAIN)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-004."
+        }
+      ],
+      "supporting_evidence": [],
+      "risk_evidence": [
+        "Personal UPI payment address requested: recruitment.officer@okaxis",
+        "Embedded direct money transfer QR code in document.",
+        "Entity matched known scam infrastructure: Phone number previously reported in case TG-2026-DEMO-003: Reused in fake GDS appointment scheme requesting \u20b9850 verification charge",
+        "Entity matched known scam infrastructure: UPI recipient ID matched known fraudulent payment collector in case TG-2026-DEMO-003: Personal UPI ID collecting fraudulent registration fees",
+        "Entity matched known scam infrastructure: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment"
+      ],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "DEMO_CASE",
+      "raw_text_preview": "DEFENCE HEADQUARTERS RECRUITMENT BOARD\nGovt of India - Urgent Staff Recruitment 2026\n\nPosition: Multi-Tasking Staff (MTS) & Store Keeper (Grade III)\nTotal Vacancies: 4,200\nEligibility: 10th / 12th Pass\n\nNotice: Admit card will be issued only after pa",
+      "file_info": {},
+      "source_platform": "Telegram"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:35:00.741904"
+  },
+  "TG-2026-000006": {
+    "case_id": "TG-2026-000006",
+    "verdict": "SCAM",
+    "trust_score": 2.0,
+    "risk_level": "HIGH",
+    "scam_probability": 92.0,
+    "genuine_probability": 5.0,
+    "suspicious_probability": 3.0,
+    "confidence": 92.0,
+    "top_reasons": [
+      "Personal UPI payment address requested: fakegovt@upi",
+      "Entity matched known scam infrastructure: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment"
+    ],
+    "recommended_action": "DO NOT PAY any registration fee. Do not click links or share Aadhaar/PAN cards. Official Indian government recruitments never collect fees via personal UPI handles or third-party web domains.",
+    "evidence_summary": {
+      "verified_count": 0,
+      "suspicious_count": 4,
+      "missing_count": 1,
+      "conflicting_count": 3,
+      "total_extracted": 12
+    },
+    "extracted_evidence": {
+      "organization": "Unspecified Government Body",
+      "department": null,
+      "notification_number": null,
+      "job_title": null,
+      "website": "https://example-recruitment-site.com",
+      "domain": "example-recruitment-site.com",
+      "email": "recruitment@example.com",
+      "phone": null,
+      "application_fee": 500.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "Registration fee \u20b9500",
+      "upi_id": "fakegovt@upi",
+      "bank_details": null,
+      "qr_detected": false,
+      "qr_data": null,
+      "social_media_handles": [
+        "Telegram: example"
+      ],
+      "contact_person": null,
+      "source_platform": "SMS"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-6C7D95FCEC64",
+      "similarity_score": 15.0,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "Unspecified Government Body",
+          "claimed_department": "UNSPECIFIED",
+          "is_central_or_state": "STATE_OR_OTHER",
+          "entity_normalized_id": "b726a3708b99ec503cec742142534598322c44fe78d40bbbb23d9f7241b3e619"
+        },
+        "notification_signature": {
+          "notification_number": null,
+          "has_standard_format": false,
+          "advt_fingerprint": "c627c09c14e58e44bc51622dac392958ec88244e414b508020634f53cfcd1e69"
+        },
+        "domain_signature": {
+          "domain": "example-recruitment-site.com",
+          "tld": "com",
+          "is_gov_in": false,
+          "is_suspicious_tld": false,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "recruitment@example.com",
+          "email_domain": "example.com",
+          "is_public_mailbox": false,
+          "phone": "",
+          "contact_channel": "SMS"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": false,
+          "qr_type": "NONE"
+        },
+        "writing_signature": {
+          "linguistic_style": "FORMAL_RECRUITMENT",
+          "urgency_markers_count": 1,
+          "guaranteed_job_claim": false,
+          "nlp_risk_score": 15.0
+        },
+        "layout_signature": {
+          "format_type": "GAZETTE_OFFICIAL",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 500.0,
+          "is_personal_upi": true,
+          "upi_handle": "fakegovt@upi",
+          "payment_mechanism": "PERSONAL_UPI"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [
+        "Formal administrative tone without coercive urgency",
+        "No unauthorized payment QR codes embedded"
+      ],
+      "mismatching_features": [
+        "Suspicious Unofficial Domain TLD: example-recruitment-site.com",
+        "Direct personal UPI payment handle requested: fakegovt@upi",
+        "Non-governmental domain email: @example.com"
+      ],
+      "missing_features": [
+        "Notice lacks formal advertisement / gazette number",
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "example-recruitment-site.com",
+          "trusted_val": "*.gov.in / *.nic.in",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "fakegovt@upi",
+          "trusted_val": "Official Treasury / SBI e-Pay Portal",
+          "status": "MISMATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "recruitment@example.com",
+          "trusted_val": "@*.gov.in",
+          "status": "MISMATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "Missing",
+          "trusted_val": "Official Notification Number",
+          "status": "MISSING",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Formal administrative style",
+          "trusted_val": "Formal administrative style",
+          "status": "MATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "Safe / None",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000006",
+            "label": "Notice-TG-2026-000006",
+            "type": "Notification",
+            "status": "UNAVAILABLE",
+            "title": null,
+            "fee": 500.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000006",
+            "label": "Unspecified Government Body",
+            "type": "Organization",
+            "status": "UNKNOWN",
+            "dept": null
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000006",
+            "label": "example-recruitment-site.com",
+            "type": "Domain",
+            "status": "UNAVAILABLE",
+            "url": "https://example-recruitment-site.com",
+            "is_gov_in": false
+          }
+        },
+        {
+          "data": {
+            "id": "email_TG-2026-000006",
+            "label": "recruitment@example.com",
+            "type": "Email",
+            "status": "UNAVAILABLE"
+          }
+        },
+        {
+          "data": {
+            "id": "upi_TG-2026-000006",
+            "label": "fakegovt@upi",
+            "type": "UPI",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000006",
+            "label": "Source: SMS",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "prev_case_TG-2026-DEMO-004",
+            "label": "Case: TG-2026-DEMO-004",
+            "type": "CaseHistory",
+            "status": "CONFLICT",
+            "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment",
+            "strength": "KNOWN"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000006_org_TG-2026-000006_PUBLISHED_BY",
+            "source": "notif_TG-2026-000006",
+            "target": "org_TG-2026-000006",
+            "label": "PUBLISHED_BY",
+            "status": "UNKNOWN"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000006_dom_TG-2026-000006_USES_DOMAIN",
+            "source": "notif_TG-2026-000006",
+            "target": "dom_TG-2026-000006",
+            "label": "USES_DOMAIN",
+            "status": "UNAVAILABLE"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000006_email_TG-2026-000006_USES_EMAIL",
+            "source": "notif_TG-2026-000006",
+            "target": "email_TG-2026-000006",
+            "label": "USES_EMAIL",
+            "status": "UNAVAILABLE"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000006_upi_TG-2026-000006_REQUESTS_PAYMENT",
+            "source": "notif_TG-2026-000006",
+            "target": "upi_TG-2026-000006",
+            "label": "REQUESTS_PAYMENT",
+            "status": "CONFLICT"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000006_notif_TG-2026-000006_APPEARS_IN",
+            "source": "src_TG-2026-000006",
+            "target": "notif_TG-2026-000006",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        },
+        {
+          "data": {
+            "id": "e_dom_TG-2026-000006_prev_case_TG-2026-DEMO-004_CONNECTED_TO",
+            "source": "dom_TG-2026-000006",
+            "target": "prev_case_TG-2026-DEMO-004",
+            "label": "CONNECTED_TO",
+            "status": "CONFLICT"
+          }
+        }
+      ],
+      "total_nodes": 7,
+      "total_edges": 6,
+      "suspicious_edges_count": 2,
+      "degree_centrality": {
+        "notif_TG-2026-000006": 0.833,
+        "org_TG-2026-000006": 0.167,
+        "dom_TG-2026-000006": 0.333,
+        "email_TG-2026-000006": 0.167,
+        "upi_TG-2026-000006": 0.167,
+        "src_TG-2026-000006": 0.167,
+        "prev_case_TG-2026-DEMO-004": 0.167
+      }
+    },
+    "verification_details": {
+      "organization_matched": false,
+      "organization_name": "Unspecified Government Body",
+      "org_key": null,
+      "organization_status": "UNKNOWN",
+      "website_status": "UNAVAILABLE",
+      "domain_status": "UNAVAILABLE",
+      "email_status": "UNAVAILABLE",
+      "notification_status": "UNAVAILABLE",
+      "payment_channel_status": "UNVERIFIED",
+      "official_portal": null,
+      "official_email_pattern": null,
+      "verified_notification": null,
+      "conflicts": [
+        {
+          "type": "UNKNOWN_ORGANIZATION",
+          "description": "The organization 'Unspecified Government Body' is not listed in the verified government recruitment registry."
+        }
+      ],
+      "source_benchmark_available": false
+    },
+    "contradiction_findings": [
+      {
+        "rule_id": "RULE_CONTRADICTION_02_PERSONAL_PAYMENT",
+        "factor": "Government Recruitment vs Personal UPI Payment Channel",
+        "evidence": "Fee collector: 'fakegovt@upi'",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "Official recruitment boards collect exam fees strictly through authorized cyber treasuries or SBI online portals. Individual UPI IDs or direct UPI QR codes are universally indicative of fraud."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_05_DOMAIN_DECEPTION",
+        "factor": "Government Body Identity vs Commercial/Unofficial Domain",
+        "evidence": "Recruitment portal URL points to non-governmental domain: 'example-recruitment-site.com'",
+        "severity": "HIGH",
+        "confidence": 0.94,
+        "explanation": "Under Indian Central Government digital guidelines, all central and state recruitment portals must be hosted on *.gov.in or *.nic.in domains. The domain 'example-recruitment-site.com' is hosted outside official infrastructure."
+      },
+      {
+        "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+        "factor": "Reused Scam Infrastructure: DOMAIN",
+        "evidence": "Domain 'example-recruitment-site.com' matches previously flagged scam case TG-2026-DEMO-004",
+        "severity": "CRITICAL",
+        "confidence": 0.99,
+        "explanation": "This entity was previously cataloged as active fraudulent infrastructure in case TG-2026-DEMO-004: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment."
+      }
+    ],
+    "scam_network_findings": [
+      {
+        "entity_type": "domain",
+        "entity_value": "example-recruitment-site.com",
+        "connected_case_id": "TG-2026-DEMO-004",
+        "connection_strength": "KNOWN",
+        "reason": "Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment"
+      }
+    ],
+    "explainability": {
+      "top_factors": [
+        {
+          "feature": "personal_upi_id",
+          "label": "Direct Personal Payment Handle",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Recruitment fee requests using personal UPI (@okaxis, @paytm, @ybl) are illegal for public recruitment."
+        },
+        {
+          "feature": "syndicate_link",
+          "label": "Repeated Scam Infrastructure (DOMAIN)",
+          "contribution": -0.5,
+          "direction": "RISK",
+          "explanation": "Matched previous flagged case TG-2026-DEMO-004."
+        }
+      ],
+      "supporting_evidence": [],
+      "risk_evidence": [
+        "Personal UPI payment address requested: fakegovt@upi",
+        "Entity matched known scam infrastructure: Domain matches known deceptive recruitment portal in case TG-2026-DEMO-004: Generic scam landing page asking for UPI fee payment"
+      ],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "DEMO_CASE",
+      "raw_text_preview": "Government Recruitment 2026\nApply immediately.\nRegistration fee \u20b9500.\nContact r***t@example.com\nPayment through UPI: fakegovt@upi\nWebsite: example-recruitment-site.com",
+      "file_info": {},
+      "source_platform": "SMS"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:35:20.088238"
+  },
+  "TG-2026-000007": {
+    "case_id": "TG-2026-000007",
+    "verdict": "GENUINE",
+    "trust_score": 98.9,
+    "risk_level": "LOW",
+    "scam_probability": 0.2,
+    "genuine_probability": 99.5,
+    "suspicious_probability": 0.3,
+    "confidence": 99.5,
+    "top_reasons": [
+      "Organization recognized in official database: Union Public Service Commission",
+      "Official government domain confirmed: upsc.gov.in",
+      "Notification index matched active official gazette: 05/2026-CSP"
+    ],
+    "recommended_action": "SAFE TO CONTINUE. Ensure you submit your application solely through the official portal URL verified above and pay fees via authorized banking channels.",
+    "evidence_summary": {
+      "verified_count": 4,
+      "suspicious_count": 0,
+      "missing_count": 0,
+      "conflicting_count": 0,
+      "total_extracted": 14
+    },
+    "extracted_evidence": {
+      "organization": "Union Public Service Commission (UPSC)",
+      "department": "Department of Personnel and Training",
+      "notification_number": "05/2026-CSP",
+      "job_title": "CIVIL SERVICES",
+      "website": "https://upsc.gov.in",
+      "domain": "upsc.gov.in",
+      "email": "facilitation@upsc.gov.in",
+      "phone": null,
+      "application_fee": 100.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "payment of fee) are required to pay a fee of Rs",
+      "upi_id": null,
+      "bank_details": null,
+      "qr_detected": false,
+      "qr_data": null,
+      "social_media_handles": [],
+      "contact_person": null,
+      "source_platform": "Official Gazette / Web Portal"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-BCF6F94DE279",
+      "similarity_score": 95.0,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "Union Public Service Commission (UPSC)",
+          "claimed_department": "Department of Personnel and Training",
+          "is_central_or_state": "CENTRAL",
+          "entity_normalized_id": "4d6eebc766c3f4394dd20d63e6baf149a7e38ddf0edf9e5c3eea6632149e581a"
+        },
+        "notification_signature": {
+          "notification_number": "05/2026-CSP",
+          "has_standard_format": true,
+          "advt_fingerprint": "98742503040a16666698637240dcc6435315b98001555045fb451c00b65f2f3c"
+        },
+        "domain_signature": {
+          "domain": "upsc.gov.in",
+          "tld": "in",
+          "is_gov_in": true,
+          "is_suspicious_tld": false,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "facilitation@upsc.gov.in",
+          "email_domain": "upsc.gov.in",
+          "is_public_mailbox": false,
+          "phone": "",
+          "contact_channel": "Official Gazette / Web Portal"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": false,
+          "qr_type": "NONE"
+        },
+        "writing_signature": {
+          "linguistic_style": "FORMAL_RECRUITMENT",
+          "urgency_markers_count": 0,
+          "guaranteed_job_claim": false,
+          "nlp_risk_score": 0.0
+        },
+        "layout_signature": {
+          "format_type": "GAZETTE_OFFICIAL",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 100.0,
+          "is_personal_upi": false,
+          "upi_handle": "",
+          "payment_mechanism": "OFFICIAL_BANK_GATEWAY"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [
+        "Official Government Apex Domain (.gov.in / .nic.in)",
+        "No personal payment or unauthorized UPI collection detected",
+        "Official Government email host: @upsc.gov.in",
+        "Conforms to formal notification indexing: 05/2026-CSP",
+        "Formal administrative tone without coercive urgency",
+        "No unauthorized payment QR codes embedded"
+      ],
+      "mismatching_features": [],
+      "missing_features": [
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "upsc.gov.in",
+          "trusted_val": "*.gov.in / *.nic.in",
+          "status": "MATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "Official Gateway / Standard Fee",
+          "trusted_val": "Official Treasury / SBI e-Pay Portal",
+          "status": "MATCH",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "facilitation@upsc.gov.in",
+          "trusted_val": "@*.gov.in or @*.nic.in",
+          "status": "MATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "05/2026-CSP",
+          "trusted_val": "Standard Gazette Format (e.g. 05/2026-CSP)",
+          "status": "MATCH",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Formal administrative style",
+          "trusted_val": "Formal administrative style",
+          "status": "MATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "Safe / None",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000007",
+            "label": "05/2026-CSP",
+            "type": "Notification",
+            "status": "DEMO VERIFIED",
+            "title": "CIVIL SERVICES",
+            "fee": 100.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000007",
+            "label": "Union Public Service Commission (UPSC)",
+            "type": "Organization",
+            "status": "VERIFIED",
+            "dept": "Department of Personnel and Training"
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000007",
+            "label": "upsc.gov.in",
+            "type": "Domain",
+            "status": "DEMO VERIFIED",
+            "url": "https://upsc.gov.in",
+            "is_gov_in": true
+          }
+        },
+        {
+          "data": {
+            "id": "email_TG-2026-000007",
+            "label": "facilitation@upsc.gov.in",
+            "type": "Email",
+            "status": "DEMO VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000007",
+            "label": "Source: Official Gazette / Web Portal",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000007_org_TG-2026-000007_PUBLISHED_BY",
+            "source": "notif_TG-2026-000007",
+            "target": "org_TG-2026-000007",
+            "label": "PUBLISHED_BY",
+            "status": "VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000007_dom_TG-2026-000007_USES_DOMAIN",
+            "source": "notif_TG-2026-000007",
+            "target": "dom_TG-2026-000007",
+            "label": "USES_DOMAIN",
+            "status": "DEMO VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000007_email_TG-2026-000007_USES_EMAIL",
+            "source": "notif_TG-2026-000007",
+            "target": "email_TG-2026-000007",
+            "label": "USES_EMAIL",
+            "status": "DEMO VERIFIED"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000007_notif_TG-2026-000007_APPEARS_IN",
+            "source": "src_TG-2026-000007",
+            "target": "notif_TG-2026-000007",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        }
+      ],
+      "total_nodes": 5,
+      "total_edges": 4,
+      "suspicious_edges_count": 0,
+      "degree_centrality": {
+        "notif_TG-2026-000007": 1.0,
+        "org_TG-2026-000007": 0.25,
+        "dom_TG-2026-000007": 0.25,
+        "email_TG-2026-000007": 0.25,
+        "src_TG-2026-000007": 0.25
+      }
+    },
+    "verification_details": {
+      "organization_matched": true,
+      "organization_name": "Union Public Service Commission",
+      "org_key": "UPSC",
+      "organization_status": "VERIFIED",
+      "website_status": "VERIFIED",
+      "domain_status": "DEMO VERIFIED",
+      "email_status": "DEMO VERIFIED",
+      "notification_status": "DEMO VERIFIED",
+      "payment_channel_status": "NO_PERSONAL_UPI_DETECTED",
+      "official_portal": "upsc.gov.in",
+      "official_email_pattern": "@upsc.gov.in",
+      "verified_notification": {
+        "notification_number": "05/2026-CSP",
+        "title": "Civil Services (Preliminary) Examination 2026",
+        "department": "Department of Personnel and Training",
+        "website": "https://upsc.gov.in",
+        "application_fee": 100,
+        "payment_methods": [
+          "SBI Net Banking",
+          "Visa/Mastercard/Rupay Debit",
+          "SBI Challan"
+        ],
+        "source_url": "https://upsc.gov.in/examinations/active-examinations"
+      },
+      "conflicts": [],
+      "source_benchmark_available": true
+    },
+    "contradiction_findings": [],
+    "scam_network_findings": [],
+    "explainability": {
+      "top_factors": [
+        {
+          "feature": "organization_verified",
+          "label": "Official Department Recognition",
+          "contribution": 0.35,
+          "direction": "SUPPORTING",
+          "explanation": "Claim matches an existing constitutional or statutory hiring body (Union Public Service Commission)."
+        },
+        {
+          "feature": "domain_verified",
+          "label": "Official Apex Domain (.gov.in)",
+          "contribution": 0.4,
+          "direction": "SUPPORTING",
+          "explanation": "Portal is hosted on official National Informatics Centre (NIC) / Government of India infrastructure."
+        },
+        {
+          "feature": "notification_verified",
+          "label": "Gazette Notification Index Matched",
+          "contribution": 0.3,
+          "direction": "SUPPORTING",
+          "explanation": "Advertisement reference and vacancy cycle are actively indexed in the official registry."
+        }
+      ],
+      "supporting_evidence": [
+        "Organization recognized in official database: Union Public Service Commission",
+        "Official government domain confirmed: upsc.gov.in",
+        "Notification index matched active official gazette: 05/2026-CSP",
+        "High Recruitment DNA alignment (95.0%) with trusted civil service pattern."
+      ],
+      "risk_evidence": [],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "DEMO_CASE",
+      "raw_text_preview": "UNION PUBLIC SERVICE COMMISSION\nEXAMINATION NOTICE NO. 05/2026-CSP\nDATE: 14/02/2026\nCIVIL SERVICES (PRELIMINARY) EXAMINATION, 2026\n\nCandidates to ensure their eligibility for the Examination:\nAll candidates (male/female/transgender) are requested to ",
+      "file_info": {},
+      "source_platform": "Official Gazette / Web Portal"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:35:27.693779"
+  },
+  "TG-2026-000008": {
+    "case_id": "TG-2026-000008",
+    "verdict": "INCONCLUSIVE",
+    "trust_score": 50.0,
+    "risk_level": "MEDIUM",
+    "scam_probability": 0.8,
+    "genuine_probability": 9.5,
+    "suspicious_probability": 89.7,
+    "confidence": 89.7,
+    "top_reasons": [
+      "Insufficient evidence provided to establish authenticity or fraud",
+      "Please verify directly through official state/central gazette portals"
+    ],
+    "recommended_action": "INCONCLUSIVE. The notification lacks verifiable identifiers. Contact the claimed department's verified helpline or visit their official .gov.in portal.",
+    "evidence_summary": {
+      "verified_count": 0,
+      "suspicious_count": 0,
+      "missing_count": 3,
+      "conflicting_count": 0,
+      "total_extracted": 10
+    },
+    "extracted_evidence": {
+      "organization": null,
+      "department": null,
+      "notification_number": null,
+      "job_title": "Junior Software Developer",
+      "website": "https://abc-tech-careers.example/register",
+      "domain": "abc-tech-careers.example",
+      "email": null,
+      "phone": null,
+      "application_fee": 35.0,
+      "currency": "INR",
+      "dates": {
+        "start_date": null,
+        "deadline": null,
+        "exam_date": null
+      },
+      "location": "All India / Specified Locations",
+      "payment_instructions": "pay a \u20b91,499 refundable registration/security fee",
+      "upi_id": null,
+      "bank_details": null,
+      "qr_detected": false,
+      "qr_data": null,
+      "social_media_handles": [],
+      "contact_person": null,
+      "source_platform": "WhatsApp"
+    },
+    "recruitment_dna": {
+      "dna_id": "DNA-C8C3C732E907",
+      "similarity_score": 45.0,
+      "signatures": {
+        "organization_signature": {
+          "claimed_organization": "UNSPECIFIED",
+          "claimed_department": "UNSPECIFIED",
+          "is_central_or_state": "STATE_OR_OTHER",
+          "entity_normalized_id": "87b544c35ba570941182dd2beca725faef4079d890a0b418c2e1828859bfced8"
+        },
+        "notification_signature": {
+          "notification_number": null,
+          "has_standard_format": false,
+          "advt_fingerprint": "c627c09c14e58e44bc51622dac392958ec88244e414b508020634f53cfcd1e69"
+        },
+        "domain_signature": {
+          "domain": "abc-tech-careers.example",
+          "tld": "example",
+          "is_gov_in": false,
+          "is_suspicious_tld": false,
+          "protocol": "HTTPS"
+        },
+        "contact_signature": {
+          "email": "",
+          "email_domain": "",
+          "is_public_mailbox": false,
+          "phone": "",
+          "contact_channel": "WhatsApp"
+        },
+        "visual_signature": {
+          "has_emblem_crest": true,
+          "qr_detected": false,
+          "qr_type": "NONE"
+        },
+        "writing_signature": {
+          "linguistic_style": "FORMAL_RECRUITMENT",
+          "urgency_markers_count": 0,
+          "guaranteed_job_claim": false,
+          "nlp_risk_score": 0.0
+        },
+        "layout_signature": {
+          "format_type": "GAZETTE_OFFICIAL",
+          "has_tabular_vacancies": true
+        },
+        "payment_signature": {
+          "has_application_fee": true,
+          "fee_amount": 35.0,
+          "is_personal_upi": false,
+          "upi_handle": "",
+          "payment_mechanism": "UNSPECIFIED"
+        },
+        "temporal_signature": {
+          "deadline": null,
+          "has_realistic_window": false
+        }
+      },
+      "matching_features": [
+        "Formal administrative tone without coercive urgency",
+        "No unauthorized payment QR codes embedded"
+      ],
+      "mismatching_features": [],
+      "missing_features": [
+        "No contact email address provided",
+        "Notice lacks formal advertisement / gazette number",
+        "No clear deadline specified"
+      ],
+      "comparison_breakdown": [
+        {
+          "feature_name": "Domain Authority",
+          "category": "Domain Signature",
+          "submitted_val": "abc-tech-careers.example",
+          "trusted_val": "*.gov.in",
+          "status": "UNVERIFIED",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Payment Gateway",
+          "category": "Payment Signature",
+          "submitted_val": "Fee \u20b935.0",
+          "trusted_val": "Official Treasury",
+          "status": "UNVERIFIED",
+          "weight": 25.0
+        },
+        {
+          "feature_name": "Official Email Domain",
+          "category": "Contact Signature",
+          "submitted_val": "None",
+          "trusted_val": "@*.gov.in",
+          "status": "MISSING",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Notification Indexing",
+          "category": "Notification Signature",
+          "submitted_val": "Missing",
+          "trusted_val": "Official Notification Number",
+          "status": "MISSING",
+          "weight": 15.0
+        },
+        {
+          "feature_name": "Linguistic Integrity",
+          "category": "Writing Signature",
+          "submitted_val": "Formal administrative style",
+          "trusted_val": "Formal administrative style",
+          "status": "MATCH",
+          "weight": 10.0
+        },
+        {
+          "feature_name": "Application Window",
+          "category": "Temporal Signature",
+          "submitted_val": "Not specified",
+          "trusted_val": "Explicit closing date",
+          "status": "MISSING",
+          "weight": 5.0
+        },
+        {
+          "feature_name": "Document QR Safety",
+          "category": "Visual Signature",
+          "submitted_val": "Safe / None",
+          "trusted_val": "No standalone fee collection QR",
+          "status": "MATCH",
+          "weight": 5.0
+        }
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        {
+          "data": {
+            "id": "notif_TG-2026-000008",
+            "label": "Notice-TG-2026-000008",
+            "type": "Notification",
+            "status": "UNAVAILABLE",
+            "title": "Junior Software Developer",
+            "fee": 35.0
+          }
+        },
+        {
+          "data": {
+            "id": "org_TG-2026-000008",
+            "label": "Claimed Government Body",
+            "type": "Organization",
+            "status": "MISSING",
+            "dept": null
+          }
+        },
+        {
+          "data": {
+            "id": "dom_TG-2026-000008",
+            "label": "abc-tech-careers.example",
+            "type": "Domain",
+            "status": "UNAVAILABLE",
+            "url": "https://abc-tech-careers.example/register",
+            "is_gov_in": false
+          }
+        },
+        {
+          "data": {
+            "id": "src_TG-2026-000008",
+            "label": "Source: WhatsApp",
+            "type": "Source",
+            "status": "NEUTRAL"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000008_org_TG-2026-000008_PUBLISHED_BY",
+            "source": "notif_TG-2026-000008",
+            "target": "org_TG-2026-000008",
+            "label": "PUBLISHED_BY",
+            "status": "MISSING"
+          }
+        },
+        {
+          "data": {
+            "id": "e_notif_TG-2026-000008_dom_TG-2026-000008_USES_DOMAIN",
+            "source": "notif_TG-2026-000008",
+            "target": "dom_TG-2026-000008",
+            "label": "USES_DOMAIN",
+            "status": "UNAVAILABLE"
+          }
+        },
+        {
+          "data": {
+            "id": "e_src_TG-2026-000008_notif_TG-2026-000008_APPEARS_IN",
+            "source": "src_TG-2026-000008",
+            "target": "notif_TG-2026-000008",
+            "label": "APPEARS_IN",
+            "status": "NEUTRAL"
+          }
+        }
+      ],
+      "total_nodes": 4,
+      "total_edges": 3,
+      "suspicious_edges_count": 0,
+      "degree_centrality": {
+        "notif_TG-2026-000008": 1.0,
+        "org_TG-2026-000008": 0.333,
+        "dom_TG-2026-000008": 0.333,
+        "src_TG-2026-000008": 0.333
+      }
+    },
+    "verification_details": {
+      "organization_matched": false,
+      "organization_name": "",
+      "org_key": null,
+      "organization_status": "MISSING",
+      "website_status": "UNAVAILABLE",
+      "domain_status": "UNAVAILABLE",
+      "email_status": "UNAVAILABLE",
+      "notification_status": "UNAVAILABLE",
+      "payment_channel_status": "UNVERIFIED",
+      "official_portal": null,
+      "official_email_pattern": null,
+      "verified_notification": null,
+      "conflicts": [
+        {
+          "type": "UNKNOWN_ORGANIZATION",
+          "description": "The organization '' is not listed in the verified government recruitment registry."
+        }
+      ],
+      "source_benchmark_available": false
+    },
+    "contradiction_findings": [],
+    "scam_network_findings": [],
+    "explainability": {
+      "top_factors": [],
+      "supporting_evidence": [],
+      "risk_evidence": [],
+      "model_type": "Gradient Boosting Ensemble (Demo Calibrated)"
+    },
+    "input_metadata": {
+      "input_type": "PASTED_TEXT",
+      "raw_text_preview": "Company: ABC Technologies Pvt. Ltd.\r\nPosition: Junior Software Developer\r\nSalary: \u20b935,000 \u2013 \u20b955,000/month\r\nLocation: Bangalore / Remote\r\n\r\nCongratulations! Your profile has been shortlisted for the above position. To confirm your interview slot, plea",
+      "file_info": {},
+      "source_platform": "WhatsApp"
+    },
+    "demo_mode": true,
+    "created_at": "2026-09-30T20:36:22.042313"
+  }
+}

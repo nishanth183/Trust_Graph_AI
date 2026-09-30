@@ -1,0 +1,64 @@
+{
+  "phones": [
+    {
+      "value": "+919876543210",
+      "case_id": "TG-2026-DEMO-003",
+      "organization_claimed": "India Post / Postal Department",
+      "report_date": "2026-02-14",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Reused in fake GDS appointment scheme requesting \u20b9850 verification charge"
+    },
+    {
+      "value": "+918765432109",
+      "case_id": "TG-2026-DEMO-002",
+      "organization_claimed": "Railway Recruitment Board",
+      "report_date": "2026-01-20",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Used in fake WhatsApp joining letter dispatch campaign"
+    }
+  ],
+  "upi_ids": [
+    {
+      "value": "recruitment.officer@okaxis",
+      "case_id": "TG-2026-DEMO-003",
+      "organization_claimed": "India Post GDS",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Personal UPI ID collecting fraudulent registration fees"
+    },
+    {
+      "value": "railway.cell.verify@paytm",
+      "case_id": "TG-2026-DEMO-002",
+      "organization_claimed": "RRB Group D",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Fake processing fee collection"
+    },
+    {
+      "value": "fakegovt@upi",
+      "case_id": "TG-2026-000006",
+      "organization_claimed": "Unspecified Government Body",
+      "status": "FLAGGED",
+      "reason": "Payment recipient flagged in case TG-2026-000006"
+    }
+  ],
+  "domains": [
+    {
+      "value": "rrb-recruitment-gov.online",
+      "case_id": "TG-2026-DEMO-002",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Typosquatting railway recruitment board domain with deceptive .online TLD"
+    },
+    {
+      "value": "indiapost-gds-apply.xyz",
+      "case_id": "TG-2026-DEMO-003",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Cloned application portal targeting rural applicants"
+    },
+    {
+      "value": "example-recruitment-site.com",
+      "case_id": "TG-2026-DEMO-004",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Generic scam landing page asking for UPI fee payment"
+    }
+  ],
+  "qr_hashes": []
+}

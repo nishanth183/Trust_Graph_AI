@@ -1,0 +1,66 @@
+[
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:15:34.977745",
+    "details": {
+      "case_id": "TG-2026-000001",
+      "verdict": "GENUINE"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:15:34.988309",
+    "details": {
+      "case_id": "TG-2026-000002",
+      "verdict": "SCAM"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:15:34.995679",
+    "details": {
+      "case_id": "TG-2026-000003",
+      "verdict": "SCAM"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:32:05.109945",
+    "details": {
+      "case_id": "TG-2026-000004",
+      "verdict": "SCAM"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:35:00.744905",
+    "details": {
+      "case_id": "TG-2026-000005",
+      "verdict": "SCAM"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:35:20.091252",
+    "details": {
+      "case_id": "TG-2026-000006",
+      "verdict": "SCAM"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:35:27.700302",
+    "details": {
+      "case_id": "TG-2026-000007",
+      "verdict": "GENUINE"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-09-30T20:36:22.046314",
+    "details": {
+      "case_id": "TG-2026-000008",
+      "verdict": "INCONCLUSIVE"
+    }
+  }
+]
