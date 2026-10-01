@@ -1,315 +1,378 @@
 import React from 'react';
 import { 
-  ShieldCheck, 
-  AlertOctagon, 
-  HelpCircle, 
   ArrowRight, 
-  Sparkles, 
-  FileText, 
-  Upload, 
-  Globe, 
-  Dna, 
-  Network, 
+  MessageSquare, 
+  Search, 
+  ShieldCheck, 
   CheckCircle2, 
-  AlertTriangle, 
-  XCircle,
-  Lock,
-  Layers
+  AlertCircle, 
+  Landmark, 
+  ShieldAlert, 
+  Check, 
+  Clock, 
+  Award,
+  Sparkles
 } from 'lucide-react';
 
 export default function HomeView({ onStartVerification, onLoadDemoCase }) {
   return (
-    <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '40px 24px' }}>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 24px', display: 'flex', flexDirection: 'column', gap: '56px' }}>
       
-      {/* Hero Section */}
+      {/* Hero Section (Matching Screen 1 of Reference) */}
       <div style={{
-        textAlign: 'center',
-        padding: '60px 20px 40px',
-        position: 'relative'
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+        gap: '48px',
+        alignItems: 'center',
+        padding: '24px 0'
       }}>
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '6px 16px',
-          borderRadius: '9999px',
-          background: 'rgba(56, 189, 248, 0.1)',
-          border: '1px solid rgba(56, 189, 248, 0.25)',
-          color: '#38bdf8',
-          fontSize: '13px',
-          fontWeight: 600,
-          marginBottom: '20px'
-        }}>
-          <Sparkles size={16} />
-          <span>Core Principle: "We don't trust the message; we trust the evidence."</span>
-        </div>
+        
+        {/* Left Hero Content */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{
+            fontSize: '12px',
+            fontWeight: 800,
+            letterSpacing: '0.08em',
+            color: 'var(--color-primary)',
+            textTransform: 'uppercase'
+          }}>
+            CHECK BEFORE YOU TRUST
+          </div>
 
-        <h1 style={{
-          fontSize: '52px',
-          fontWeight: 800,
-          letterSpacing: '-1.5px',
-          lineHeight: 1.15,
-          marginBottom: '20px'
-        }}>
-          Verify Fake Government Recruitment <br />
-          <span className="gradient-text-cyan">Before You Trust</span>
-        </h1>
+          <h1 style={{
+            fontSize: '44px',
+            fontWeight: 800,
+            lineHeight: 1.15,
+            letterSpacing: '-0.03em',
+            color: 'var(--text-primary)'
+          }}>
+            Got a government<br />job message?<br />
+            <span style={{ color: 'var(--color-primary)' }}>Let's check it.</span>
+          </h1>
 
-        <p style={{
-          fontSize: '18px',
-          color: '#94a3b8',
-          maxWidth: '720px',
-          margin: '0 auto 36px',
-          lineHeight: 1.6
-        }}>
-          Protect yourself and job seekers from fraudulent Indian civil service and PSU notices. 
-          TrustGraph AI analyzes message text, circular PDFs, screenshots, and URLs using 
-          <strong> Recruitment DNA</strong> and <strong>Evidence Graphs</strong>.
-        </p>
+          <p style={{
+            fontSize: '16px',
+            lineHeight: 1.6,
+            color: 'var(--text-secondary)',
+            maxWidth: '480px'
+          }}>
+            Upload the message, screenshot, recruitment notice or website. TrustGraph AI will examine the available evidence and explain what we find.
+          </p>
 
-        {/* Call to action & Input Selector */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '16px',
-          flexWrap: 'wrap',
-          marginBottom: '48px'
-        }}>
-          <button
-            onClick={() => onStartVerification()}
-            className="btn-primary"
-            style={{ fontSize: '16px', padding: '14px 32px' }}
-          >
-            <span>Verify Recruitment Now</span>
-            <ArrowRight size={18} />
-          </button>
-
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start', marginTop: '8px' }}>
             <button
-              onClick={() => onLoadDemoCase('case_1_genuine')}
-              className="btn-secondary"
-              style={{ fontSize: '13px', padding: '10px 14px' }}
+              onClick={onStartVerification}
+              className="tg-btn-primary"
+              style={{ padding: '14px 32px', fontSize: '16px' }}
             >
-              Demo: Genuine UPSC
+              <span>Check a Job Message</span>
+              <ArrowRight size={18} />
+            </button>
+
+            <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+              It only takes a few seconds to start.
+            </span>
+          </div>
+
+          {/* Quick Demo links */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600 }}>Quick Demos:</span>
+            <button
+              onClick={() => onLoadDemoCase('demo_case_01')}
+              className="tg-btn-ghost"
+              style={{ fontSize: '12px', padding: '4px 10px', backgroundColor: 'var(--bg-card-subtle)' }}
+            >
+              Genuine UPSC Notice
             </button>
             <button
-              onClick={() => onLoadDemoCase('case_3_personal_upi')}
-              className="btn-secondary"
-              style={{ fontSize: '13px', padding: '10px 14px', borderColor: 'rgba(239, 68, 68, 0.3)', color: '#f87171' }}
+              onClick={() => onLoadDemoCase('demo_case_02')}
+              className="tg-btn-ghost"
+              style={{ fontSize: '12px', padding: '4px 10px', backgroundColor: 'var(--bg-card-subtle)' }}
             >
-              Demo: Fake Postal UPI
+              Fake Postal Appointment
             </button>
           </div>
         </div>
 
-        {/* Input Types Supported Cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '16px',
-          maxWidth: '960px',
-          margin: '0 auto 60px'
-        }}>
-          <div className="glass-card" style={{ padding: '20px', textAlign: 'left' }}>
-            <FileText size={24} color="#38bdf8" style={{ marginBottom: '12px' }} />
-            <h4 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '6px' }}>Pasted Text</h4>
-            <p style={{ fontSize: '12px', color: '#94a3b8' }}>WhatsApp messages, Telegram circulars, SMS job offers.</p>
-          </div>
-          <div className="glass-card" style={{ padding: '20px', textAlign: 'left' }}>
-            <Upload size={24} color="#a855f7" style={{ marginBottom: '12px' }} />
-            <h4 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '6px' }}>Screenshot / Image</h4>
-            <p style={{ fontSize: '12px', color: '#94a3b8' }}>PNG, JPG, or poster scans with OpenCV image pre-processing.</p>
-          </div>
-          <div className="glass-card" style={{ padding: '20px', textAlign: 'left' }}>
-            <Layers size={24} color="#10b981" style={{ marginBottom: '12px' }} />
-            <h4 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '6px' }}>Official PDF</h4>
-            <p style={{ fontSize: '12px', color: '#94a3b8' }}>Scanned notices or digital circulars with QR code scanning.</p>
-          </div>
-          <div className="glass-card" style={{ padding: '20px', textAlign: 'left' }}>
-            <Globe size={24} color="#f59e0b" style={{ marginBottom: '12px' }} />
-            <h4 style={{ fontSize: '15px', fontWeight: 700, marginBottom: '6px' }}>Portal URL</h4>
-            <p style={{ fontSize: '12px', color: '#94a3b8' }}>Domain structure, SSL verification, and typosquatting checks.</p>
+        {/* Right Hero Graphic (Card with Pipeline Flow & Message Bubble) */}
+        <div style={{ position: 'relative' }}>
+          <div className="tg-card" style={{
+            padding: '32px',
+            position: 'relative',
+            background: 'var(--bg-card)',
+            boxShadow: 'var(--shadow-hover)'
+          }}>
+            
+            {/* Suspicious Message Bubble Mock */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '12px',
+              padding: '16px 20px',
+              backgroundColor: 'var(--bg-card-subtle)',
+              borderRadius: '16px 16px 16px 4px',
+              border: '1px solid var(--border-subtle)',
+              position: 'relative',
+              marginBottom: '28px'
+            }}>
+              <div style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--color-primary-light)',
+                color: 'var(--color-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}>
+                <MessageSquare size={16} />
+              </div>
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  Congratulations!
+                </div>
+                <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                  You have been selected for a Government Job in Postal Department...
+                </div>
+              </div>
+              <div style={{
+                position: 'absolute',
+                top: '-6px',
+                right: '-6px',
+                width: '18px',
+                height: '18px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--color-danger)',
+                color: '#FFFFFF',
+                fontSize: '11px',
+                fontWeight: 800,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 2px 6px rgba(239, 68, 68, 0.4)'
+              }}>
+                !
+              </div>
+            </div>
+
+            {/* Step-by-Step Flow Pills */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', position: 'relative' }}>
+              
+              {/* Vertical connector line */}
+              <div style={{
+                position: 'absolute',
+                left: '22px',
+                top: '20px',
+                bottom: '20px',
+                width: '2px',
+                backgroundColor: 'var(--border-subtle)',
+                zIndex: 0
+              }} />
+
+              {/* Step 1: Message */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '14px',
+                padding: '10px 16px',
+                backgroundColor: 'var(--bg-card)',
+                border: '1px solid var(--border-card)',
+                borderRadius: '12px',
+                position: 'relative',
+                zIndex: 1
+              }}>
+                <div style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--color-primary-light)',
+                  color: 'var(--color-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 700,
+                  fontSize: '11px'
+                }}>
+                  TXT
+                </div>
+                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>Message</span>
+              </div>
+
+              {/* Step 2: Evidence */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '14px',
+                padding: '10px 16px',
+                backgroundColor: 'var(--bg-card)',
+                border: '1px solid var(--border-card)',
+                borderRadius: '12px',
+                position: 'relative',
+                zIndex: 1
+              }}>
+                <div style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--color-primary)',
+                  color: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <Search size={15} />
+                </div>
+                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>Evidence</span>
+              </div>
+
+              {/* Step 3: Verification */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '14px',
+                padding: '10px 16px',
+                backgroundColor: 'var(--bg-card)',
+                border: '1px solid var(--border-card)',
+                borderRadius: '12px',
+                position: 'relative',
+                zIndex: 1
+              }}>
+                <div style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--color-info-bg)',
+                  color: 'var(--color-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <ShieldCheck size={16} />
+                </div>
+                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>Verification</span>
+              </div>
+
+              {/* Step 4: Result */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '14px',
+                padding: '10px 16px',
+                backgroundColor: 'var(--bg-card)',
+                border: '1px solid var(--border-card)',
+                borderRadius: '12px',
+                position: 'relative',
+                zIndex: 1
+              }}>
+                <div style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--color-success)',
+                  color: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <Check size={16} />
+                </div>
+                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>Result</span>
+              </div>
+
+            </div>
+
+            {/* Architectural Civic Seal / Building Graphic */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              marginTop: '28px',
+              paddingTop: '20px',
+              borderTop: '1px solid var(--border-subtle)',
+              color: 'var(--text-muted)',
+              fontSize: '12px'
+            }}>
+              <Landmark size={18} color="var(--color-primary)" />
+              <span>Cross-verified with Indian Government Gazette Database (.gov.in)</span>
+            </div>
+
           </div>
         </div>
+
       </div>
 
-      {/* How It Works - The 4-Stage Architecture */}
-      <div style={{ marginBottom: '80px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '32px', fontWeight: 800, letterSpacing: '-0.5px' }}>
-            How TrustGraph AI Works
-          </h2>
-          <p style={{ color: '#94a3b8', fontSize: '15px', marginTop: '8px' }}>
-            Beyond simple keywords: Deep multi-stage verification and evidence reasoning.
+      {/* 3 Pillars of Evidence Verification */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '24px'
+      }}>
+        <div className="tg-card" style={{ padding: '24px' }}>
+          <div style={{
+            width: '42px',
+            height: '42px',
+            borderRadius: '12px',
+            backgroundColor: 'var(--color-primary-light)',
+            color: 'var(--color-primary)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '16px'
+          }}>
+            <Landmark size={22} />
+          </div>
+          <h3 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px' }}>
+            Official Gazette Matching
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            We cross-reference claimed notices, exam circular numbers, and department authority against the official government registry (`.gov.in` and `.nic.in`).
           </p>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '24px'
-        }}>
-          <div className="glass-card" style={{ padding: '28px' }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px',
-              background: 'rgba(56, 189, 248, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#38bdf8',
-              fontWeight: 800,
-              fontSize: '18px',
-              marginBottom: '16px'
-            }}>1</div>
-            <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '10px' }}>Evidence Extraction</h3>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.6 }}>
-              Extracts claimed organization, notification number, fee, domain, email, phone, UPI handles, and embedded payment QR codes.
-            </p>
-          </div>
-
-          <div className="glass-card" style={{ padding: '28px' }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px',
-              background: 'rgba(168, 85, 247, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#a855f7',
-              fontWeight: 800,
-              fontSize: '18px',
-              marginBottom: '16px'
-            }}>2</div>
-            <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '10px' }}>Recruitment DNA</h3>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.6 }}>
-              Generates a 9-dimensional digital feature genome and calculates similarity against official UPSC, SSC, and Railway recruitment signatures.
-            </p>
-          </div>
-
-          <div className="glass-card" style={{ padding: '28px' }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px',
-              background: 'rgba(245, 158, 11, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#f59e0b',
-              fontWeight: 800,
-              fontSize: '18px',
-              marginBottom: '16px'
-            }}>3</div>
-            <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '10px' }}>Evidence Graph</h3>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.6 }}>
-              Connects entities into an attributed knowledge graph to detect repeated scam phone numbers, UPI IDs, and fraudulent host domains.
-            </p>
-          </div>
-
-          <div className="glass-card" style={{ padding: '28px' }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '8px',
-              background: 'rgba(16, 185, 129, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#10b981',
-              fontWeight: 800,
-              fontSize: '18px',
-              marginBottom: '16px'
-            }}>4</div>
-            <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '10px' }}>Explainable Decision</h3>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.6 }}>
-              Produces a transparent verdict (Genuine, Suspicious, Scam, Inconclusive) with clear positive supporting vs negative risk evidence.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Verdict Classifications Explained */}
-      <div style={{ marginBottom: '80px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '28px', fontWeight: 800 }}>Understanding the 4 Verdicts</h2>
-        </div>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '20px'
-        }}>
-          <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #10b981' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-              <CheckCircle2 color="#10b981" size={20} />
-              <h4 style={{ fontSize: '16px', fontWeight: 700, color: '#34d399' }}>GENUINE</h4>
-            </div>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5 }}>
-              Matched active official gazette records, verified .gov.in/.nic.in domain, authorized banking fee channel, and statutory DNA profile.
-            </p>
-          </div>
-
-          <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #f59e0b' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-              <AlertTriangle color="#f59e0b" size={20} />
-              <h4 style={{ fontSize: '16px', fontWeight: 700, color: '#fbbf24' }}>SUSPICIOUS</h4>
-            </div>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5 }}>
-              Unofficial aggregators, missing advertisement numbers, or moderate stylistic irregularities requiring manual portal verification.
-            </p>
-          </div>
-
-          <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #ef4444' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-              <XCircle color="#ef4444" size={20} />
-              <h4 style={{ fontSize: '16px', fontWeight: 700, color: '#f87171' }}>SCAM</h4>
-            </div>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5 }}>
-              Severe contradictions detected: Personal UPI ID payment requests, fake .xyz/.online domains, guaranteed job claims, or reused scam syndicate numbers.
-            </p>
-          </div>
-
-          <div className="glass-card" style={{ padding: '24px', borderLeft: '4px solid #94a3b8' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-              <HelpCircle color="#94a3b8" size={20} />
-              <h4 style={{ fontSize: '16px', fontWeight: 700, color: '#cbd5e1' }}>INCONCLUSIVE</h4>
-            </div>
-            <p style={{ fontSize: '13px', color: '#94a3b8', lineHeight: 1.5 }}>
-              The provided input lacks sufficient verifiable entities to confirm or refute. The system does not force an unverified claim.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Safety Advisory Banner */}
-      <div className="glass-card" style={{
-        padding: '32px',
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%)',
-        border: '1px solid rgba(56, 189, 248, 0.2)'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+        <div className="tg-card" style={{ padding: '24px' }}>
           <div style={{
-            padding: '10px',
-            borderRadius: '10px',
-            background: 'rgba(56, 189, 248, 0.1)',
-            color: '#38bdf8'
+            width: '42px',
+            height: '42px',
+            borderRadius: '12px',
+            backgroundColor: 'var(--color-danger-bg)',
+            color: 'var(--color-danger)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '16px'
           }}>
-            <Lock size={28} />
+            <ShieldAlert size={22} />
           </div>
-          <div>
-            <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '8px' }}>
-              Official Citizen Safety Tips
-            </h3>
-            <ul style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: 1.8, paddingLeft: '20px' }}>
-              <li><strong>Zero UPI Collection:</strong> Indian Central and State recruitment boards NEVER accept exam fees via personal UPI handles (e.g. <code>@okaxis</code>, <code>@paytm</code>) or direct WhatsApp QR codes.</li>
-              <li><strong>Verify the Apex Domain:</strong> Official central and state government recruitment portals strictly use <code>.gov.in</code> or <code>.nic.in</code>. Beware of <code>.online</code>, <code>.xyz</code>, or <code>.com</code> spoof sites.</li>
-              <li><strong>No Direct Appointment Without Merit:</strong> Public recruitment adheres strictly to competitive examinations. Any offer promising "100% Guaranteed Selection" or "No Exam Direct Joining" is fraudulent.</li>
-            </ul>
+          <h3 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px' }}>
+            Illegal Payment Detection
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            Statutory recruitments never collect application fees or security deposits through personal UPI IDs (@okaxis, @paytm) or standalone QR codes.
+          </p>
+        </div>
+
+        <div className="tg-card" style={{ padding: '24px' }}>
+          <div style={{
+            width: '42px',
+            height: '42px',
+            borderRadius: '12px',
+            backgroundColor: 'var(--color-success-bg)',
+            color: 'var(--color-success)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '16px'
+          }}>
+            <Award size={22} />
           </div>
+          <h3 style={{ fontSize: '17px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px' }}>
+            Evidence Before Trust
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            You receive an explainable Trust Score, a clear breakdown of warning factors, and guidance on how to report suspicious schemes to Cyber Helpline 1930.
+          </p>
         </div>
       </div>
 

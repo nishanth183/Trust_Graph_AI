@@ -10,10 +10,12 @@ logger = logging.getLogger("trustgraph.storage")
 CASES_FILE = DATA_DIR / "cases.json"
 INDICATORS_FILE = DATA_DIR / "scam_indicators.json"
 AUDIT_FILE = DATA_DIR / "audit_logs.json"
+USERS_FILE = DATA_DIR / "users.json"
 
 class StorageEngine:
     def __init__(self):
         self.cases: Dict[str, Dict[str, Any]] = {}
+        self.users: Dict[str, Dict[str, Any]] = {}
         self.scam_indicators: Dict[str, List[Dict[str, Any]]] = {
             "phones": [],
             "upi_ids": [],
@@ -23,6 +25,7 @@ class StorageEngine:
         self.audit_logs: List[Dict[str, Any]] = []
         self._load()
         self._seed_default_demo_indicators()
+        self._seed_default_admin()
 
     def _load(self):
         try:
@@ -35,6 +38,9 @@ class StorageEngine:
             if AUDIT_FILE.exists():
                 with open(AUDIT_FILE, "r", encoding="utf-8") as f:
                     self.audit_logs = json.load(f)
+            if USERS_FILE.exists():
+                with open(USERS_FILE, "r", encoding="utf-8") as f:
+                    self.users = json.load(f)
         except Exception as e:
             logger.error(f"Error loading stored data: {e}")
 
@@ -47,8 +53,30 @@ class StorageEngine:
                 json.dump(self.scam_indicators, f, indent=2)
             with open(AUDIT_FILE, "w", encoding="utf-8") as f:
                 json.dump(self.audit_logs, f, indent=2)
+            with open(USERS_FILE, "w", encoding="utf-8") as f:
+                json.dump(self.users, f, indent=2)
         except Exception as e:
             logger.error(f"Error saving data: {e}")
+
+    def _seed_default_admin(self):
+        """Seed a default admin account if no users exist."""
+        if not self.users:
+            from backend.utils.auth import hash_password
+            pw_hash, salt = hash_password("admin123")
+            admin_id = "USR-ADMIN-001"
+            self.users[admin_id] = {
+                "user_id": admin_id,
+                "username": "admin",
+                "full_name": "System Administrator",
+                "email": "admin@trustgraph.ai",
+                "role": "admin",
+                "password_hash": pw_hash,
+                "salt": salt,
+                "created_at": datetime.now().isoformat(),
+                "is_active": True
+            }
+            self._save()
+            logger.info("Default admin user seeded: admin / admin123")
 
     def _seed_default_demo_indicators(self):
         # Demo scam infrastructure for testing repeated scam detection (Case 3 & Case 4 linkages)
@@ -114,10 +142,20 @@ class StorageEngine:
 
         self._save()
 
+    # ─── Case ID Generation ───────────────────────────────────────────────────
+
     def generate_case_id(self) -> str:
         count = len(self.cases) + 1
         year = datetime.now().year
         return f"TG-{year}-{count:06d}"
+
+    # ─── User ID Generation ───────────────────────────────────────────────────
+
+    def generate_user_id(self) -> str:
+        count = len(self.users) + 1
+        return f"USR-{count:04d}"
+
+    # ─── Case CRUD ────────────────────────────────────────────────────────────
 
     def save_case(self, case_id: str, case_data: Dict[str, Any]):
         self.cases[case_id] = case_data
@@ -137,6 +175,38 @@ class StorageEngine:
         items = list(self.cases.values())
         items.sort(key=lambda x: x.get("created_at", ""), reverse=True)
         return items[:limit]
+
+    def list_cases_by_user(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        """Return only cases belonging to a specific user."""
+        items = [
+            c for c in self.cases.values()
+            if c.get("user_id") == user_id
+        ]
+        items.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+        return items[:limit]
+
+    # ─── User CRUD ────────────────────────────────────────────────────────────
+
+    def save_user(self, user_id: str, user_data: Dict[str, Any]):
+        self.users[user_id] = user_data
+        self._record_audit("USER_CREATED", {"user_id": user_id, "username": user_data.get("username")})
+        self._save()
+
+    def get_user(self, user_id: str) -> Optional[Dict[str, Any]]:
+        return self.users.get(user_id)
+
+    def get_user_by_username(self, username: str) -> Optional[Dict[str, Any]]:
+        for u in self.users.values():
+            if u.get("username", "").lower() == username.lower():
+                return u
+        return None
+
+    def list_users(self) -> List[Dict[str, Any]]:
+        users = list(self.users.values())
+        users.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+        return users
+
+    # ─── Scam Indicators ──────────────────────────────────────────────────────
 
     def register_scam_indicators(self, case_id: str, evidence: Dict[str, Any]):
         phone = evidence.get("phone")
@@ -171,8 +241,141 @@ class StorageEngine:
                     "reason": f"Fake recruitment portal flagged in case {case_id}"
                 })
 
-    def get_scam_indicators(self) -> Dict[str, List[Dict[str, Any]]]:
-        return self.scam_indicators
+    def add_scam_indicator(self, indicator_type: str, value: str, organization_claimed: str = "Unknown", reason: str = "", case_id: str = "USER-REPORTED") -> Dict[str, Any]:
+        """Manually report or add a new scam indicator."""
+        value = value.strip()
+        category = "phones" if indicator_type == "phone" else ("upi_ids" if indicator_type == "upi" else "domains")
+        
+        # Check if already exists
+        for item in self.scam_indicators.get(category, []):
+            if item.get("value", "").lower() == value.lower():
+                return item
+
+        new_entry = {
+            "value": value,
+            "case_id": case_id,
+            "organization_claimed": organization_claimed or "Unknown Syndicate Target",
+            "report_date": datetime.now().strftime("%Y-%m-%d"),
+            "status": "CONFIRMED_SCAM" if case_id != "USER-REPORTED" else "COMMUNITY_FLAGGED",
+            "reason": reason or f"Reported fraudulent recruitment infrastructure ({indicator_type})"
+        }
+        self.scam_indicators[category].append(new_entry)
+        self._record_audit("SCAM_INDICATOR_REPORTED", {"type": indicator_type, "value": value})
+        self._save()
+        return new_entry
+
+    def get_scam_indicators(self) -> Dict[str, Any]:
+        """Return enriched scam indicators with cross-case links and syndicate statistics."""
+        # Cross-reference cases for each indicator
+        phones_enriched = []
+        for p in self.scam_indicators.get("phones", []):
+            val = p.get("value", "")
+            connected_cases = [
+                c.get("case_id") for c in self.cases.values()
+                if c.get("extracted_evidence", {}).get("phone") == val
+            ]
+            if p.get("case_id") and p.get("case_id") not in connected_cases:
+                connected_cases.insert(0, p.get("case_id"))
+            phones_enriched.append({
+                **p,
+                "cases": connected_cases,
+                "case_count": max(len(connected_cases), 1)
+            })
+
+        upis_enriched = []
+        for u in self.scam_indicators.get("upi_ids", []):
+            val = u.get("value", "")
+            connected_cases = [
+                c.get("case_id") for c in self.cases.values()
+                if (c.get("extracted_evidence", {}).get("upi_id") or "").lower() == val.lower()
+            ]
+            if u.get("case_id") and u.get("case_id") not in connected_cases:
+                connected_cases.insert(0, u.get("case_id"))
+            upis_enriched.append({
+                **u,
+                "cases": connected_cases,
+                "case_count": max(len(connected_cases), 1)
+            })
+
+        domains_enriched = []
+        for d in self.scam_indicators.get("domains", []):
+            val = d.get("value", "")
+            connected_cases = [
+                c.get("case_id") for c in self.cases.values()
+                if (c.get("extracted_evidence", {}).get("domain") or "").lower() == val.lower()
+            ]
+            if d.get("case_id") and d.get("case_id") not in connected_cases:
+                connected_cases.insert(0, d.get("case_id"))
+            
+            # Extract tld
+            tld = "." + val.split(".")[-1] if "." in val else ""
+            domains_enriched.append({
+                **d,
+                "cases": connected_cases,
+                "case_count": max(len(connected_cases), 1),
+                "tld": tld
+            })
+
+        # Calculate impersonation frequency
+        agency_counts: Dict[str, int] = {}
+        for item in phones_enriched + upis_enriched + domains_enriched:
+            org = item.get("organization_claimed", "Unknown")
+            if org and org != "Unknown":
+                agency_counts[org] = agency_counts.get(org, 0) + 1
+
+        top_agencies = sorted(
+            [{"agency": k, "count": v} for k, v in agency_counts.items()],
+            key=lambda x: x["count"],
+            reverse=True
+        )[:5]
+
+        # Total distinct scam cases linked
+        all_linked_cases = set()
+        for item in phones_enriched + upis_enriched + domains_enriched:
+            for cid in item.get("cases", []):
+                all_linked_cases.add(cid)
+
+        return {
+            "phones": phones_enriched,
+            "upi_ids": upis_enriched,
+            "domains": domains_enriched,
+            "stats": {
+                "total_indicators": len(phones_enriched) + len(upis_enriched) + len(domains_enriched),
+                "reused_phones_count": len(phones_enriched),
+                "fraudulent_upis_count": len(upis_enriched),
+                "spoofed_domains_count": len(domains_enriched),
+                "total_scam_cases_linked": len(all_linked_cases),
+                "top_agencies": top_agencies
+            }
+        }
+
+    def lookup_scam_indicator(self, query: str) -> Dict[str, Any]:
+        """Instant lookup for any indicator query across phones, UPIs and domains."""
+        q = (query or "").strip().lower()
+        if not q:
+            return {"match_found": False, "query": query, "results": []}
+
+        data = self.get_scam_indicators()
+        matched = []
+
+        for p in data["phones"]:
+            if q in p.get("value", "").lower() or q in p.get("organization_claimed", "").lower():
+                matched.append({**p, "type": "phone"})
+
+        for u in data["upi_ids"]:
+            if q in u.get("value", "").lower() or q in u.get("organization_claimed", "").lower():
+                matched.append({**u, "type": "upi"})
+
+        for d in data["domains"]:
+            if q in d.get("value", "").lower() or q in d.get("reason", "").lower():
+                matched.append({**d, "type": "domain"})
+
+        return {
+            "match_found": len(matched) > 0,
+            "query": query,
+            "total_matches": len(matched),
+            "results": matched
+        }
 
     def _record_audit(self, action: str, details: Dict[str, Any]):
         self.audit_logs.append({

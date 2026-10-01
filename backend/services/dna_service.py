@@ -385,6 +385,26 @@ class RecruitmentDNAService:
                 "weight": weights["qr_safety"]
             })
 
+        pattern_checklist = self.generate_recruitment_pattern(
+            evidence={
+                "organization": signatures.get("organization_signature", {}).get("claimed_organization"),
+                "department": signatures.get("organization_signature", {}).get("claimed_department"),
+                "domain": dom_sig.get("domain"),
+                "website": signatures.get("domain_signature", {}).get("protocol"),
+                "email": contact_sig.get("email"),
+                "phone": contact_sig.get("phone"),
+                "source_platform": contact_sig.get("contact_channel"),
+                "notification_number": notif_sig.get("notification_number"),
+                "upi_id": pay_sig.get("upi_handle"),
+                "application_fee": pay_sig.get("fee_amount"),
+                "payment_requested": pay_sig.get("has_application_fee") or bool(pay_sig.get("upi_handle")),
+                "is_unauthorized_payment": pay_sig.get("is_personal_upi"),
+                "has_direct_selection": write_sig.get("guaranteed_job_claim"),
+                "qr_detected": vis_sig.get("qr_type") != "NONE"
+            },
+            nlp_results={"guaranteed_job_claim": write_sig.get("guaranteed_job_claim"), "semantic_features": {"urgency_markers_count": write_sig.get("urgency_markers_count", 0)}}
+        )
+
         similarity_score = round(min(100.0, max(0.0, score)), 1)
 
         return {
@@ -394,8 +414,159 @@ class RecruitmentDNAService:
             "matching_features": matching_features,
             "mismatching_features": mismatching_features,
             "missing_features": missing_features,
-            "comparison_breakdown": breakdown
+            "comparison_breakdown": breakdown,
+            "pattern_checklist": pattern_checklist
         }
+
+    def generate_recruitment_pattern(
+        self,
+        evidence: Dict[str, Any],
+        nlp_results: Optional[Dict[str, Any]] = None,
+        verification_details: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
+        nlp_data = nlp_results or {}
+        verif = verification_details or {}
+
+        # 1. Organization Name
+        org = evidence.get("organization") or ""
+        dept = evidence.get("department") or ""
+        if org and org not in ["Unspecified Government Body", "Government Recruitment Department"]:
+            org_status = "Match"
+            org_type = "tg-pill-verified"
+            org_detail = f"{org}{f' ({dept})' if dept and dept != 'Public Services' else ''}"
+        elif org:
+            org_status = "Partial match"
+            org_type = "tg-pill-caution"
+            org_detail = f"{org} (Claimed government department)"
+        else:
+            org_status = "Mismatch"
+            org_type = "tg-pill-warning"
+            org_detail = "No authoritative government recruitment body identified"
+
+        # 2. Website
+        domain = (evidence.get("domain") or "").lower()
+        if domain.endswith(".gov.in") or domain.endswith(".nic.in"):
+            web_status = "Match"
+            web_type = "tg-pill-verified"
+            web_detail = f"Official government portal verified ({domain})"
+        elif domain and any(tld in domain for tld in [".xyz", ".online", ".site", ".info", ".top", ".club", ".biz", ".org"]):
+            web_status = "Mismatch"
+            web_type = "tg-pill-warning"
+            web_detail = f"Suspicious non-government portal ({domain} — Expected .gov.in)"
+        elif domain:
+            web_status = "Mismatch"
+            web_type = "tg-pill-warning"
+            web_detail = f"Hosted outside official government infrastructure ({domain})"
+        else:
+            web_status = "Needs checking"
+            web_type = "tg-pill-caution"
+            web_detail = "No official website portal provided in notice"
+
+        # 3. Application Process
+        has_direct = bool(evidence.get("has_direct_selection") or nlp_data.get("guaranteed_job_claim"))
+        urgency_count = nlp_data.get("semantic_features", {}).get("urgency_markers_count", 0)
+        if has_direct:
+            proc_status = "Mismatch"
+            proc_type = "tg-pill-warning"
+            proc_detail = "Direct selection claim without written exam (100% selection promise)"
+        elif urgency_count > 0:
+            proc_status = "Partial match"
+            proc_type = "tg-pill-caution"
+            proc_detail = "High urgency pressure tactics detected in recruitment text"
+        else:
+            proc_status = "Match"
+            proc_type = "tg-pill-verified"
+            proc_detail = "Standard statutory merit-based selection process"
+
+        # 4. Contact Method
+        phone = evidence.get("phone") or ""
+        email = (evidence.get("email") or "").lower()
+        source = (evidence.get("source_platform") or "").lower()
+        channels = evidence.get("social_media_handles") or []
+        
+        is_whatsapp = "whatsapp" in source or "WhatsApp" in channels or ("+91" in phone and not phone.startswith("011"))
+        is_public_mail = any(p in email for p in ["@gmail.com", "@yahoo.com", "@outlook.com", "@hotmail.com"])
+        
+        if is_whatsapp and is_public_mail:
+            contact_status = "Mismatch"
+            contact_type = "tg-pill-warning"
+            contact_detail = f"Personal WhatsApp ({phone}) & public email (@{email.split('@')[-1]})"
+        elif is_public_mail:
+            contact_status = "Mismatch"
+            contact_type = "tg-pill-warning"
+            contact_detail = f"Public email mailbox used (@{email.split('@')[-1]})"
+        elif is_whatsapp:
+            contact_status = "Needs checking"
+            contact_type = "tg-pill-caution"
+            contact_detail = f"Personal mobile/WhatsApp contact used ({phone})"
+        elif email.endswith(".gov.in") or email.endswith(".nic.in"):
+            contact_status = "Match"
+            contact_type = "tg-pill-verified"
+            contact_detail = f"Official government email gateway verified ({email})"
+        elif phone and phone.startswith("011"):
+            contact_status = "Match"
+            contact_type = "tg-pill-verified"
+            contact_detail = f"Official central secretariat landline exchange ({phone})"
+        else:
+            contact_status = "Needs checking"
+            contact_type = "tg-pill-caution"
+            contact_detail = "No verified institutional recruitment helpdesk identified"
+
+        # 5. Notice Format
+        notif = evidence.get("notification_number") or ""
+        if notif and any(c in notif for c in ["/", "-", "."]):
+            notif_status = "Match"
+            notif_type = "tg-pill-verified"
+            notif_detail = f"Standard gazette CEN format indexing ({notif})"
+        elif notif:
+            notif_status = "Partial match"
+            notif_type = "tg-pill-caution"
+            notif_detail = f"Notification circular reference ({notif})"
+        else:
+            notif_status = "Partial match"
+            notif_type = "tg-pill-caution"
+            notif_detail = "Informal notification lacking gazette circular index"
+
+        # 6. Payment Pattern
+        upi_id = evidence.get("upi_id") or ""
+        qr_detected = bool(evidence.get("qr_detected"))
+        is_unauth = bool(evidence.get("is_unauthorized_payment"))
+        fee = evidence.get("application_fee")
+        payment_requested = bool(evidence.get("payment_requested"))
+
+        if upi_id:
+            pay_status = "Mismatch"
+            pay_type = "tg-pill-warning"
+            pay_detail = f"Personal UPI fee collection ({upi_id})"
+        elif qr_detected:
+            pay_status = "Mismatch"
+            pay_type = "tg-pill-warning"
+            pay_detail = "Standalone UPI QR code fee collection"
+        elif is_unauth:
+            pay_status = "Mismatch"
+            pay_type = "tg-pill-warning"
+            pay_detail = evidence.get("payment_pattern") or "Unauthorized fee or security deposit requested"
+        elif fee and domain.endswith(".gov.in"):
+            pay_status = "Match"
+            pay_type = "tg-pill-verified"
+            pay_detail = f"Official government treasury gateway (₹{int(fee) if fee == int(fee) else fee})"
+        elif not payment_requested:
+            pay_status = "Match"
+            pay_type = "tg-pill-verified"
+            pay_detail = "No application fee or deposit required"
+        else:
+            pay_status = "Needs checking"
+            pay_type = "tg-pill-caution"
+            pay_detail = f"Application fee: ₹{int(fee) if fee else 'unspecified'}"
+
+        return [
+            {"feature": "Organization Name", "detail": org_detail, "status": org_status, "type": org_type},
+            {"feature": "Website", "detail": web_detail, "status": web_status, "type": web_type},
+            {"feature": "Application Process", "detail": proc_detail, "status": proc_status, "type": proc_type},
+            {"feature": "Contact Method", "detail": contact_detail, "status": contact_status, "type": contact_type},
+            {"feature": "Notice Format", "detail": notif_detail, "status": notif_status, "type": notif_type},
+            {"feature": "Payment Pattern", "detail": pay_detail, "status": pay_status, "type": pay_type}
+        ]
 
     def _hash_str(self, val: str) -> str:
         return hashlib.sha256(val.encode("utf-8")).hexdigest()

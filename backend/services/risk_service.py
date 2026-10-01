@@ -175,12 +175,10 @@ class MLRiskService:
         scam_links: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
         """
-        Predict risk probabilities with architectural deterministic safety overrides:
-        'Do not let the ML model silently override critical verification evidence.'
+        Predict risk using ML + deterministic overrides + pattern-based fallback.
+        INCONCLUSIVE is only returned when absolutely no signals exist.
         """
         probs = self.model.predict_proba(features)[0]
-        # classes: 0: GENUINE, 1: SUSPICIOUS, 2: SCAM
-        # Ensure array has 3 elements
         if len(probs) == 3:
             p_gen, p_susp, p_scam = float(probs[0]), float(probs[1]), float(probs[2])
         elif len(probs) == 2:
@@ -188,73 +186,163 @@ class MLRiskService:
         else:
             p_gen, p_susp, p_scam = 0.1, 0.2, 0.7
 
-        # --- CRITICAL DECISION LOGIC & SAFETY ARBITER ---
-        # 1. Critical Contradictions Override (Personal UPI, Reused Scam syndicate link, etc.)
-        critical_count = sum(1 for c in contradictions if c.get("severity") == "CRITICAL")
-        has_scam_links = len(scam_links) > 0
-        has_suspicious_domain = verification.get("domain_status") == "SUSPICIOUS_NON_GOV_DOMAIN"
+        # ── SIGNAL EXTRACTION ──────────────────────────────────────────────────
+        critical_count   = sum(1 for c in contradictions if c.get("severity") == "CRITICAL")
+        high_count       = sum(1 for c in contradictions if c.get("severity") == "HIGH")
+        medium_count     = sum(1 for c in contradictions if c.get("severity") == "MEDIUM")
+        has_scam_links   = len(scam_links) > 0
+        org_matched      = bool(verification.get("organization_matched"))
+        domain_status    = verification.get("domain_status", "")
+        email_status     = verification.get("email_status", "")
+        notif_status     = verification.get("notification_status", "")
+        payment_status   = verification.get("payment_channel_status", "")
 
-        if critical_count >= 1 or has_scam_links:
-            # Overrides model towards SCAM
+        has_suspicious_domain     = domain_status == "SUSPICIOUS_NON_GOV_DOMAIN"
+        has_public_email          = email_status == "PUBLIC_PROVIDER_CONFLICT"
+        has_personal_upi_payment  = payment_status in ["CRITICAL_CONFLICT_PERSONAL_UPI", "CRITICAL_CONFLICT_QR_CODE"]
+        all_verified              = (
+            verification.get("organization_status") in ["VERIFIED", "DEMO VERIFIED"] and
+            domain_status in ["VERIFIED", "DEMO VERIFIED"] and
+            notif_status in ["VERIFIED", "DEMO VERIFIED"] and
+            len(contradictions) == 0
+        )
+
+        # Raw feature values for pattern fallback
+        f = features[0]
+        nlp_risk     = float(f[0])   # nlp_risk_score
+        payment_risk = float(f[3])   # payment_risk_score
+        qr_flag      = float(f[4])   # qr_detected_flag
+        dna_sim      = float(f[8])   # dna_similarity_score
+        urgency      = float(f[13])  # urgency_score
+        guaranteed   = float(f[14])  # guaranteed_job_claim_flag
+
+        # ── TIER 1: ABSOLUTE OVERRIDES (deterministic) ─────────────────────────
+        # Critical UPI/QR/scam infrastructure → always SCAM
+        if critical_count >= 1 or has_scam_links or has_personal_upi_payment:
             p_scam = max(p_scam, 0.92)
-            p_gen = min(p_gen, 0.05)
-            p_susp = 1.0 - (p_scam + p_gen)
-            verdict = "SCAM"
-            trust_score = round((1.0 - p_scam) * 25.0, 1) # Range 0 - 25
+            p_gen  = min(p_gen,  0.04)
+            p_susp = max(0.0, 1.0 - p_scam - p_gen)
+            verdict    = "SCAM"
             risk_level = "HIGH"
+            trust_score = round((1.0 - p_scam) * 20.0, 1)
 
-        elif has_suspicious_domain or sum(1 for c in contradictions if c.get("severity") == "HIGH") >= 2:
+        # Suspicious domain or ≥2 HIGH contradictions or public email fraud
+        elif has_suspicious_domain or high_count >= 2 or (has_public_email and org_matched):
             p_scam = max(p_scam, 0.78)
-            p_gen = min(p_gen, 0.10)
-            p_susp = 1.0 - (p_scam + p_gen)
-            verdict = "SCAM"
-            trust_score = round((1.0 - p_scam) * 35.0, 1)
+            p_gen  = min(p_gen,  0.10)
+            p_susp = max(0.0, 1.0 - p_scam - p_gen)
+            verdict    = "SCAM"
             risk_level = "HIGH"
+            trust_score = round((1.0 - p_scam) * 32.0, 1)
 
-        elif verification.get("organization_status") in ["VERIFIED", "DEMO VERIFIED"] and \
-             verification.get("domain_status") in ["VERIFIED", "DEMO VERIFIED"] and \
-             verification.get("notification_status") in ["VERIFIED", "DEMO VERIFIED"] and \
-             len(contradictions) == 0:
-            # Verified Genuine Case
-            p_gen = max(p_gen, 0.94)
+        # ── TIER 2: VERIFIED GENUINE ────────────────────────────────────────────
+        elif all_verified:
+            p_gen  = max(p_gen,  0.94)
             p_scam = min(p_scam, 0.03)
-            p_susp = 1.0 - (p_gen + p_scam)
-            verdict = "GENUINE"
-            trust_score = round(85.0 + (p_gen * 14.0), 1) # Range 85 - 99
+            p_susp = max(0.0, 1.0 - p_gen - p_scam)
+            verdict    = "GENUINE"
             risk_level = "LOW"
+            trust_score = round(85.0 + (p_gen * 14.0), 1)
 
-        elif not verification.get("organization_matched") and not verification.get("domain_status") in ["VERIFIED", "DEMO VERIFIED"]:
-            if len(contradictions) == 0 and p_scam < 0.5:
-                verdict = "INCONCLUSIVE"
-                trust_score = 50.0
-                risk_level = "MEDIUM"
-            else:
-                verdict = "SUSPICIOUS"
-                trust_score = round((1.0 - p_scam) * 60.0, 1)
-                risk_level = "MEDIUM"
+        # ── TIER 3: PATTERN-BASED SCORING (when org not in registry) ───────────
+        # Compute a weighted risk score purely from available signals
         else:
-            if p_scam > 0.65:
-                verdict = "SCAM"
-                risk_level = "HIGH"
-                trust_score = round((1.0 - p_scam) * 35.0, 1)
-            elif p_gen > 0.70:
-                verdict = "GENUINE"
-                risk_level = "LOW"
-                trust_score = round(p_gen * 90.0, 1)
-            else:
-                verdict = "SUSPICIOUS"
-                risk_level = "MEDIUM"
-                trust_score = round(50.0 + (p_gen - p_scam) * 20.0, 1)
+            pattern_score = 0.0
 
-        confidence = round(max(p_gen, p_susp, p_scam) * 100.0, 1)
+            # NLP risk is the strongest independent signal
+            if nlp_risk >= 70:
+                pattern_score += 50.0
+            elif nlp_risk >= 40:
+                pattern_score += 30.0
+            elif nlp_risk >= 15:
+                pattern_score += 12.0
+
+            # Payment fraud indicators
+            if payment_risk >= 1.0:   pattern_score += 35.0
+            elif payment_risk >= 0.8: pattern_score += 25.0
+            elif payment_risk >= 0.1: pattern_score += 8.0
+
+            # QR code in message
+            if qr_flag >= 1.0: pattern_score += 20.0
+
+            # Guaranteed job promise (constitutional violation)
+            if guaranteed >= 1.0: pattern_score += 25.0
+
+            # Urgency signals
+            if urgency >= 70:  pattern_score += 15.0
+            elif urgency >= 35: pattern_score += 8.0
+
+            # Single HIGH contradiction (e.g. missing advt number)
+            if high_count >= 1:  pattern_score += 15.0
+            if medium_count >= 1: pattern_score += 5.0
+
+            # Domain/email partial conflicts
+            if has_public_email:          pattern_score += 18.0
+            if domain_status == "MISSING" and org_matched: pattern_score += 8.0
+
+            # DNA similarity — low score means poor match to real patterns
+            if dna_sim < 30:   pattern_score += 15.0
+            elif dna_sim < 50: pattern_score += 5.0
+            elif dna_sim > 80 and nlp_risk < 15: pattern_score -= 10.0
+
+            # Org recognized but unverifiable details
+            if org_matched and notif_status in ["NOT_FOUND", "VALID_FORMAT_NOT_IN_REGISTRY"]:
+                pattern_score += 12.0
+
+            # If org not recognized at all and no positive signals → likely spam/scam
+            if not org_matched and nlp_risk < 10 and payment_risk < 0.1 and urgency < 10:
+                # Truly empty — insufficient to classify
+                pattern_score = -1.0
+
+            # ── Map pattern score → verdict ─────────────────────────────────
+            if pattern_score < 0:
+                # Genuinely no data to classify
+                verdict    = "INCONCLUSIVE"
+                risk_level = "MEDIUM"
+                trust_score = 50.0
+                p_scam = 0.30; p_gen = 0.30; p_susp = 0.40
+
+            elif pattern_score >= 55:
+                verdict    = "SCAM"
+                risk_level = "HIGH"
+                p_scam = min(0.95, 0.60 + pattern_score / 200.0)
+                p_gen  = max(0.02, 0.20 - pattern_score / 200.0)
+                p_susp = max(0.0, 1.0 - p_scam - p_gen)
+                trust_score = round(max(1.0, 30.0 - pattern_score * 0.3), 1)
+
+            elif pattern_score >= 25:
+                verdict    = "SUSPICIOUS"
+                risk_level = "MEDIUM"
+                p_scam = min(0.75, 0.40 + pattern_score / 200.0)
+                p_gen  = max(0.05, 0.40 - pattern_score / 150.0)
+                p_susp = max(0.0, 1.0 - p_scam - p_gen)
+                trust_score = round(max(20.0, 60.0 - pattern_score * 0.8), 1)
+
+            elif pattern_score >= 5:
+                # Low but non-zero risk signals — lean SUSPICIOUS not INCONCLUSIVE
+                verdict    = "SUSPICIOUS"
+                risk_level = "LOW"
+                p_scam = 0.35; p_gen = 0.40; p_susp = 0.25
+                trust_score = round(55.0 - pattern_score * 0.5, 1)
+
+            else:
+                # Genuinely clean signal with no flags — treat as plausible
+                verdict    = "GENUINE"
+                risk_level = "LOW"
+                p_gen = max(p_gen, 0.70)
+                p_scam = min(p_scam, 0.15)
+                p_susp = max(0.0, 1.0 - p_gen - p_scam)
+                trust_score = round(60.0 + p_gen * 25.0, 1)
+
+        confidence  = round(max(p_gen, p_susp, p_scam) * 100.0, 1)
         trust_score = max(1.0, min(99.0, trust_score))
 
         return {
             "verdict": verdict,
             "trust_score": trust_score,
             "risk_level": risk_level,
-            "scam_probability": round(p_scam * 100.0, 1),
-            "genuine_probability": round(p_gen * 100.0, 1),
+            "scam_probability":     round(p_scam * 100.0, 1),
+            "genuine_probability":  round(p_gen  * 100.0, 1),
             "suspicious_probability": round(p_susp * 100.0, 1),
             "confidence": confidence,
             "model_type": self.model_type

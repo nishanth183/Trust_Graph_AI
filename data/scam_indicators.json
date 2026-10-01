@@ -15,6 +15,30 @@
       "report_date": "2026-01-20",
       "status": "CONFIRMED_SCAM",
       "reason": "Used in fake WhatsApp joining letter dispatch campaign"
+    },
+    {
+      "value": "919165146378",
+      "case_id": "TG-2026-000022",
+      "organization_claimed": "Unspecified Government Body",
+      "report_date": "2026-10-01",
+      "status": "FLAGGED",
+      "reason": "Associated with scam case TG-2026-000022"
+    },
+    {
+      "value": "+91 99998 88877",
+      "case_id": "COMMUNITY-REPORT",
+      "organization_claimed": "Staff Selection Commission (SSC)",
+      "report_date": "2026-10-01",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Fake SSC CGL appointment dispatch letter asking for joining fee"
+    },
+    {
+      "value": "+917654321099",
+      "case_id": "COMMUNITY-REPORT",
+      "organization_claimed": "Delhi Police",
+      "report_date": "2026-10-01",
+      "status": "CONFIRMED_SCAM",
+      "reason": "Test report from automated test"
     }
   ],
   "upi_ids": [
@@ -38,6 +62,27 @@
       "organization_claimed": "Unspecified Government Body",
       "status": "FLAGGED",
       "reason": "Payment recipient flagged in case TG-2026-000006"
+    },
+    {
+      "value": "govtjobs2026@upi",
+      "case_id": "TG-2026-000011",
+      "organization_claimed": "GOVERNMENT OF INDIA",
+      "status": "FLAGGED",
+      "reason": "Payment recipient flagged in case TG-2026-000011"
+    },
+    {
+      "value": "delhipolice@okaxis",
+      "case_id": "TG-2026-000031",
+      "organization_claimed": "Unspecified Government Body",
+      "status": "FLAGGED",
+      "reason": "Payment recipient flagged in case TG-2026-000031"
+    },
+    {
+      "value": "post.gds.verify@okaxis",
+      "case_id": "TG-2026-000041",
+      "organization_claimed": "Department of Posts (India Post)",
+      "status": "FLAGGED",
+      "reason": "Payment recipient flagged in case TG-2026-000041"
     }
   ],
   "domains": [
@@ -58,6 +103,42 @@
       "case_id": "TG-2026-DEMO-004",
       "status": "CONFIRMED_SCAM",
       "reason": "Generic scam landing page asking for UPI fee payment"
+    },
+    {
+      "value": "govt-recruitment-example.com",
+      "case_id": "TG-2026-000011",
+      "status": "FLAGGED",
+      "reason": "Fake recruitment portal flagged in case TG-2026-000011"
+    },
+    {
+      "value": "delhipolice-recruitment.xyz",
+      "case_id": "TG-2026-000031",
+      "status": "FLAGGED",
+      "reason": "Fake recruitment portal flagged in case TG-2026-000031"
+    },
+    {
+      "value": "example.com",
+      "case_id": "TG-2026-000037",
+      "status": "FLAGGED",
+      "reason": "Fake recruitment portal flagged in case TG-2026-000037"
+    },
+    {
+      "value": "abc-tech-careers.example",
+      "case_id": "TG-2026-000009",
+      "status": "FLAGGED",
+      "reason": "Fake recruitment portal flagged in case TG-2026-000009"
+    },
+    {
+      "value": "tamilanguide.in",
+      "case_id": "TG-2026-000018",
+      "status": "FLAGGED",
+      "reason": "Fake recruitment portal flagged in case TG-2026-000018"
+    },
+    {
+      "value": "wa.me",
+      "case_id": "TG-2026-000022",
+      "status": "FLAGGED",
+      "reason": "Fake recruitment portal flagged in case TG-2026-000022"
     }
   ],
   "qr_hashes": []

@@ -2,8 +2,9 @@ import os
 import json
 from datetime import datetime
 from typing import Optional
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Header, Request, status
 from fastapi.responses import JSONResponse
+from backend.utils.auth import extract_user_from_header
 
 from backend.config import settings, UPLOAD_DIR
 from backend.schemas.requests import AnalyzeRequest
@@ -28,6 +29,7 @@ router = APIRouter(tags=["Analysis"])
 
 @router.post("/analyze", response_model=CaseAnalysisResponse, status_code=status.HTTP_200_OK)
 async def analyze_recruitment(
+    request: Request,
     text: Optional[str] = Form(None),
     url: Optional[str] = Form(None),
     source_type: Optional[str] = Form("Other"),
@@ -60,20 +62,32 @@ async def analyze_recruitment(
 
     # 2. Handle File Upload (Image or PDF)
     elif file and file.filename:
-        input_type = "FILE_IMAGE" if any(file.filename.lower().endswith(ext) for ext in [".png", ".jpg", ".jpeg"]) else "FILE_PDF"
+        is_image = any(file.filename.lower().endswith(ext) for ext in [".png", ".jpg", ".jpeg"])
+        input_type = "FILE_IMAGE" if is_image else "FILE_PDF"
         content_bytes = await file.read()
         validate_uploaded_file(file, content_bytes)
 
         # Run OCR / PDF Extractor
         ocr_result = ocr_service.process_file(content_bytes, file.filename)
-        extracted_text = ocr_result.get("text", "")
+        extracted_text = ocr_result.get("text", "").strip()
         qr_detected = ocr_result.get("qr_detected", False)
         qr_data = ocr_result.get("qr_data")
         file_metadata = {
             "filename": file.filename,
             "size_bytes": len(content_bytes),
-            "ocr_confidence": ocr_result.get("confidence")
+            "ocr_confidence": ocr_result.get("confidence"),
+            "ocr_source": ocr_result.get("source_type", "IMAGE")
         }
+
+        # If OCR returned no text (e.g. Tesseract not installed, or blank image),
+        # synthesize a placeholder so the pipeline can still run and give a result.
+        if not extracted_text:
+            if qr_data:
+                extracted_text = f"Uploaded image contains a payment QR code pointing to: {qr_data}"
+            elif is_image:
+                extracted_text = f"Uploaded recruitment image file: {file.filename}. No readable text could be extracted from this image."
+            else:
+                extracted_text = f"Uploaded PDF recruitment document: {file.filename}. No text layer found."
 
     # 3. Handle Direct Text
     elif text:
@@ -191,6 +205,7 @@ async def analyze_recruitment(
         "evidence_summary": evidence_summary,
         "extracted_evidence": evidence,
         "recruitment_dna": dna_comparison,
+        "recruitment_pattern": dna_comparison.get("pattern_checklist") or dna_service.generate_recruitment_pattern(evidence, nlp_results, verification_details),
         "evidence_graph": graph_result,
         "verification_details": verification_details,
         "contradiction_findings": contradictions,
@@ -206,6 +221,13 @@ async def analyze_recruitment(
         "created_at": created_at
     }
 
+    # Associate case with logged-in user (if authenticated)
+    auth_header = request.headers.get("authorization")
+    user_info = extract_user_from_header(auth_header)
+    if user_info:
+        response_payload["user_id"] = user_info["user_id"]
+        response_payload["username"] = user_info["username"]
+
     # Step 11: Save Case & Register Scam Indicators
     storage.save_case(case_id, response_payload)
 
@@ -219,8 +241,16 @@ async def get_case_details(case_id: str):
     return case
 
 @router.get("/cases")
-async def list_cases(limit: int = 50):
-    return storage.list_cases(limit=limit)
+async def list_cases(request: Request, limit: int = 50, authorization: Optional[str] = Header(None)):
+    """List cases. If authenticated, returns only the user's cases. Admins see all."""
+    auth_header = authorization or request.headers.get("authorization")
+    user_info = extract_user_from_header(auth_header)
+    if user_info:
+        if user_info.get("role") == "admin":
+            return storage.list_cases(limit=limit)
+        return storage.list_cases_by_user(user_info["user_id"], limit=limit)
+    # Unauthenticated: return empty list (require login)
+    return []
 
 @router.get("/demo-cases")
 async def list_demo_cases():

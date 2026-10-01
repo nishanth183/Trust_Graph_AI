@@ -117,20 +117,34 @@ class ExplainableAIService:
                     "explanation": f"Matched previous flagged case {l.get('connected_case_id')}."
                 })
 
+        # 3. Incorporate Contradiction Findings
+        for c in contradictions:
+            factor = c.get("factor", "Contradiction")
+            sev = c.get("severity", "MEDIUM")
+            exp = c.get("explanation", "")
+            risk_evidence.append(f"[{sev}] {factor}: {exp}")
+            top_factors.append({
+                "feature": f"contradiction_{factor.lower().replace(' ', '_')}",
+                "label": factor,
+                "contribution": -0.40 if sev in ["CRITICAL", "HIGH"] else -0.20,
+                "direction": "RISK",
+                "explanation": exp
+            })
+
         # Top reasons synthesis
         top_reasons = []
         if verdict == "SCAM":
             if risk_evidence:
-                top_reasons = risk_evidence[:4]
+                top_reasons = risk_evidence[:5]
             else:
                 top_reasons = ["Significant multi-factor contradictions detected", "Recruitment DNA diverged sharply from official standards"]
         elif verdict == "GENUINE":
             if supporting_evidence:
-                top_reasons = supporting_evidence[:3]
+                top_reasons = supporting_evidence[:4]
             else:
                 top_reasons = ["Official portal and gazette record validated", "Recruitment DNA conforms to statutory pattern"]
         elif verdict == "SUSPICIOUS":
-            top_reasons = risk_evidence[:2] + ["Key recruitment credentials could not be verified in the official registry"]
+            top_reasons = risk_evidence[:4] if risk_evidence else ["Key recruitment credentials could not be verified in the official registry"]
         else: # INCONCLUSIVE
             top_reasons = ["Insufficient evidence provided to establish authenticity or fraud", "Please verify directly through official state/central gazette portals"]
 

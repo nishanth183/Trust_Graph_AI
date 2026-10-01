@@ -46,6 +46,7 @@ class DNAResult(BaseModel):
     mismatching_features: List[str] = []
     missing_features: List[str] = []
     comparison_breakdown: List[DNASignatureBreakdown] = []
+    pattern_checklist: Optional[List[Dict[str, Any]]] = []
 
 class GraphNode(BaseModel):
     id: str
@@ -96,6 +97,7 @@ class CaseAnalysisResponse(BaseModel):
     evidence_summary: EvidenceSummary
     extracted_evidence: Dict[str, Any]
     recruitment_dna: DNAResult
+    recruitment_pattern: Optional[List[Dict[str, Any]]] = None
     evidence_graph: GraphResult
     verification_details: Dict[str, Any]
     contradiction_findings: List[ContradictionItem]
@@ -104,6 +106,8 @@ class CaseAnalysisResponse(BaseModel):
     input_metadata: Dict[str, Any]
     demo_mode: bool = True
     created_at: str
+    user_id: Optional[str] = None
+    username: Optional[str] = None
 
 class HealthResponse(BaseModel):
     status: str

@@ -133,8 +133,7 @@ export default function ResultView({ result, onViewGraph, onViewDNA, onReportCas
           </button>
           <a
             href={`/api/report/${case_id}/download`}
-            target="_blank"
-            rel="noreferrer"
+            download={`TrustGraph_Report_${case_id}.pdf`}
             className="btn-secondary"
             style={{ fontSize: '13px', padding: '8px 14px', textDecoration: 'none' }}
           >
@@ -207,21 +206,27 @@ export default function ResultView({ result, onViewGraph, onViewDNA, onReportCas
                 width: '84px',
                 height: '84px',
                 borderRadius: '50%',
-                border: `4px solid ${currentVerdict.color}`,
+                border: `4px solid ${verdict === 'INCONCLUSIVE' ? '#4b5563' : currentVerdict.color}`,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: 'rgba(9, 13, 22, 0.6)',
-                boxShadow: `0 0 16px ${currentVerdict.color}30`
+                boxShadow: verdict === 'INCONCLUSIVE' ? 'none' : `0 0 16px ${currentVerdict.color}30`
               }}>
-                <span style={{ fontSize: '26px', fontWeight: 800, color: currentVerdict.color, lineHeight: 1 }}>
-                  {Math.round(trust_score)}
-                </span>
-                <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600 }}>/ 100</span>
+                {verdict === 'INCONCLUSIVE' ? (
+                  <span style={{ fontSize: '28px', fontWeight: 800, color: '#6b7280', lineHeight: 1 }}>—</span>
+                ) : (
+                  <>
+                    <span style={{ fontSize: '26px', fontWeight: 800, color: currentVerdict.color, lineHeight: 1 }}>
+                      {Math.round(trust_score)}
+                    </span>
+                    <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600 }}>/ 100</span>
+                  </>
+                )}
               </div>
               <div style={{ fontSize: '12px', fontWeight: 600, color: '#94a3b8', marginTop: '6px' }}>
-                Trust Score
+                {verdict === 'INCONCLUSIVE' ? "Can't score" : 'Trust Score'}
               </div>
             </div>
 

@@ -34,9 +34,10 @@ async def download_report_file(case_id: str):
     case = storage.get_case(case_id)
     if not case:
         raise HTTPException(status_code=404, detail="Case not found.")
-    report_file = report_generator.generate_html_report(case)
+    report_file = report_generator.generate_pdf_report(case)
     return FileResponse(
         report_file,
-        media_type="text/html",
-        filename=f"TrustGraph_Report_{case_id}.html"
+        media_type="application/pdf",
+        filename=f"TrustGraph_Report_{case_id}.pdf"
     )
+

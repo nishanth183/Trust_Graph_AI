@@ -1,0 +1,46 @@
+{
+  "USR-ADMIN-001": {
+    "user_id": "USR-ADMIN-001",
+    "username": "admin",
+    "full_name": "System Administrator",
+    "email": "admin@trustgraph.ai",
+    "role": "admin",
+    "password_hash": "4673d5ee7b0d1e5a80c89ba994786eab4fb5b15e79aed35e3ac0fbc6f65eff9b",
+    "salt": "266a6c63a124836fb739cee6f0840546",
+    "created_at": "2026-10-01T13:45:01.158518",
+    "is_active": true
+  },
+  "USR-0002": {
+    "user_id": "USR-0002",
+    "username": "testuser",
+    "full_name": "Test User",
+    "email": "",
+    "role": "user",
+    "password_hash": "88597c5195ac14b30d2e1fd46ecd1c2cd0945f361f8cad63cdc6990b82a85807",
+    "salt": "8b5c48ef9a81dfb3885536892aab237b",
+    "created_at": "2026-10-01T13:52:55.657242",
+    "is_active": true
+  },
+  "USR-0003": {
+    "user_id": "USR-0003",
+    "username": "rahul_sharma",
+    "full_name": "Rahul Sharma",
+    "email": "rahul@example.com",
+    "role": "user",
+    "password_hash": "c83843d7831051f78d8e1025311b94d4140441452be6e16f3a695ce20621be00",
+    "salt": "b98c9c114d2a7dea913d4d734cc62c21",
+    "created_at": "2026-10-01T14:08:52.562973",
+    "is_active": true
+  },
+  "USR-0004": {
+    "user_id": "USR-0004",
+    "username": "NISHANTH",
+    "full_name": "NISHANTH",
+    "email": "nishanthm.cs24@bitsathy.ac.in",
+    "role": "user",
+    "password_hash": "275b3a37c844e8fbc2144837b1d80d5383ea7ca7111966a44ba4dec428d2dbc9",
+    "salt": "37e197d7090e21b19f9983b9c29de88b",
+    "created_at": "2026-10-01T14:23:15.498525",
+    "is_active": true
+  }
+}

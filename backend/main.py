@@ -13,6 +13,7 @@ from backend.routes.graph import router as graph_router
 from backend.routes.risk import router as risk_router
 from backend.routes.reports import router as reports_router
 from backend.routes.health import router as health_router
+from backend.routes.auth import router as auth_router
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("trustgraph.api")
@@ -50,6 +51,7 @@ app.include_router(graph_router, prefix=settings.API_PREFIX)
 app.include_router(risk_router, prefix=settings.API_PREFIX)
 app.include_router(reports_router, prefix=settings.API_PREFIX)
 app.include_router(health_router, prefix=settings.API_PREFIX)
+app.include_router(auth_router, prefix=settings.API_PREFIX)
 
 @app.get("/")
 async def root():

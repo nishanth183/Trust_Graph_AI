@@ -19,7 +19,8 @@ class RiskReasoningEngine:
 
         org = evidence.get("organization") or ""
         dept = evidence.get("department") or ""
-        is_claimed_gov = bool(org and any(k in org.upper() for k in ["GOVERNMENT", "MINISTRY", "UPSC", "SSC", "RAILWAY", "RRB", "POST", "POLICE", "PSC", "DRDO", "ISRO", "COMMISSION"]))
+        is_claimed_gov = bool(org and any(k in org.upper() for k in ["GOVERNMENT", "MINISTRY", "UPSC", "SSC", "RAILWAY", "RRB", "POST", "POLICE", "PSC", "DRDO", "ISRO", "COMMISSION", "BOARD", "DEPARTMENT"]))
+        raw_text = (evidence.get("raw_text") or nlp_analysis.get("raw_text") or "").lower()
 
         email = evidence.get("email") or ""
         email_domain = email.split("@")[-1].lower() if "@" in email else ""
@@ -28,21 +29,34 @@ class RiskReasoningEngine:
         qr_detected = evidence.get("qr_detected", False)
         notif_num = evidence.get("notification_number") or ""
         notif_status = verification_details.get("notification_status")
+        org_matched = bool(verification_details.get("organization_matched"))
+        org_name = verification_details.get("organization_name") or org
 
-        # RULE 1: Claimed Government Body + Public / Unofficial Email Provider
+        # RULE 1: Unverified Government / Police Organization
+        if is_claimed_gov and not org_matched:
+            contradictions.append({
+                "rule_id": "RULE_CONTRADICTION_00_UNVERIFIED_BODY",
+                "factor": "Unverified Government / Police Recruitment Body",
+                "evidence": f"Claimed entity: '{org}'",
+                "severity": "HIGH",
+                "confidence": 0.92,
+                "explanation": f"The entity '{org}' is not listed as a verified statutory recruitment body in the official government directory. Fraudulent job posts frequently impersonate state police departments or recruitment boards."
+            })
+
+        # RULE 2: Claimed Government Body + Public / Unofficial Email Provider
         if is_claimed_gov and email:
             public_providers = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "rediffmail.com", "yandex.com"]
             if email_domain in public_providers:
                 contradictions.append({
                     "rule_id": "RULE_CONTRADICTION_01_EMAIL_MISMATCH",
-                    "factor": "Claimed Government Institution vs Public Email Provider",
+                    "factor": "Government Institution vs Public Email Provider",
                     "evidence": f"Organization claimed: '{org}', Contact Email provided: '{email}'",
                     "severity": "HIGH",
                     "confidence": 0.95,
-                    "explanation": f"All official recruitment communications from {org} must originate from official institutional email gateways (*.gov.in or *.nic.in). Free public mailboxes (@{email_domain}) are never authorized for official recruitment."
+                    "explanation": f"All official recruitment communications from {org_name} must originate from official institutional email gateways (*.gov.in or *.nic.in). Free public mailboxes (@{email_domain}) are never authorized for official recruitment."
                 })
 
-        # RULE 2: Official Recruitment + Personal UPI / Direct QR Payment Request
+        # RULE 3: Official Recruitment + Personal UPI / Direct QR Payment Request
         if is_claimed_gov and (upi_id or qr_detected):
             payment_evidence = upi_id if upi_id else "Payment QR Code (UPI Protocol)"
             contradictions.append({
@@ -54,28 +68,31 @@ class RiskReasoningEngine:
                 "explanation": "Official recruitment boards collect exam fees strictly through authorized cyber treasuries or SBI online portals. Individual UPI IDs or direct UPI QR codes are universally indicative of fraud."
             })
 
-        # RULE 3: Official Recruitment Claim + Notification Number Missing / Not in Official Gazette
-        if is_claimed_gov and verification_details.get("organization_matched"):
-            if notif_status == "NOT_FOUND":
-                contradictions.append({
-                    "rule_id": "RULE_CONTRADICTION_03_UNVERIFIED_GAZETTE_NUMBER",
-                    "factor": "Claimed Advertisement Number Absent from Official Registry",
-                    "evidence": f"Advertised number '{notif_num}' could not be verified in the active gazette directory of {verification_details.get('organization_name')}",
-                    "severity": "HIGH",
-                    "confidence": 0.90,
-                    "explanation": "Every legitimate central or state recruitment circular possesses a traceable gazette advertisement index published on the official commission portal."
-                })
-            elif not notif_num:
-                contradictions.append({
-                    "rule_id": "RULE_CONTRADICTION_04_MISSING_ADVT_NUMBER",
-                    "factor": "Absence of Formal Notification Reference Number",
-                    "evidence": "No formal advertisement or notification number identified in message text",
-                    "severity": "MEDIUM",
-                    "confidence": 0.80,
-                    "explanation": "Legitimate government recruitment notices always carry a specific notification/CEN reference code."
-                })
+        # RULE 4: Fee Solicitation via Messaging App / Without Official Portal
+        if evidence.get("payment_requested") and not domain:
+            fee_val = evidence.get("application_fee")
+            fee_str = f"₹{int(fee_val)}" if fee_val else "Registration Fee"
+            contradictions.append({
+                "rule_id": "RULE_CONTRADICTION_03_FEE_WITHOUT_PORTAL",
+                "factor": "Application Fee Solicited Without Official Web Portal",
+                "evidence": f"Fee requested: {fee_str} without an official .gov.in application URL",
+                "severity": "HIGH",
+                "confidence": 0.91,
+                "explanation": "Legitimate recruitment notices require payment exclusively through secured payment gateways on official government portals (.gov.in). Soliciting registration fees directly via social media or instant messaging is a primary fraud indicator."
+            })
 
-        # RULE 4: Claimed Government Institution + Suspicious / Commercial Domain TLD
+        # RULE 5: Informal Document Submission (Aadhaar / PAN over WhatsApp / Telegram)
+        if any(kw in raw_text for kw in ["whatsapp", "telegram", "aadhaar", "pan", "certificate", "send your"]):
+            contradictions.append({
+                "rule_id": "RULE_CONTRADICTION_04_INFORMAL_DOC_SUBMISSION",
+                "factor": "Informal Channel Identity Document Submission Request",
+                "evidence": "Requests candidates to send Aadhaar, PAN card, or marksheets via WhatsApp / Telegram",
+                "severity": "HIGH",
+                "confidence": 0.96,
+                "explanation": "Official recruitment agencies never request candidates to submit sensitive personal identification documents (Aadhaar/PAN) or certificates through instant messaging applications."
+            })
+
+        # RULE 6: Claimed Government Institution + Suspicious / Commercial Domain TLD
         if is_claimed_gov and domain:
             is_gov_domain = domain.endswith(".gov.in") or domain.endswith(".nic.in")
             if not is_gov_domain:
@@ -85,13 +102,43 @@ class RiskReasoningEngine:
                     "evidence": f"Recruitment portal URL points to non-governmental domain: '{domain}'",
                     "severity": "HIGH",
                     "confidence": 0.94,
-                    "explanation": f"Under Indian Central Government digital guidelines, all central and state recruitment portals must be hosted on *.gov.in or *.nic.in domains. The domain '{domain}' is hosted outside official infrastructure."
+                    "explanation": f"Under Indian Central Government digital guidelines, all central and state recruitment portals must be hosted on *.gov.in or *.nic.in domains. The domain '{domain}' is hosted outside official government infrastructure."
+                })
+        elif is_claimed_gov and not domain:
+            contradictions.append({
+                "rule_id": "RULE_CONTRADICTION_06_MISSING_OFFICIAL_PORTAL",
+                "factor": "Absence of Official Government Web Portal",
+                "evidence": "No official website domain provided in recruitment notice",
+                "severity": "MEDIUM",
+                "confidence": 0.85,
+                "explanation": "Legitimate government recruitment notifications direct candidates to official .gov.in web portals for online registration and verification."
+            })
+
+        # RULE 7: Official Gazette Reference Number Missing / Unverified
+        if is_claimed_gov:
+            if notif_status == "NOT_FOUND":
+                contradictions.append({
+                    "rule_id": "RULE_CONTRADICTION_07_UNVERIFIED_GAZETTE_NUMBER",
+                    "factor": "Claimed Advertisement Number Absent from Official Registry",
+                    "evidence": f"Advertised number '{notif_num}' could not be verified in the active gazette directory of {org_name}",
+                    "severity": "HIGH",
+                    "confidence": 0.90,
+                    "explanation": "Every legitimate central or state recruitment circular possesses a traceable gazette advertisement index published on the official commission portal."
+                })
+            elif not notif_num:
+                contradictions.append({
+                    "rule_id": "RULE_CONTRADICTION_08_MISSING_ADVT_NUMBER",
+                    "factor": "Absence of Formal Notification Reference Number",
+                    "evidence": "No formal advertisement or notification number identified in message text",
+                    "severity": "MEDIUM",
+                    "confidence": 0.80,
+                    "explanation": "Legitimate government recruitment notices always carry a specific notification/CEN reference code."
                 })
 
-        # RULE 5: Guaranteed Job / Direct Appointment Without Examination
+        # RULE 8: Guaranteed Job / Direct Appointment Without Examination
         if nlp_analysis.get("guaranteed_job_claim"):
             contradictions.append({
-                "rule_id": "RULE_CONTRADICTION_06_DIRECT_JOINING_CLAIM",
+                "rule_id": "RULE_CONTRADICTION_09_DIRECT_JOINING_CLAIM",
                 "factor": "Guaranteed Employment / Bypass of Statutory Competitive Exam",
                 "evidence": "Phrases promising 100% selection or direct appointment without examination",
                 "severity": "CRITICAL",
@@ -99,11 +146,11 @@ class RiskReasoningEngine:
                 "explanation": "Articles 14 and 16 of the Constitution of India mandate transparent, merit-based selection processes for public employment. Claims of direct joining without competitive examination violate statutory recruitment policy."
             })
 
-        # RULE 6: Reused Syndicate Infrastructure
+        # RULE 9: Reused Syndicate Infrastructure
         if scam_links:
             for link in scam_links:
                 contradictions.append({
-                    "rule_id": "RULE_CONTRADICTION_07_REPEATED_SCAM_INFRASTRUCTURE",
+                    "rule_id": "RULE_CONTRADICTION_10_REPEATED_SCAM_INFRASTRUCTURE",
                     "factor": f"Reused Scam Infrastructure: {link.get('entity_type').upper()}",
                     "evidence": f"{link.get('entity_type').title()} '{link.get('entity_value')}' matches previously flagged scam case {link.get('connected_case_id')}",
                     "severity": "CRITICAL",
