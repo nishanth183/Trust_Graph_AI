@@ -42,5 +42,27 @@
     "salt": "37e197d7090e21b19f9983b9c29de88b",
     "created_at": "2026-10-01T14:23:15.498525",
     "is_active": true
+  },
+  "USR-0005": {
+    "user_id": "USR-0005",
+    "username": "nithishk",
+    "full_name": "nithish",
+    "email": "",
+    "role": "user",
+    "password_hash": "2d2d83bf48647e4094bbbf11699622e935843639a5a260c5ccc11ee2effeafcd",
+    "salt": "b39da9a578b4dc48eef424b5c4f0f3d9",
+    "created_at": "2026-10-01T18:29:49.281707",
+    "is_active": true
+  },
+  "USR-0006": {
+    "user_id": "USR-0006",
+    "username": "nikil25",
+    "full_name": "nikil",
+    "email": "",
+    "role": "user",
+    "password_hash": "637653cc5a8c8605199768bcbd2e37f6026feb8f55870280a5e681e98dbc8150",
+    "salt": "b857755088f800afce6e5948c2382d84",
+    "created_at": "2026-10-01T19:31:27.522258",
+    "is_active": true
   }
 }

@@ -9,7 +9,7 @@ OFFICIAL_ORGANIZATIONS = {
         "full_name": "Union Public Service Commission",
         "official_domains": ["upsc.gov.in", "upsconline.nic.in"],
         "official_email_domains": ["upsc.gov.in", "nic.in", "gov.in"],
-        "notification_pattern": r'^\d{2}/\d{4}-[A-Z0-9\-_]+$', # e.g. 05/2026-CSP, 01/2026-ENGG
+        "notification_pattern": r'^\d{2}/\d{4}-[A-Z0-9\-_]+$',
         "known_notifications": [
             {
                 "notification_number": "05/2026-CSP",
@@ -52,7 +52,7 @@ OFFICIAL_ORGANIZATIONS = {
         "full_name": "Railway Recruitment Boards",
         "official_domains": ["indianrailways.gov.in", "rrbcdg.gov.in", "rrbapply.gov.in"],
         "official_email_domains": ["railnet.gov.in", "rrbcdg.gov.in", "gov.in"],
-        "notification_pattern": r'^CEN\s*\d{2}/\d{4}$', # e.g. CEN 01/2026
+        "notification_pattern": r'^CEN\s*\d{2}/\d{4}$',
         "known_notifications": [
             {
                 "notification_number": "CEN 01/2026",
@@ -62,6 +62,91 @@ OFFICIAL_ORGANIZATIONS = {
                 "application_fee": 500,
                 "payment_methods": ["Official Online Gateway (Refundable ₹400 upon CBT 1 attendance)"],
                 "source_url": "https://rrbcdg.gov.in"
+            }
+        ]
+    },
+    "STATE_POLICE": {
+        "full_name": "State Police Recruitment Board (Department of Home)",
+        "official_domains": ["police.gov.in", "ksp.gov.in", "uppbpb.gov.in", "slprbassam.in", "delhipolice.gov.in", "mahapolice.gov.in"],
+        "official_email_domains": ["police.gov.in", "gov.in", "nic.in"],
+        "notification_pattern": r'^[A-Z0-9\-_/]+\d{4}[A-Z0-9\-_]*$',
+        "known_notifications": [
+            {
+                "notification_number": "PRB-2026-CONSTABLE",
+                "title": "Police Constable Recruitment 2026",
+                "department": "Department of Home Affairs",
+                "website": "https://police.gov.in",
+                "application_fee": 100,
+                "payment_methods": ["Official State Cyber Treasury Portal"],
+                "source_url": "https://police.gov.in"
+            }
+        ]
+    },
+    "IBPS": {
+        "full_name": "Institute of Banking Personnel Selection",
+        "official_domains": ["ibps.in", "ibpsonline.ibps.in"],
+        "official_email_domains": ["ibps.in"],
+        "notification_pattern": r'^CRP\s+[A-Z0-9\-_/]+$',
+        "known_notifications": [
+            {
+                "notification_number": "CRP PO/MT-XIV",
+                "title": "Recruitment of Probationary Officers / Management Trainees",
+                "department": "Public Sector Banks",
+                "website": "https://www.ibps.in",
+                "application_fee": 175,
+                "payment_methods": ["Official Gateway"],
+                "source_url": "https://www.ibps.in"
+            }
+        ]
+    },
+    "SBI": {
+        "full_name": "State Bank of India",
+        "official_domains": ["sbi.co.in", "bank.sbi"],
+        "official_email_domains": ["sbi.co.in"],
+        "notification_pattern": r'^CRPD/[A-Z0-9\-_/]+$',
+        "known_notifications": [
+            {
+                "notification_number": "CRPD/PO/2026-27/01",
+                "title": "Recruitment of Probationary Officers in SBI",
+                "department": "State Bank of India",
+                "website": "https://bank.sbi/careers",
+                "application_fee": 750,
+                "payment_methods": ["SBI e-Pay"],
+                "source_url": "https://sbi.co.in/web/careers"
+            }
+        ]
+    },
+    "DRDO": {
+        "full_name": "Defence Research and Development Organisation",
+        "official_domains": ["drdo.gov.in", "rac.gov.in"],
+        "official_email_domains": ["drdo.gov.in", "gov.in", "nic.in"],
+        "notification_pattern": r'^ADV\s*\d+/\d{4}$',
+        "known_notifications": [
+            {
+                "notification_number": "ADV 147/2026",
+                "title": "Recruitment of Scientist 'B' in DRDO",
+                "department": "Ministry of Defence",
+                "website": "https://rac.gov.in",
+                "application_fee": 100,
+                "payment_methods": ["RAC Online Gateway"],
+                "source_url": "https://drdo.gov.in"
+            }
+        ]
+    },
+    "ISRO": {
+        "full_name": "Indian Space Research Organisation",
+        "official_domains": ["isro.gov.in", "apps.isro.gov.in"],
+        "official_email_domains": ["isro.gov.in", "gov.in", "nic.in"],
+        "notification_pattern": r'^ICRB:\d+:\d{4}$',
+        "known_notifications": [
+            {
+                "notification_number": "ICRB:01:2026",
+                "title": "Recruitment of Scientist/Engineer 'SC'",
+                "department": "Department of Space",
+                "website": "https://www.isro.gov.in",
+                "application_fee": 250,
+                "payment_methods": ["ISRO Online Payment Gateway"],
+                "source_url": "https://www.isro.gov.in"
             }
         ]
     },
@@ -82,20 +167,20 @@ OFFICIAL_ORGANIZATIONS = {
             }
         ]
     },
-    "TNPSC": {
-        "full_name": "Tamil Nadu Public Service Commission",
-        "official_domains": ["tnpsc.gov.in", "tnpscexams.in"],
-        "official_email_domains": ["tn.gov.in", "tnpsc.gov.in"],
-        "notification_pattern": r'^\d{2}/\d{4}$',
+    "STATE_PSC": {
+        "full_name": "State Public Service Commission",
+        "official_domains": ["tnpsc.gov.in", "kpsc.kar.nic.in", "uppsc.up.nic.in", "bpsc.bih.nic.in", "mpsc.gov.in", "psc.wb.gov.in", "gpsc.gujarat.gov.in", "rpsc.rajasthan.gov.in"],
+        "official_email_domains": ["gov.in", "nic.in"],
+        "notification_pattern": r'^\d{1,3}/\d{4}$',
         "known_notifications": [
             {
                 "notification_number": "03/2026",
-                "title": "Combined Civil Services Examination-II (Group II Services)",
-                "department": "Government of Tamil Nadu",
-                "website": "https://tnpsc.gov.in",
+                "title": "Combined Civil Services Examination 2026",
+                "department": "State Government",
+                "website": "https://gov.in",
                 "application_fee": 150,
-                "payment_methods": ["Treasury Net Banking", "Credit/Debit Card via Portal"],
-                "source_url": "https://tnpsc.gov.in"
+                "payment_methods": ["State Treasury Portal"],
+                "source_url": "https://gov.in"
             }
         ]
     }
@@ -151,31 +236,28 @@ class OfficialVerificationService:
             })
             return results
 
+        # 2. Domain & Website Verification
         results["official_portal"] = org_details["official_domains"][0]
-        results["official_email_pattern"] = "@" + org_details["official_email_domains"][0]
-
-        # 2. Domain Verification
         if domain:
             is_official_domain = any(domain == od or domain.endswith("." + od) for od in org_details["official_domains"])
             if is_official_domain:
                 results["domain_status"] = "VERIFIED" if not is_demo else "DEMO VERIFIED"
-                results["website_status"] = "VERIFIED"
+                results["website_status"] = "VERIFIED" if not is_demo else "DEMO VERIFIED"
             else:
-                # Check if it has a legitimate .gov.in or .nic.in domain
+                # Check for suspicious non-gov domain
                 if domain.endswith(".gov.in") or domain.endswith(".nic.in"):
                     results["domain_status"] = "DIFFERENT_GOV_DOMAIN"
-                    results["conflicts"].append({
-                        "type": "DOMAIN_MISMATCH",
-                        "description": f"Domain '{domain}' is a government domain, but does not belong to {org_details['full_name']} (expected {', '.join(org_details['official_domains'])})."
-                    })
+                    results["website_status"] = "DIFFERENT_GOV_DOMAIN"
                 else:
                     results["domain_status"] = "SUSPICIOUS_NON_GOV_DOMAIN"
+                    results["website_status"] = "SUSPICIOUS_NON_GOV_DOMAIN"
                     results["conflicts"].append({
-                        "type": "SUSPICIOUS_DOMAIN",
-                        "description": f"Recruitment claims to be from {org_details['full_name']}, but directs applicants to an unofficial domain '{domain}' instead of '{org_details['official_domains'][0]}'."
+                        "type": "UNOFFICIAL_DOMAIN",
+                        "description": f"Domain '{domain}' is not an official domain for {org_details['full_name']}. Official portals: {', '.join(org_details['official_domains'])}."
                     })
         else:
             results["domain_status"] = "MISSING"
+            results["website_status"] = "MISSING"
 
         # 3. Email Domain Verification
         if email_domain:
@@ -183,13 +265,12 @@ class OfficialVerificationService:
             if is_official_email:
                 results["email_status"] = "VERIFIED" if not is_demo else "DEMO VERIFIED"
             else:
-                # Check for public email providers
                 public_providers = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "rediffmail.com", "mail.com"]
                 if email_domain in public_providers:
                     results["email_status"] = "PUBLIC_PROVIDER_CONFLICT"
                     results["conflicts"].append({
                         "type": "PUBLIC_EMAIL_USED",
-                        "description": f"Recruitment for {org_details['full_name']} lists a generic public email address (@{email_domain}). Indian government recruitment bodies strictly use official .gov.in or .nic.in mail servers."
+                        "description": f"Recruitment for {org_details['full_name']} lists a generic public email address (@{email_domain}). Official recruitment bodies strictly use official .gov.in or .nic.in mail servers."
                     })
                 else:
                     results["email_status"] = "UNOFFICIAL_EMAIL_DOMAIN"
@@ -212,7 +293,6 @@ class OfficialVerificationService:
                 results["notification_status"] = "VERIFIED" if not is_demo else "DEMO VERIFIED"
                 results["verified_notification"] = matched_notif
             else:
-                # Test if format conforms to regex pattern
                 pattern = org_details.get("notification_pattern")
                 if pattern and re.match(pattern, notif_num.strip(), re.IGNORECASE):
                     results["notification_status"] = "VALID_FORMAT_NOT_IN_REGISTRY"
@@ -230,7 +310,7 @@ class OfficialVerificationService:
             results["payment_channel_status"] = "CRITICAL_CONFLICT_PERSONAL_UPI"
             results["conflicts"].append({
                 "type": "PERSONAL_UPI_PAYMENT",
-                "description": f"Personal UPI ID '{upi_id}' found. Indian government departments NEVER accept examination fees via personal UPI handles or direct money transfers. All payments must go through authorized treasury/banking gateways (SBI e-Pay/Bharatkosh)."
+                "description": f"Personal UPI ID '{upi_id}' found. Indian government departments NEVER accept examination fees via personal UPI handles or direct money transfers."
             })
         elif evidence.get("qr_detected"):
             results["payment_channel_status"] = "CRITICAL_CONFLICT_QR_CODE"
@@ -253,13 +333,23 @@ class OfficialVerificationService:
             return "SSC"
         if "RRB" in text or "RAILWAY RECRUITMENT" in text or "INDIAN RAILWAYS" in text:
             return "RRB"
+        if "POLICE" in text or "CONSTABLE" in text or "SLPRB" in text or "UPPRPB" in text or "KSP" in text:
+            return "STATE_POLICE"
+        if "IBPS" in text or "BANKING PERSONNEL" in text:
+            return "IBPS"
+        if "SBI" in text or "STATE BANK OF INDIA" in text:
+            return "SBI"
+        if "DRDO" in text or "DEFENCE RESEARCH" in text:
+            return "DRDO"
+        if "ISRO" in text or "SPACE RESEARCH" in text:
+            return "ISRO"
         if "INDIA POST" in text or "POST OFFICE" in text or "DAK SEVAK" in text or "GDS" in text or "DEPARTMENT OF POSTS" in text:
             return "INDIA_POST"
-        if "TNPSC" in text or "TAMIL NADU PUBLIC SERVICE" in text:
-            return "TNPSC"
+        if "PSC" in text or "PUBLIC SERVICE COMMISSION" in text or "TNPSC" in text or "KPSC" in text or "UPPSC" in text or "BPSC" in text or "MPSC" in text:
+            return "STATE_PSC"
         return None
 
-    def _normalize(self, s: str) -> str:
-        return re.sub(r'[\s\-_/]', '', s.lower())
+    def _normalize(self, text: str) -> str:
+        return re.sub(r'[^A-Z0-9]', '', str(text or '').upper())
 
 verification_service = OfficialVerificationService()

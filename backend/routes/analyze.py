@@ -29,7 +29,7 @@ router = APIRouter(tags=["Analysis"])
 
 @router.post("/analyze", response_model=CaseAnalysisResponse, status_code=status.HTTP_200_OK)
 async def analyze_recruitment(
-    request: Request,
+    request: Request = None,
     text: Optional[str] = Form(None),
     url: Optional[str] = Form(None),
     source_type: Optional[str] = Form("Other"),
@@ -222,7 +222,7 @@ async def analyze_recruitment(
     }
 
     # Associate case with logged-in user (if authenticated)
-    auth_header = request.headers.get("authorization")
+    auth_header = request.headers.get("authorization") if request else None
     user_info = extract_user_from_header(auth_header)
     if user_info:
         response_payload["user_id"] = user_info["user_id"]
@@ -241,9 +241,9 @@ async def get_case_details(case_id: str):
     return case
 
 @router.get("/cases")
-async def list_cases(request: Request, limit: int = 50, authorization: Optional[str] = Header(None)):
+async def list_cases(request: Request = None, limit: int = 50, authorization: Optional[str] = Header(None)):
     """List cases. If authenticated, returns only the user's cases. Admins see all."""
-    auth_header = authorization or request.headers.get("authorization")
+    auth_header = authorization or (request.headers.get("authorization") if request else None)
     user_info = extract_user_from_header(auth_header)
     if user_info:
         if user_info.get("role") == "admin":

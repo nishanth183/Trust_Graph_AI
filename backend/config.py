@@ -13,6 +13,25 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
 DEMO_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
+# Load environment variables from .env if present
+def _load_env_file():
+    env_file = PROJECT_ROOT / ".env"
+    if env_file.exists():
+        try:
+            with open(env_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#") and "=" in line:
+                        k, v = line.split("=", 1)
+                        k = k.strip()
+                        v = v.strip().strip('"').strip("'")
+                        if k:
+                            os.environ[k] = v
+        except Exception:
+            pass
+
+_load_env_file()
+
 class Settings(BaseModel):
     PROJECT_NAME: str = "TRUSTGRAPH AI"
     VERSION: str = "1.0.0"

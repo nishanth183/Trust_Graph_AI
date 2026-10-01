@@ -49,7 +49,7 @@ class NLPService:
             r'kyc\s*fee',
             r'background\s*(?:check|verification)\s*fee',
             r'id\s*card\s*fee',
-            r'pay\s*(?:₹|rs\.?|inr)?\s*\d+',
+            r'pay\s*(?:₹|rs\.?|inr)?\s*\d+\s*(?:before|in\s*advance|to\s*confirm|immediately|on\s*whatsapp|on\s*upi)',
             r'transfer\s*(?:the\s*)?(?:amount|money|fee)',
             r'(?:neft|imps|rtgs)\s*(?:transfer|payment)',
         ]

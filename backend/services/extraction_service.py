@@ -146,7 +146,7 @@ class EvidenceExtractionService:
             return "Central Industrial Security Force (CISF)", "Ministry of Home Affairs"
         elif re.search(r'\b(?:BSF)\b', text, re.I):
             return "Border Security Force (BSF)", "Ministry of Home Affairs"
-        elif re.search(r'\b(?:POLICE)\b', text, re.I):
+        elif re.search(r'\b(?:STATE POLICE RECRUITMENT|POLICE RECRUITMENT BOARD|POLICE DEPARTMENT)\b', text, re.I):
             return "State Police Recruitment Board", "Department of Home"
             
         # Defense & Scientific Research
@@ -201,32 +201,35 @@ class EvidenceExtractionService:
         m_gov = re.search(r'(?:Ministry of [A-Za-z\s]+|Government of [A-Za-z\s]+|Department of [A-Za-z\s]+|[A-Za-z\s]+ Recruitment Board|[A-Za-z\s]+ Service Commission|[A-Za-z\s]+ Bank)', text, re.IGNORECASE)
         if m_gov:
             found_name = m_gov.group(0).strip()
-            if len(found_name) > 6 and len(found_name) < 70:
+            if len(found_name) > 6 and len(found_name) < 70 and not any(k in found_name.lower() for k in ["policy", "privacy", "terms"]):
                 return found_name, "Government Administration"
 
-        if re.search(r'(?:Sarkari|Government|Govt\b|Recruitment Cell)', text, re.IGNORECASE):
+        if re.search(r'\b(?:Sarkari\s*Naukri|Government\s*Recruitment|Govt\s*Job\s*Portal|Recruitment\s*Cell)\b', text, re.IGNORECASE):
             return "Government Recruitment Department", "Public Services"
 
         return None, None
 
     def _extract_notification_number(self, text: str) -> Optional[str]:
+        # Strict patterns requiring digits to avoid false positives like online/apply, and/or
         patterns = [
-            r'(?:Advt\.?\s*No\.?|Notification\s*No\.?|Notice\s*No\.?|Ref\s*No\.?|Circular\s*No\.?)\s*[:\-]?\s*([A-Za-z0-9\/\-_.]+)',
+            r'(?:Advt\.?\s*(?:No\.?)?|Notification\s*(?:No\.?)?|Notice\s*(?:No\.?)?|Ref\s*(?:No\.?)?|Circular\s*(?:No\.?)?)\s*[:\-]?\s*([A-Za-z0-9\/\-_.]*\d+[A-Za-z0-9\/\-_.]*)',
             r'\b(CEN\s*\d{2}/\d{4})\b',
             r'\b(SSC-[A-Z]+-\d{4})\b',
             r'\b(\d{2}/\d{4}-[A-Z0-9\-_]+)\b',
-            r'\b(\d+-\d+/\d{4}-[A-Z]+)\b',
+            r'\b(\d+-\d+/\d{4}-[A-Z0-9]+)\b',
             r'\b(EN\s*\d{2}/\d{2,4})\b',
-            r'\b([A-Za-z]{3,8}/[A-Za-z0-9\-_/]+)\b',
-            r'\b([A-Z]+/\d{2,4}/[A-Z0-9]+)\b'
+            r'\b(F\.\s*No\.?\s*[\d\-A-Za-z/]+)\b',
+            r'\b([A-Z]{2,6}/\d{2,4}/[A-Z0-9\-_]+)\b'
         ]
+        excluded_words = ["online/apply", "apply/online", "and/or", "male/female", "gen/obc", "sc/st", "pass/fail", "http://", "https://"]
         for pat in patterns:
             match = re.search(pat, text, re.IGNORECASE)
             if match:
-                val = match.group(1) if match.groups() else match.group(0)
+                val = match.group(1) if match.groups() and match.group(1) else match.group(0)
                 cleaned = val.strip().rstrip(".,;")
-                if len(cleaned) >= 4:
-                    return cleaned
+                if len(cleaned) >= 4 and any(c.isdigit() for c in cleaned):
+                    if not any(ex in cleaned.lower() for ex in excluded_words):
+                        return cleaned
         return None
 
     def _extract_job_title(self, text: str) -> Optional[str]:
@@ -305,12 +308,15 @@ class EvidenceExtractionService:
         return upi_id, instructions, is_unauthorized
 
     def _extract_fee(self, text: str) -> tuple[Optional[float], str]:
-        # Match ₹ 500, Rs. 500, INR 500, Fee: 500
-        m = re.search(r'(?:₹|Rs\.?|INR|Fee\s*[:\-]?)\s*(\d{2,6})', text, re.IGNORECASE)
+        # Match explicit currency symbols: ₹ 500, Rs. 500, Rs 500, INR 500
+        # Or explicit fee headers: Application Fee: 100, Exam Fee: 200, Registration Fee: Rs. 500
+        m = re.search(r'(?:(?:₹|Rs\.?|INR)\s*(\d{2,6})|(?:Application\s*Fee|Exam\s*Fee|Registration\s*Fee|Processing\s*Fee|Fee|Deposit)\s*[:\-]\s*(?:₹|Rs\.?|INR)?\s*(\d{2,6}))', text, re.IGNORECASE)
         if m:
             try:
-                fee = float(m.group(1))
-                return fee, "INR"
+                fee_val = m.group(1) or m.group(2)
+                if fee_val:
+                    fee = float(fee_val)
+                    return fee, "INR"
             except ValueError:
                 pass
         return None, "INR"

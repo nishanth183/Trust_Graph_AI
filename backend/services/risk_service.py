@@ -219,21 +219,21 @@ class MLRiskService:
         # ── TIER 1: ABSOLUTE OVERRIDES (deterministic) ─────────────────────────
         # Critical UPI/QR/scam infrastructure → always SCAM
         if critical_count >= 1 or has_scam_links or has_personal_upi_payment:
-            p_scam = max(p_scam, 0.92)
-            p_gen  = min(p_gen,  0.04)
+            p_scam = max(p_scam, 0.90)
+            p_gen  = min(p_gen,  0.03)
             p_susp = max(0.0, 1.0 - p_scam - p_gen)
             verdict    = "SCAM"
             risk_level = "HIGH"
-            trust_score = round((1.0 - p_scam) * 20.0, 1)
+            trust_score = round(max(5.0, 28.0 - (critical_count * 6.0 + len(scam_links) * 4.0)), 1)
 
         # Suspicious domain or ≥2 HIGH contradictions or public email fraud
         elif has_suspicious_domain or high_count >= 2 or (has_public_email and org_matched):
-            p_scam = max(p_scam, 0.78)
+            p_scam = max(p_scam, 0.75)
             p_gen  = min(p_gen,  0.10)
             p_susp = max(0.0, 1.0 - p_scam - p_gen)
             verdict    = "SCAM"
             risk_level = "HIGH"
-            trust_score = round((1.0 - p_scam) * 32.0, 1)
+            trust_score = round(max(12.0, 35.0 - (high_count * 5.0)), 1)
 
         # ── TIER 2: VERIFIED GENUINE ────────────────────────────────────────────
         elif all_verified:

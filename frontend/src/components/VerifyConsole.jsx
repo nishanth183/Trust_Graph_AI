@@ -219,7 +219,7 @@ export default function VerifyConsole({ activeResult, onOpenReportModal, preload
 
     const isGenuineOrg = verification.organization_status === 'VERIFIED' || verification.organization_status === 'DEMO VERIFIED';
     const isGenuineDomain = verification.domain_status === 'VERIFIED' || verification.domain_status === 'DEMO VERIFIED';
-    const isPaymentDetected = evidence.payment_requested === true || evidence.upi_id || evidence.qr_code_detected;
+    const isPaymentIllegal = Boolean(evidence.upi_id || evidence.qr_code_detected || verification.payment_status === 'UNOFFICIAL' || verification.payment_status === 'CONFLICT');
     const isSuspiciousPattern = verdict === 'SCAM' || verdict === 'SUSPICIOUS' || contradictions.length > 0;
     const isContactVerified = !evidence.phone && !evidence.email ? 'neutral' : (verification.email_status === 'VERIFIED' && verification.phone_status === 'VERIFIED');
 
@@ -244,9 +244,9 @@ export default function VerifyConsole({ activeResult, onOpenReportModal, preload
       },
       {
         label: 'Fee & Payment Channel Integrity',
-        status: isPaymentDetected ? 'fail' : 'pass',
-        symbol: isPaymentDetected ? '✕' : '✓',
-        detail: isPaymentDetected ? 'UNOFFICIAL CHANNEL' : 'NO ILLEGAL DEMAND'
+        status: isPaymentIllegal ? 'fail' : 'pass',
+        symbol: isPaymentIllegal ? '✕' : '✓',
+        detail: isPaymentIllegal ? 'UNOFFICIAL CHANNEL (UPI/QR)' : (evidence.application_fee ? 'OFFICIAL GATEWAY' : 'NO ILLEGAL DEMAND')
       },
       {
         label: 'Institutional Contact Verification',

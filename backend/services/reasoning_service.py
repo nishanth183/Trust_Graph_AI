@@ -1,3 +1,4 @@
+import re
 from typing import Dict, Any, List, Optional
 
 class RiskReasoningEngine:
@@ -32,8 +33,9 @@ class RiskReasoningEngine:
         org_matched = bool(verification_details.get("organization_matched"))
         org_name = verification_details.get("organization_name") or org
 
-        # RULE 1: Unverified Government / Police Organization
-        if is_claimed_gov and not org_matched:
+        # RULE 1: Unverified Government / Police Organization (Flag only when coupled with non-official attributes)
+        has_fraud_signals = bool(upi_id or qr_detected or (domain and not domain.endswith(".gov.in") and not domain.endswith(".nic.in")) or nlp_analysis.get("guaranteed_job_claim"))
+        if is_claimed_gov and not org_matched and has_fraud_signals:
             contradictions.append({
                 "rule_id": "RULE_CONTRADICTION_00_UNVERIFIED_BODY",
                 "factor": "Unverified Government / Police Recruitment Body",
@@ -57,36 +59,41 @@ class RiskReasoningEngine:
                 })
 
         # RULE 3: Official Recruitment + Personal UPI / Direct QR Payment Request
-        if is_claimed_gov and (upi_id or qr_detected):
+        if (is_claimed_gov or evidence.get("payment_requested")) and (upi_id or qr_detected):
             payment_evidence = upi_id if upi_id else "Payment QR Code (UPI Protocol)"
             contradictions.append({
                 "rule_id": "RULE_CONTRADICTION_02_PERSONAL_PAYMENT",
-                "factor": "Government Recruitment vs Personal UPI Payment Channel",
+                "factor": "Recruitment Notice vs Personal UPI Payment Channel",
                 "evidence": f"Fee collector: '{payment_evidence}'",
                 "severity": "CRITICAL",
                 "confidence": 0.99,
                 "explanation": "Official recruitment boards collect exam fees strictly through authorized cyber treasuries or SBI online portals. Individual UPI IDs or direct UPI QR codes are universally indicative of fraud."
             })
 
-        # RULE 4: Fee Solicitation via Messaging App / Without Official Portal
-        if evidence.get("payment_requested") and not domain:
+        # RULE 4: Unauthorized Fee Solicitation / Security Deposit
+        if evidence.get("is_unauthorized_payment") and not (upi_id or qr_detected):
             fee_val = evidence.get("application_fee")
-            fee_str = f"₹{int(fee_val)}" if fee_val else "Registration Fee"
+            fee_str = f"₹{int(fee_val)}" if fee_val else "Registration / Security Fee"
             contradictions.append({
                 "rule_id": "RULE_CONTRADICTION_03_FEE_WITHOUT_PORTAL",
-                "factor": "Application Fee Solicited Without Official Web Portal",
-                "evidence": f"Fee requested: {fee_str} without an official .gov.in application URL",
+                "factor": "Unauthorized Registration / Security Deposit Solicitation",
+                "evidence": f"Payment requested: {fee_str} via unauthorized channel",
                 "severity": "HIGH",
                 "confidence": 0.91,
-                "explanation": "Legitimate recruitment notices require payment exclusively through secured payment gateways on official government portals (.gov.in). Soliciting registration fees directly via social media or instant messaging is a primary fraud indicator."
+                "explanation": "Legitimate recruitment notices require payment exclusively through secured payment gateways on official government portals (.gov.in). Soliciting refundable deposits or registration charges directly is a primary fraud indicator."
             })
 
         # RULE 5: Informal Document Submission (Aadhaar / PAN over WhatsApp / Telegram)
-        if any(kw in raw_text for kw in ["whatsapp", "telegram", "aadhaar", "pan", "certificate", "send your"]):
+        is_informal_doc_submission = bool(
+            re.search(r'\b(?:send|forward|share|submit|upload)\b[^\n.]{0,80}\b(?:aadhaar|pan\s*card|voter\s*id|marksheet|passbook|certificate)\b[^\n.]{0,80}\b(?:whatsapp|telegram|\+?91[\-\s]?[6-9]\d{9})\b', raw_text, re.I) or
+            re.search(r'\b(?:whatsapp|telegram)\s*(?:interview|appointment\s*letter|selection\s*guarantee)\b', raw_text, re.I) or
+            ("screenshot" in raw_text and ("whatsapp" in raw_text or "telegram" in raw_text))
+        )
+        if is_informal_doc_submission:
             contradictions.append({
                 "rule_id": "RULE_CONTRADICTION_04_INFORMAL_DOC_SUBMISSION",
                 "factor": "Informal Channel Identity Document Submission Request",
-                "evidence": "Requests candidates to send Aadhaar, PAN card, or marksheets via WhatsApp / Telegram",
+                "evidence": "Requests candidates to send Aadhaar, PAN card, or payment screenshots via WhatsApp / Telegram",
                 "severity": "HIGH",
                 "confidence": 0.96,
                 "explanation": "Official recruitment agencies never request candidates to submit sensitive personal identification documents (Aadhaar/PAN) or certificates through instant messaging applications."

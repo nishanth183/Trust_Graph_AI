@@ -26,7 +26,7 @@ export default function CytoscapeEvidenceGraph({ graphData, caseId, theme = 'dar
       { data: { id: 'e3', source: 'msg_01', target: 'contact_01', label: 'PROVIDES_PHONE', status: 'CONFLICT' } },
       { data: { id: 'e4', source: 'msg_01', target: 'mail_01', label: 'PROVIDES_EMAIL', status: 'CONFLICT' } },
       { data: { id: 'e5', source: 'msg_01', target: 'pay_01', label: 'DEMANDS_UPI', status: 'SCAM' } },
-      { data: { id: 'pay_01', source: 'pay_01', target: 'risk_01', label: 'FLAGGED_BY_RULES', status: 'SCAM' } }
+      { data: { id: 'e6', source: 'pay_01', target: 'risk_01', label: 'FLAGGED_BY_RULES', status: 'SCAM' } }
     ]
   };
 

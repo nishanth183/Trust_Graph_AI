@@ -3,7 +3,14 @@ import logging
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
-from backend.config import DATA_DIR, DEMO_DATA_DIR
+from backend.config import DATA_DIR, DEMO_DATA_DIR, settings
+
+try:
+    import pymongo
+    import certifi
+except ImportError:
+    pymongo = None
+    certifi = None
 
 logger = logging.getLogger("trustgraph.storage")
 
@@ -23,11 +30,86 @@ class StorageEngine:
             "qr_hashes": []
         }
         self.audit_logs: List[Dict[str, Any]] = []
+        self.mongo_client = None
+        self.mongo_db = None
+        self.is_mongo_connected = False
+
+        self._init_mongo()
         self._load()
         self._seed_default_demo_indicators()
         self._seed_default_admin()
 
+    def _init_mongo(self):
+        """Initialize MongoDB client if URI configured and pymongo available."""
+        if not pymongo or not getattr(settings, "MONGODB_URI", None):
+            return
+
+        uri = settings.MONGODB_URI.strip()
+        if not uri or "localhost:27017" in uri and not getattr(settings, "USE_LOCAL_MONGO", False):
+            if "localhost:27017" in uri:
+                logger.info("MongoDB URI is default localhost. Using embedded persistent storage.")
+                return
+
+        try:
+            # Configure public DNS resolver for SRV record reliability
+            try:
+                import dns.resolver
+                dns.resolver.default_resolver = dns.resolver.Resolver(configure=False)
+                dns.resolver.default_resolver.nameservers = ['8.8.8.8', '1.1.1.1', '8.8.4.4']
+            except Exception:
+                pass
+
+            kwargs = {"serverSelectionTimeoutMS": 5000, "connectTimeoutMS": 5000}
+            if certifi:
+                kwargs["tlsCAFile"] = certifi.where()
+
+            self.mongo_client = pymongo.MongoClient(uri, **kwargs)
+            # Test connection
+            self.mongo_client.admin.command("ping")
+            
+            # Extract db name or default to trustgraph
+            parsed_db = None
+            try:
+                from urllib.parse import urlparse
+                path = urlparse(uri).path.lstrip("/")
+                if path and "?" in path:
+                    path = path.split("?")[0]
+                if path:
+                    parsed_db = path
+            except Exception:
+                pass
+            
+            db_name = parsed_db or "trustgraph"
+            self.mongo_db = self.mongo_client[db_name]
+            self.is_mongo_connected = True
+            logger.info(f"Connected to MongoDB Atlas: database '{db_name}'")
+        except Exception as e:
+            self.is_mongo_connected = False
+            logger.warning(f"MongoDB connection notice ({e}). Operating with persistent local storage engine.")
+
+    def _sync_local_to_mongo(self):
+        """Push all local users, cases, and indicators to MongoDB."""
+        if not self.is_mongo_connected or self.mongo_db is None:
+            return
+        try:
+            # Sync users
+            for uid, udata in self.users.items():
+                self.mongo_db["users"].replace_one({"user_id": uid}, {"_id": uid, **udata}, upsert=True)
+            # Sync cases
+            for cid, cdata in self.cases.items():
+                self.mongo_db["cases"].replace_one({"case_id": cid}, {"_id": cid, **cdata}, upsert=True)
+            # Sync indicators
+            self.mongo_db["scam_indicators"].replace_one(
+                {"_id": "global_indicators"},
+                {"_id": "global_indicators", **self.scam_indicators},
+                upsert=True
+            )
+            logger.info(f"Pushed local dataset to MongoDB Atlas ({len(self.users)} users, {len(self.cases)} cases).")
+        except Exception as e:
+            logger.warning(f"Error syncing local data to MongoDB Atlas: {e}")
+
     def _load(self):
+        # First load from local JSON
         try:
             if CASES_FILE.exists():
                 with open(CASES_FILE, "r", encoding="utf-8") as f:
@@ -42,7 +124,38 @@ class StorageEngine:
                 with open(USERS_FILE, "r", encoding="utf-8") as f:
                     self.users = json.load(f)
         except Exception as e:
-            logger.error(f"Error loading stored data: {e}")
+            logger.error(f"Error loading local stored data: {e}")
+
+        # If MongoDB is connected, merge/sync data from MongoDB
+        if self.is_mongo_connected and self.mongo_db is not None:
+            try:
+                # Load cases
+                for doc in self.mongo_db["cases"].find():
+                    cid = doc.get("case_id")
+                    if cid:
+                        doc.pop("_id", None)
+                        self.cases[cid] = doc
+                
+                # Load users
+                for doc in self.mongo_db["users"].find():
+                    uid = doc.get("user_id")
+                    if uid:
+                        doc.pop("_id", None)
+                        self.users[uid] = doc
+
+                # Load indicators
+                indicators_doc = self.mongo_db["scam_indicators"].find_one({"_id": "global_indicators"})
+                if indicators_doc:
+                    indicators_doc.pop("_id", None)
+                    for k in ["phones", "upi_ids", "domains", "qr_hashes"]:
+                        if k in indicators_doc:
+                            self.scam_indicators[k] = indicators_doc[k]
+
+                logger.info(f"Synchronized with MongoDB: {len(self.cases)} cases, {len(self.users)} users loaded.")
+                # Also push any local users or cases to MongoDB
+                self._sync_local_to_mongo()
+            except Exception as e:
+                logger.warning(f"Failed to fetch initial state from MongoDB: {e}")
 
     def _save(self):
         try:
@@ -57,6 +170,17 @@ class StorageEngine:
                 json.dump(self.users, f, indent=2)
         except Exception as e:
             logger.error(f"Error saving data: {e}")
+
+        # Sync scam indicators to MongoDB
+        if self.is_mongo_connected and self.mongo_db is not None:
+            try:
+                self.mongo_db["scam_indicators"].replace_one(
+                    {"_id": "global_indicators"},
+                    {"_id": "global_indicators", **self.scam_indicators},
+                    upsert=True
+                )
+            except Exception as e:
+                logger.warning(f"MongoDB indicator sync notice: {e}")
 
     def _seed_default_admin(self):
         """Seed a default admin account if no users exist."""
@@ -167,6 +291,16 @@ class StorageEngine:
             
         self._save()
 
+        if self.is_mongo_connected and self.mongo_db is not None:
+            try:
+                self.mongo_db["cases"].replace_one(
+                    {"case_id": case_id},
+                    {"_id": case_id, **case_data},
+                    upsert=True
+                )
+            except Exception as e:
+                logger.warning(f"Failed to upsert case to MongoDB: {e}")
+
     def get_case(self, case_id: str) -> Optional[Dict[str, Any]]:
         return self.cases.get(case_id)
 
@@ -191,6 +325,16 @@ class StorageEngine:
         self.users[user_id] = user_data
         self._record_audit("USER_CREATED", {"user_id": user_id, "username": user_data.get("username")})
         self._save()
+
+        if self.is_mongo_connected and self.mongo_db is not None:
+            try:
+                self.mongo_db["users"].replace_one(
+                    {"user_id": user_id},
+                    {"_id": user_id, **user_data},
+                    upsert=True
+                )
+            except Exception as e:
+                logger.warning(f"Failed to upsert user to MongoDB: {e}")
 
     def get_user(self, user_id: str) -> Optional[Dict[str, Any]]:
         return self.users.get(user_id)

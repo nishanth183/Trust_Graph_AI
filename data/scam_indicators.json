@@ -83,6 +83,13 @@
       "organization_claimed": "Department of Posts (India Post)",
       "status": "FLAGGED",
       "reason": "Payment recipient flagged in case TG-2026-000041"
+    },
+    {
+      "value": "recruitment@okaxis",
+      "case_id": "TG-2026-000084",
+      "organization_claimed": null,
+      "status": "FLAGGED",
+      "reason": "Payment recipient flagged in case TG-2026-000084"
     }
   ],
   "domains": [
