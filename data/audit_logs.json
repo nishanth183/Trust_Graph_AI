@@ -1,788 +1,161 @@
 [
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:15:34.977745",
+    "timestamp": "2026-10-02T21:18:58.817095",
     "details": {
-      "case_id": "TG-2026-000001",
-      "verdict": "GENUINE"
+      "case_id": "TG-2026-000116",
+      "verdict": "SUSPICIOUS",
+      "user_id": "USR-0004"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:15:34.988309",
+    "timestamp": "2026-10-02T21:20:56.477906",
     "details": {
-      "case_id": "TG-2026-000002",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-A1",
+      "verdict": "GENUINE",
+      "user_id": "USR-SECURITY-TEST-A"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:15:34.995679",
+    "timestamp": "2026-10-02T21:20:58.695827",
     "details": {
-      "case_id": "TG-2026-000003",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-A2",
+      "verdict": "GENUINE",
+      "user_id": "USR-SECURITY-TEST-A"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:32:05.109945",
+    "timestamp": "2026-10-02T21:20:59.432218",
     "details": {
-      "case_id": "TG-2026-000004",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-B1",
+      "verdict": "SCAM",
+      "user_id": "USR-SECURITY-TEST-B"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:35:00.744905",
+    "timestamp": "2026-10-02T21:21:00.165242",
     "details": {
-      "case_id": "TG-2026-000005",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-B2",
+      "verdict": "SCAM",
+      "user_id": "USR-SECURITY-TEST-B"
     }
   },
   {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:35:20.091252",
-    "details": {
-      "case_id": "TG-2026-000006",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:35:27.700302",
-    "details": {
-      "case_id": "TG-2026-000007",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T20:36:22.046314",
-    "details": {
-      "case_id": "TG-2026-000008",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T21:08:18.880108",
-    "details": {
-      "case_id": "TG-2026-000009",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T21:08:58.908075",
-    "details": {
-      "case_id": "TG-2026-000010",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T21:10:56.540135",
-    "details": {
-      "case_id": "TG-2026-000011",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T21:24:28.828532",
-    "details": {
-      "case_id": "TG-2026-000012",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-09-30T21:37:43.197197",
-    "details": {
-      "case_id": "TG-2026-000013",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T09:14:00.396215",
-    "details": {
-      "case_id": "TG-2026-000014",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T09:55:20.038562",
-    "details": {
-      "case_id": "TG-2026-000015",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T09:55:28.988203",
-    "details": {
-      "case_id": "TG-2026-000016",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T10:23:53.923902",
-    "details": {
-      "case_id": "TG-2026-000017",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T10:25:38.003023",
-    "details": {
-      "case_id": "TG-2026-000018",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T10:26:02.383816",
-    "details": {
-      "case_id": "TG-2026-000019",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T10:28:24.619836",
-    "details": {
-      "case_id": "TG-2026-000020",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T10:28:33.395769",
-    "details": {
-      "case_id": "TG-2026-000021",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T10:29:39.196878",
-    "details": {
-      "case_id": "TG-2026-000022",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T11:39:06.805310",
-    "details": {
-      "case_id": "TG-2026-000023",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:07:43.891074",
-    "details": {
-      "case_id": "TG-2026-000024",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "USER_FEEDBACK_SUBMITTED",
-    "timestamp": "2026-10-01T12:08:29.208042",
-    "details": {
-      "case_id": "TG-2026-000024",
-      "user_verdict": "SCAM",
-      "notes": ""
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:09:41.677974",
-    "details": {
-      "case_id": "TG-2026-000025",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:11:16.572810",
-    "details": {
-      "case_id": "TG-2026-000026",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:12:00.852237",
-    "details": {
-      "case_id": "TG-2026-000027",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:12:33.260196",
-    "details": {
-      "case_id": "TG-2026-000028",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:14:05.788712",
-    "details": {
-      "case_id": "TG-2026-000029",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:21:15.868268",
-    "details": {
-      "case_id": "TG-2026-000030",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:25:16.620757",
-    "details": {
-      "case_id": "TG-2026-000031",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:27:29.851895",
-    "details": {
-      "case_id": "TG-2026-000032",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T12:27:43.845147",
-    "details": {
-      "case_id": "TG-2026-000033",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T13:30:36.510837",
-    "details": {
-      "case_id": "TG-2026-000034",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T13:31:11.261633",
-    "details": {
-      "case_id": "TG-2026-000035",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T13:31:39.107329",
-    "details": {
-      "case_id": "TG-2026-000036",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "USER_CREATED",
-    "timestamp": "2026-10-01T13:52:55.657242",
-    "details": {
-      "user_id": "USR-0002",
-      "username": "testuser"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T13:54:05.637235",
-    "details": {
-      "case_id": "TG-2026-000037",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T13:54:34.732990",
-    "details": {
-      "case_id": "TG-2026-000038",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "USER_CREATED",
-    "timestamp": "2026-10-01T14:08:52.562973",
-    "details": {
-      "user_id": "USR-0003",
-      "username": "rahul_sharma"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:08:52.725097",
-    "details": {
-      "case_id": "TG-2026-000039",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:09:37.860610",
-    "details": {
-      "case_id": "TG-2026-000040",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:09:37.898623",
-    "details": {
-      "case_id": "TG-2026-000041",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:09:37.977993",
-    "details": {
-      "case_id": "TG-2026-000042",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:13:59.427024",
-    "details": {
-      "case_id": "TG-2026-000043",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:14:54.567691",
-    "details": {
-      "case_id": "TG-2026-000044",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "USER_CREATED",
-    "timestamp": "2026-10-01T14:23:15.498525",
-    "details": {
-      "user_id": "USR-0004",
-      "username": "NISHANTH"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:23:30.652538",
-    "details": {
-      "case_id": "TG-2026-000045",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "SCAM_INDICATOR_REPORTED",
-    "timestamp": "2026-10-01T14:37:30.580381",
-    "details": {
-      "type": "phone",
-      "value": "+91 99998 88877"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T14:41:50.588473",
-    "details": {
-      "case_id": "TG-2026-000046",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "USER_FEEDBACK_SUBMITTED",
-    "timestamp": "2026-10-01T14:42:09.347099",
-    "details": {
-      "case_id": "TG-2026-000046",
-      "user_verdict": "SUSPICIOUS",
-      "notes": ""
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T15:40:14.983435",
-    "details": {
-      "case_id": "TG-2026-000047",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:02:11.934616",
-    "details": {
-      "case_id": "TG-2026-000048",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:03:32.380938",
-    "details": {
-      "case_id": "TG-2026-000049",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "SCAM_INDICATOR_REPORTED",
-    "timestamp": "2026-10-01T16:03:34.485254",
-    "details": {
-      "type": "phone",
-      "value": "+917654321099"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:05:34.175477",
-    "details": {
-      "case_id": "TG-2026-000050",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:07:11.228565",
-    "details": {
-      "case_id": "TG-2026-000051",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:08:18.044592",
-    "details": {
-      "case_id": "TG-2026-000052",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:27:56.886373",
-    "details": {
-      "case_id": "TG-2026-000053",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:37:37.824149",
-    "details": {
-      "case_id": "TG-2026-000054",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:39:33.736014",
-    "details": {
-      "case_id": "TG-2026-000055",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T16:39:52.247345",
-    "details": {
-      "case_id": "TG-2026-000056",
-      "verdict": "INCONCLUSIVE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T17:11:50.076563",
-    "details": {
-      "case_id": "TG-2026-000057",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T17:22:42.537135",
-    "details": {
-      "case_id": "TG-2026-000058",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T17:32:24.299767",
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T21:21:02.469907",
     "details": {
-      "case_id": "TG-2026-000059",
-      "verdict": "SUSPICIOUS"
+      "case_id": "TG-TEST-A2"
     }
   },
   {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T17:40:41.106591",
-    "details": {
-      "case_id": "TG-2026-000060",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T17:51:31.062181",
-    "details": {
-      "case_id": "TG-2026-000061",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T17:52:09.666230",
-    "details": {
-      "case_id": "TG-2026-000062",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "USER_CREATED",
-    "timestamp": "2026-10-01T18:29:49.281707",
-    "details": {
-      "user_id": "USR-0005",
-      "username": "nithishk"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T18:30:03.281254",
-    "details": {
-      "case_id": "TG-2026-000063",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T18:30:36.528029",
-    "details": {
-      "case_id": "TG-2026-000064",
-      "verdict": "SUSPICIOUS"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T18:46:06.978974",
-    "details": {
-      "case_id": "TG-2026-000065",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T18:46:41.318068",
-    "details": {
-      "case_id": "TG-2026-000066",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T18:47:25.535925",
-    "details": {
-      "case_id": "TG-2026-000067",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T18:48:16.398755",
-    "details": {
-      "case_id": "TG-2026-000068",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:01:29.883245",
-    "details": {
-      "case_id": "TG-2026-000069",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:01:29.943897",
-    "details": {
-      "case_id": "TG-2026-000070",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:01:30.002898",
-    "details": {
-      "case_id": "TG-2026-000071",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:17:42.608191",
-    "details": {
-      "case_id": "TG-2026-000072",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:17:42.656987",
-    "details": {
-      "case_id": "TG-2026-000073",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:17:42.703633",
-    "details": {
-      "case_id": "TG-2026-000074",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:27:15.714243",
-    "details": {
-      "case_id": "TG-2026-000075",
-      "verdict": "GENUINE"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:27:15.765086",
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T21:21:02.837084",
     "details": {
-      "case_id": "TG-2026-000076",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-B1"
     }
   },
   {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:27:15.815412",
-    "details": {
-      "case_id": "TG-2026-000077",
-      "verdict": "SCAM"
-    }
-  },
-  {
-    "action": "USER_CREATED",
-    "timestamp": "2026-10-01T19:31:27.522258",
-    "details": {
-      "user_id": "USR-0006",
-      "username": "nikil25"
-    }
-  },
-  {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:31:44.307996",
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T21:21:03.219399",
     "details": {
-      "case_id": "TG-2026-000078",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-B2"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T19:55:01.299269",
+    "timestamp": "2026-10-02T21:23:16.747311",
     "details": {
-      "case_id": "TG-2026-000079",
-      "verdict": "SCAM"
+      "case_id": "TG-2026-000116",
+      "verdict": "GENUINE",
+      "user_id": "USR-ANONYMOUS"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:00:07.866550",
+    "timestamp": "2026-10-02T21:23:17.392109",
     "details": {
-      "case_id": "TG-2026-000080",
-      "verdict": "GENUINE"
+      "case_id": "TG-2026-000116",
+      "verdict": "SCAM",
+      "user_id": "USR-ANONYMOUS"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:00:08.134997",
+    "timestamp": "2026-10-02T21:23:17.874086",
     "details": {
-      "case_id": "TG-2026-000081",
-      "verdict": "SCAM"
+      "case_id": "TG-2026-000116",
+      "verdict": "SCAM",
+      "user_id": "USR-ANONYMOUS"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:00:08.593025",
+    "timestamp": "2026-10-02T21:23:18.451679",
     "details": {
-      "case_id": "TG-2026-000082",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-A1",
+      "verdict": "GENUINE",
+      "user_id": "USR-SECURITY-TEST-A"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:01:10.368431",
+    "timestamp": "2026-10-02T21:23:18.762103",
     "details": {
-      "case_id": "TG-2026-000083",
-      "verdict": "GENUINE"
+      "case_id": "TG-TEST-A2",
+      "verdict": "GENUINE",
+      "user_id": "USR-SECURITY-TEST-A"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:01:10.636959",
+    "timestamp": "2026-10-02T21:23:19.092898",
     "details": {
-      "case_id": "TG-2026-000084",
-      "verdict": "SCAM"
+      "case_id": "TG-TEST-B1",
+      "verdict": "SCAM",
+      "user_id": "USR-SECURITY-TEST-B"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:01:10.837520",
+    "timestamp": "2026-10-02T21:23:19.454774",
     "details": {
-      "case_id": "TG-2026-000085",
-      "verdict": "INCONCLUSIVE"
+      "case_id": "TG-TEST-B2",
+      "verdict": "SCAM",
+      "user_id": "USR-SECURITY-TEST-B"
     }
   },
   {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:01:47.093983",
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T21:23:21.829500",
     "details": {
-      "case_id": "TG-2026-000086",
-      "verdict": "SUSPICIOUS"
+      "case_id": "TG-TEST-A2"
     }
   },
   {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:02:09.865699",
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T21:23:22.575631",
     "details": {
-      "case_id": "TG-2026-000087",
-      "verdict": "SUSPICIOUS"
+      "case_id": "TG-TEST-B1"
     }
   },
   {
-    "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:05:27.573518",
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T21:23:23.440559",
     "details": {
-      "case_id": "TG-2026-000088",
-      "verdict": "SUSPICIOUS"
+      "case_id": "TG-TEST-B2"
     }
   },
   {
     "action": "CASE_CREATED",
-    "timestamp": "2026-10-01T20:05:58.800169",
+    "timestamp": "2026-10-02T21:28:22.647227",
     "details": {
-      "case_id": "TG-2026-000089",
-      "verdict": "SUSPICIOUS"
+      "case_id": "TG-2026-000116",
+      "verdict": "SUSPICIOUS",
+      "user_id": "USR-0004"
     }
   }
 ]

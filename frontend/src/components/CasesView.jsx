@@ -24,11 +24,22 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
 
+  const getEffectiveToken = () => {
+    if (authToken) return authToken;
+    try {
+      const stored = localStorage.getItem('trustgraph_auth');
+      return stored ? JSON.parse(stored).token : null;
+    } catch {
+      return null;
+    }
+  };
+
   const fetchCases = async () => {
     setLoading(true);
     try {
+      const token = getEffectiveToken();
       const headers = {};
-      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+      if (token) headers['Authorization'] = `Bearer ${token}`;
 
       const res = await fetch('/api/history', { headers });
       if (res.ok) {
@@ -81,8 +92,9 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
       return;
     }
     try {
+      const token = getEffectiveToken();
       const headers = {};
-      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+      if (token) headers['Authorization'] = `Bearer ${token}`;
       const res = await fetch(`/api/case/${caseId}`, {
         method: 'DELETE',
         headers
@@ -101,8 +113,9 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
   const handleDownloadPdf = async (caseId, e) => {
     e.stopPropagation();
     try {
+      const token = getEffectiveToken();
       const headers = {};
-      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+      if (token) headers['Authorization'] = `Bearer ${token}`;
       const res = await fetch(`/api/report/${caseId}/download`, { headers });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));

@@ -39,6 +39,14 @@
       "report_date": "2026-10-01",
       "status": "CONFIRMED_SCAM",
       "reason": "Test report from automated test"
+    },
+    {
+      "value": "+918123456789",
+      "case_id": "TG-2026-000116",
+      "organization_claimed": "BankName\nHDFC Bank",
+      "report_date": "2026-10-02",
+      "status": "FLAGGED",
+      "reason": "Associated with scam case TG-2026-000116"
     }
   ],
   "upi_ids": [

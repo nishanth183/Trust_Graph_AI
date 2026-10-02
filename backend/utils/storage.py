@@ -19,6 +19,29 @@ INDICATORS_FILE = DATA_DIR / "scam_indicators.json"
 AUDIT_FILE = DATA_DIR / "audit_logs.json"
 USERS_FILE = DATA_DIR / "users.json"
 
+def sanitize_for_storage(data: Any) -> Any:
+    """Recursively converts all NumPy and custom scalar types to pure Python primitives."""
+    if isinstance(data, dict):
+        return {str(k): sanitize_for_storage(v) for k, v in data.items()}
+    elif isinstance(data, (list, tuple, set)):
+        return [sanitize_for_storage(item) for item in data]
+    type_str = str(type(data))
+    if "bool" in type_str:
+        return bool(data)
+    elif "int" in type_str and not isinstance(data, int):
+        return int(data)
+    elif "float" in type_str and not isinstance(data, float):
+        return float(data)
+    elif hasattr(data, "tolist"):
+        return sanitize_for_storage(data.tolist())
+    elif hasattr(data, "item"):
+        try:
+            return sanitize_for_storage(data.item())
+        except Exception:
+            pass
+    return data
+
+
 class StorageEngine:
     def __init__(self):
         self.cases: Dict[str, Dict[str, Any]] = {}
@@ -282,6 +305,9 @@ class StorageEngine:
     # ─── Case CRUD ────────────────────────────────────────────────────────────
 
     def save_case(self, case_id: str, case_data: Dict[str, Any]):
+        # Sanitize any NumPy types (e.g. np.bool_, np.int64) to native Python primitives
+        case_data = sanitize_for_storage(case_data)
+
         # Ensure mandatory case fields are always present
         if "case_id" not in case_data:
             case_data["case_id"] = case_id
@@ -294,7 +320,9 @@ class StorageEngine:
         if "created_at" not in case_data:
             case_data["created_at"] = datetime.now().isoformat()
         if "user_id" not in case_data or not case_data["user_id"]:
-            case_data["user_id"] = "USR-ADMIN-001"
+            case_data["user_id"] = "USR-ANONYMOUS"
+        if "username" not in case_data or not case_data["username"]:
+            case_data["username"] = "anonymous"
 
         self.cases[case_id] = case_data
         self._record_audit("CASE_CREATED", {"case_id": case_id, "verdict": case_data.get("verdict"), "user_id": case_data.get("user_id")})

@@ -32,7 +32,7 @@ class VisualAnalysisService:
         edges = cv2.Canny(gray_header, 50, 150)
         edge_density = np.sum(edges > 0) / (header_region.shape[0] * header_region.shape[1])
 
-        has_emblem_indicator = edge_density > 0.04
+        has_emblem_indicator = bool(edge_density > 0.04)
 
         # 2. Check for QR Code
         detector = cv2.QRCodeDetector()
@@ -42,12 +42,12 @@ class VisualAnalysisService:
         layout = "GAZETTE_LAYOUT" if (h > w * 1.2 and has_emblem_indicator) else "SOCIAL_MEDIA_BANNER"
 
         return {
-            "has_emblem_indicator": has_emblem_indicator,
-            "emblem_confidence": 0.65 if has_emblem_indicator else 0.1,
-            "document_layout": layout,
-            "aspect_ratio": round(w / h, 2),
+            "has_emblem_indicator": bool(has_emblem_indicator),
+            "emblem_confidence": float(0.65 if has_emblem_indicator else 0.1),
+            "document_layout": str(layout),
+            "aspect_ratio": round(float(w / h), 2),
             "qr_detected": bool(qr_found and len(qr_data) > 0),
-            "qr_count": len(qr_data) if qr_found else 0,
+            "qr_count": int(len(qr_data) if qr_found else 0),
             "notes": "Visual emblem present at top header. Note: Scammers frequently paste genuine emblems onto fake circulars; presence of emblem alone does NOT confirm authenticity."
         }
 

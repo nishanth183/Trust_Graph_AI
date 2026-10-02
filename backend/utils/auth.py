@@ -16,8 +16,8 @@ from backend.config import settings
 
 logger = logging.getLogger("trustgraph.auth")
 
-# Simple HMAC-SHA256 based JWT-like tokens (no external dependency needed)
-TOKEN_EXPIRY_SECONDS = 86400  # 24 hours
+# HMAC-SHA256 based JWT-like tokens (30 days validity)
+TOKEN_EXPIRY_SECONDS = 86400 * 30  # 30 days
 
 
 def hash_password(password: str, salt: Optional[str] = None) -> tuple:
@@ -77,8 +77,14 @@ def decode_token(token: str) -> Optional[Dict[str, Any]]:
         payload_json = base64.urlsafe_b64decode(payload_b64).decode()
         payload = json.loads(payload_json)
 
-        # Check expiry
-        if payload.get("exp", 0) < int(time.time()):
+        # Check expiry (allow 30 days validity window for signed tokens)
+        exp = payload.get("exp", 0)
+        iat = payload.get("iat", 0)
+        # If token was created more than 30 days ago, expire it
+        if iat and (int(time.time()) - iat) > (86400 * 30):
+            logger.info("Token expired beyond 30 days")
+            return None
+        elif not iat and exp and exp < int(time.time()):
             logger.info("Token expired")
             return None
 
@@ -89,18 +95,32 @@ def decode_token(token: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def extract_user_from_header(authorization: Optional[str]) -> Optional[Dict[str, Any]]:
-    """Extract user info from Authorization header (Bearer token)."""
+def extract_user_from_header(authorization: Optional[Any]) -> Optional[Dict[str, Any]]:
+    """Extract user info from Authorization header (Bearer token or raw token)."""
     if not authorization:
         return None
-    if not authorization.startswith("Bearer "):
+    if hasattr(authorization, "default"):
+        authorization = authorization.default
+    if not isinstance(authorization, str):
         return None
-    token = authorization[7:]
-    return decode_token(token)
+    auth_str = authorization.strip()
+    if auth_str.lower().startswith("bearer "):
+        token = auth_str[7:].strip()
+        return decode_token(token)
+    return decode_token(auth_str)
 
 
-def extract_user_from_request(request: Optional[Any] = None, authorization: Optional[str] = None) -> Optional[Dict[str, Any]]:
-    """Extract and verify authenticated user from Authorization header or signed token query param."""
+def extract_user_from_request(
+    request: Optional[Any] = None,
+    authorization: Optional[Any] = None,
+    token: Optional[Any] = None
+) -> Optional[Dict[str, Any]]:
+    """Extract and verify authenticated user from Authorization header, token param, or query param."""
+    if hasattr(authorization, "default"):
+        authorization = authorization.default
+    if hasattr(token, "default"):
+        token = token.default
+
     header = authorization
     if not header and request and hasattr(request, "headers"):
         header = request.headers.get("authorization")
@@ -108,9 +128,14 @@ def extract_user_from_request(request: Optional[Any] = None, authorization: Opti
     if user:
         return user
 
+    if token and isinstance(token, str):
+        user = decode_token(token)
+        if user:
+            return user
+
     if request and hasattr(request, "query_params"):
-        token = request.query_params.get("token")
-        if token:
-            return decode_token(token)
+        q_token = request.query_params.get("token")
+        if q_token:
+            return decode_token(q_token)
 
     return None

@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple, Optional
 from sklearn.ensemble import GradientBoostingClassifier
 
 class MLRiskService:
@@ -172,7 +172,8 @@ class MLRiskService:
         features: np.ndarray,
         contradictions: List[Dict[str, Any]],
         verification: Dict[str, Any],
-        scam_links: List[Dict[str, Any]]
+        scam_links: List[Dict[str, Any]],
+        evidence: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
         Predict risk using ML + deterministic overrides + pattern-based fallback.
@@ -289,50 +290,56 @@ class MLRiskService:
             if org_matched and notif_status in ["NOT_FOUND", "VALID_FORMAT_NOT_IN_REGISTRY"]:
                 pattern_score += 12.0
 
-            # If org not recognized at all and no positive signals → likely spam/scam
-            if not org_matched and nlp_risk < 10 and payment_risk < 0.1 and urgency < 10:
-                # Truly empty — insufficient to classify
-                pattern_score = -1.0
+            # If organization is not recognized in official registries, add unverified entity risk
+            if not org_matched:
+                pattern_score += 20.0
 
-            # ── Map pattern score → verdict ─────────────────────────────────
-            if pattern_score < 0:
-                # Genuinely no data to classify
+            # ── Check if input text is completely empty or blank ───────────────
+            raw_text = (evidence or {}).get("raw_text") or ""
+            has_readable_content = (
+                len(raw_text.strip()) >= 10
+                or qr_flag >= 1.0
+                or bool(org_matched)
+                or any(bool((evidence or {}).get(k)) for k in ["organization", "upi_id", "email", "phone", "website", "job_title"])
+            )
+            if not has_readable_content:
+                # Genuinely blank/empty file with no readable text
                 verdict    = "INCONCLUSIVE"
                 risk_level = "MEDIUM"
                 trust_score = 50.0
                 p_scam = 0.30; p_gen = 0.30; p_susp = 0.40
 
-            elif pattern_score >= 55:
+            elif pattern_score >= 50:
                 verdict    = "SCAM"
                 risk_level = "HIGH"
                 p_scam = min(0.95, 0.60 + pattern_score / 200.0)
                 p_gen  = max(0.02, 0.20 - pattern_score / 200.0)
                 p_susp = max(0.0, 1.0 - p_scam - p_gen)
-                trust_score = round(max(1.0, 30.0 - pattern_score * 0.3), 1)
+                trust_score = round(max(5.0, 32.0 - pattern_score * 0.3), 1)
 
-            elif pattern_score >= 25:
+            elif pattern_score >= 20:
                 verdict    = "SUSPICIOUS"
                 risk_level = "MEDIUM"
-                p_scam = min(0.75, 0.40 + pattern_score / 200.0)
-                p_gen  = max(0.05, 0.40 - pattern_score / 150.0)
+                p_scam = min(0.70, 0.40 + pattern_score / 200.0)
+                p_gen  = max(0.08, 0.40 - pattern_score / 150.0)
                 p_susp = max(0.0, 1.0 - p_scam - p_gen)
-                trust_score = round(max(20.0, 60.0 - pattern_score * 0.8), 1)
+                trust_score = round(max(20.0, 60.0 - pattern_score * 0.7), 1)
 
-            elif pattern_score >= 5:
-                # Low but non-zero risk signals — lean SUSPICIOUS not INCONCLUSIVE
-                verdict    = "SUSPICIOUS"
-                risk_level = "LOW"
-                p_scam = 0.35; p_gen = 0.40; p_susp = 0.25
-                trust_score = round(55.0 - pattern_score * 0.5, 1)
-
-            else:
-                # Genuinely clean signal with no flags — treat as plausible
+            elif org_matched:
+                # Officially verified body with clean parameters
                 verdict    = "GENUINE"
                 risk_level = "LOW"
-                p_gen = max(p_gen, 0.70)
-                p_scam = min(p_scam, 0.15)
+                p_gen = max(p_gen, 0.78)
+                p_scam = min(p_scam, 0.10)
                 p_susp = max(0.0, 1.0 - p_gen - p_scam)
-                trust_score = round(60.0 + p_gen * 25.0, 1)
+                trust_score = round(72.0 + p_gen * 22.0, 1)
+
+            else:
+                # Unverified independent notice without official backing
+                verdict    = "SUSPICIOUS"
+                risk_level = "MEDIUM"
+                p_scam = 0.45; p_gen = 0.20; p_susp = 0.35
+                trust_score = 48.0
 
         confidence  = round(max(p_gen, p_susp, p_scam) * 100.0, 1)
         trust_score = max(1.0, min(99.0, trust_score))

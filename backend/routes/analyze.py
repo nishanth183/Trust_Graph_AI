@@ -1,10 +1,32 @@
 import os
 import json
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Any
+import numpy as np
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Header, Request, status
 from fastapi.responses import JSONResponse
-from backend.utils.auth import extract_user_from_header, extract_user_from_request
+from backend.utils.auth import extract_user_from_header, extract_user_from_request, decode_token
+
+def sanitize_for_json(data: Any) -> Any:
+    """Recursively converts all NumPy and custom scalar types to pure Python primitives."""
+    if isinstance(data, dict):
+        return {str(k): sanitize_for_json(v) for k, v in data.items()}
+    elif isinstance(data, (list, tuple, set)):
+        return [sanitize_for_json(item) for item in data]
+    elif isinstance(data, (np.bool_, getattr(np, 'bool8', np.bool_))):
+        return bool(data)
+    elif isinstance(data, np.integer):
+        return int(data)
+    elif isinstance(data, np.floating):
+        return float(data)
+    elif isinstance(data, np.ndarray):
+        return sanitize_for_json(data.tolist())
+    elif hasattr(data, "item"):
+        try:
+            return sanitize_for_json(data.item())
+        except Exception:
+            pass
+    return data
 
 from backend.config import settings, UPLOAD_DIR
 from backend.schemas.requests import AnalyzeRequest
@@ -34,12 +56,28 @@ async def analyze_recruitment(
     url: Optional[str] = Form(None),
     source_type: Optional[str] = Form("Other"),
     demo_case_id: Optional[str] = Form(None),
-    file: Optional[UploadFile] = File(None)
+    token: Optional[str] = Form(None),
+    file: Optional[UploadFile] = File(None),
+    authorization: Optional[str] = Header(None)
 ):
     """
     Unified multi-stage recruitment analysis pipeline.
     Accepts text, image, PDF, URL, or demo preset.
     """
+    # Unpack Form defaults if called directly in Python tests
+    if hasattr(source_type, "default"):
+        source_type = source_type.default or "Other"
+    if hasattr(demo_case_id, "default"):
+        demo_case_id = demo_case_id.default or None
+    if hasattr(text, "default"):
+        text = text.default or None
+    if hasattr(url, "default"):
+        url = url.default or None
+    if hasattr(token, "default"):
+        token = token.default or None
+    if hasattr(authorization, "default"):
+        authorization = authorization.default or None
+
     case_id = storage.generate_case_id()
     created_at = datetime.now().isoformat()
 
@@ -62,12 +100,12 @@ async def analyze_recruitment(
 
     # 2. Handle File Upload (Image or PDF)
     elif file and file.filename:
-        is_image = any(file.filename.lower().endswith(ext) for ext in [".png", ".jpg", ".jpeg"])
+        is_image = any(file.filename.lower().endswith(ext) for ext in [".png", ".jpg", ".jpeg", ".webp", ".bmp"])
         input_type = "FILE_IMAGE" if is_image else "FILE_PDF"
         content_bytes = await file.read()
         validate_uploaded_file(file, content_bytes)
 
-        # Run OCR / PDF Extractor
+        # Run OCR / PDF Extractor (with RapidOCR)
         ocr_result = ocr_service.process_file(content_bytes, file.filename)
         extracted_text = ocr_result.get("text", "").strip()
         qr_detected = ocr_result.get("qr_detected", False)
@@ -79,8 +117,16 @@ async def analyze_recruitment(
             "ocr_source": ocr_result.get("source_type", "IMAGE")
         }
 
-        # If OCR returned no text (e.g. Tesseract not installed, or blank image),
-        # synthesize a placeholder so the pipeline can still run and give a result.
+        # Check visual indicators with visual_service
+        try:
+            visual_info = visual_service.analyze_document_visuals(content_bytes, file.filename)
+            file_metadata["visual_analysis"] = visual_info
+            if visual_info.get("qr_detected") and not qr_detected:
+                qr_detected = True
+        except Exception:
+            pass
+
+        # If OCR returned no text, synthesize informative note
         if not extracted_text:
             if qr_data:
                 extracted_text = f"Uploaded image contains a payment QR code pointing to: {qr_data}"
@@ -164,7 +210,8 @@ async def analyze_recruitment(
         features=feature_vector,
         contradictions=contradictions,
         verification=verification_details,
-        scam_links=scam_links
+        scam_links=scam_links,
+        evidence=evidence
     )
 
     # Step 9: Explainable AI
@@ -195,7 +242,7 @@ async def analyze_recruitment(
     extracted_org = evidence.get("organization") or "Unknown Organization"
 
     # Associate case with logged-in user (if authenticated)
-    user_info = extract_user_from_request(request)
+    user_info = extract_user_from_request(request, authorization, token)
     user_id = user_info["user_id"] if user_info else "USR-ANONYMOUS"
     username = user_info["username"] if user_info else "anonymous"
 
@@ -233,6 +280,9 @@ async def analyze_recruitment(
         },
         "demo_mode": settings.DEMO_MODE,
     }
+
+    # Sanitize response payload to ensure all values are native JSON-serializable Python types
+    response_payload = sanitize_for_json(response_payload)
 
     # Step 11: Save Case & Register Scam Indicators
     storage.save_case(case_id, response_payload)
@@ -311,11 +361,12 @@ async def delete_case(
 async def list_cases(
     request: Request = None,
     limit: int = 50,
+    all_cases: bool = False,
     authorization: Optional[str] = Header(None)
 ):
     """
     Returns only the authenticated user's verification history.
-    Admin users can access all cases.
+    Admin users can pass all_cases=True to view system-wide cases.
     """
     user_info = extract_user_from_request(request, authorization)
     if not user_info:
@@ -324,7 +375,7 @@ async def list_cases(
             detail="Authentication required to access case history."
         )
 
-    if user_info.get("role") == "admin":
+    if all_cases and user_info.get("role") == "admin":
         return storage.list_cases(limit=limit)
 
     return storage.list_cases_by_user(user_info["user_id"], limit=limit)

@@ -115,7 +115,8 @@ class EvidenceExtractionService:
             "qr_data": qr_data,
             "social_media_handles": social_channels,
             "contact_person": contact_person,
-            "source_platform": source_platform or "Direct"
+            "source_platform": source_platform or "Direct",
+            "raw_text": text_clean
         }
 
     def _extract_organization(self, text: str) -> tuple[Optional[str], Optional[str]]:

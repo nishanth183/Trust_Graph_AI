@@ -142,8 +142,19 @@ export default function CheckJobView({
       if (websiteUrl) formData.append('url', websiteUrl);
       if (selectedFile) formData.append('file', selectedFile);
 
+      const effectiveToken = authToken || (() => {
+        try {
+          const stored = localStorage.getItem('trustgraph_auth');
+          return stored ? JSON.parse(stored).token : null;
+        } catch { return null; }
+      })();
+
+      if (effectiveToken) {
+        formData.append('token', effectiveToken);
+      }
+
       const headers = {};
-      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+      if (effectiveToken) headers['Authorization'] = `Bearer ${effectiveToken}`;
 
       const res = await fetch('/api/analyze', {
         method: 'POST',
