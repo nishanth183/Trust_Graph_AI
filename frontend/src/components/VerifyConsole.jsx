@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { API_BASE } from '../config/api';
 import { 
   FileText, 
   Image as ImageIcon, 
@@ -186,7 +187,7 @@ export default function VerifyConsole({ activeResult, onOpenReportModal, preload
       const headers = {};
       if (effectiveToken) headers['Authorization'] = `Bearer ${effectiveToken}`;
 
-      const res = await fetch('/api/analyze', {
+      const res = await fetch(`${API_BASE}/api/analyze`, {
         method: 'POST',
         headers,
         body: formData
@@ -935,7 +936,7 @@ export default function VerifyConsole({ activeResult, onOpenReportModal, preload
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <a
-                href={`/api/report/${analysisResult.case_id}/view`}
+                href={`${API_BASE}/api/report/${analysisResult.case_id}/view`}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-secondary"
@@ -946,7 +947,7 @@ export default function VerifyConsole({ activeResult, onOpenReportModal, preload
               </a>
 
               <a
-                href={`/api/report/${analysisResult.case_id}/download`}
+                href={`${API_BASE}/api/report/${analysisResult.case_id}/download`}
                 download
                 className="btn-secondary"
                 style={{ textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '12px' }}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../config/api';
 import { FileText, FileDown, ExternalLink, ShieldCheck, Flag } from 'lucide-react';
 
 export default function ReportsView({ activeCaseId = 'TG-2026-00128', onOpenFeedback }) {
@@ -49,7 +50,7 @@ export default function ReportsView({ activeCaseId = 'TG-2026-00128', onOpenFeed
           />
 
           <a
-            href={`/api/report/${targetCaseId}/view`}
+            href={`${API_BASE}/api/report/${targetCaseId}/view`}
             target="_blank"
             rel="noreferrer"
             className="btn-primary"
@@ -60,7 +61,7 @@ export default function ReportsView({ activeCaseId = 'TG-2026-00128', onOpenFeed
           </a>
 
           <a
-            href={`/api/report/${targetCaseId}/download`}
+            href={`${API_BASE}/api/report/${targetCaseId}/download`}
             download
             className="btn-secondary"
             style={{ textDecoration: 'none', fontFamily: 'var(--font-mono)' }}

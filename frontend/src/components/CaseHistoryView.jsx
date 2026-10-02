@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE } from '../config/api';
 import { History, Search, RefreshCw, ArrowRight } from 'lucide-react';
 
 export default function CaseHistoryView({ onSelectCase }) {
@@ -79,7 +80,7 @@ export default function CaseHistoryView({ onSelectCase }) {
   const fetchCases = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/cases');
+      const res = await fetch(`${API_BASE}/api/cases`);
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {

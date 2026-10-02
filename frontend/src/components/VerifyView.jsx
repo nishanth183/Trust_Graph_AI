@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../config/api';
 import { 
   FileText, 
   Upload, 
@@ -131,7 +132,7 @@ export default function VerifyView({ onAnalyzeSuccess, preloadedDemo }) {
       const headers = {};
       if (effectiveToken) headers['Authorization'] = `Bearer ${effectiveToken}`;
 
-      const res = await fetch('/api/analyze', {
+      const res = await fetch(`${API_BASE}/api/analyze`, {
         method: 'POST',
         headers,
         body: formData

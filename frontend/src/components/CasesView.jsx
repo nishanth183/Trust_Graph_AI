@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE } from '../config/api';
 import { 
   Search, 
   RefreshCw, 
@@ -41,7 +42,7 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
       const headers = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      const res = await fetch('/api/history', { headers });
+      const res = await fetch(`${API_BASE}/api/history`, { headers });
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
@@ -95,7 +96,7 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
       const token = getEffectiveToken();
       const headers = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
-      const res = await fetch(`/api/case/${caseId}`, {
+      const res = await fetch(`${API_BASE}/api/case/${caseId}`, {
         method: 'DELETE',
         headers
       });
@@ -116,7 +117,7 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
       const token = getEffectiveToken();
       const headers = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
-      const res = await fetch(`/api/report/${caseId}/download`, { headers });
+      const res = await fetch(`${API_BASE}/api/report/${caseId}/download`, { headers });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         alert(data.detail || "Failed to download report.");

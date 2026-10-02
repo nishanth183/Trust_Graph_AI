@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../config/api';
 import { Flag, X, Check } from 'lucide-react';
 
 export default function FeedbackModal({ isOpen, onClose, caseId }) {
@@ -14,7 +15,7 @@ export default function FeedbackModal({ isOpen, onClose, caseId }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch('/api/report', {
+      const res = await fetch(`${API_BASE}/api/report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

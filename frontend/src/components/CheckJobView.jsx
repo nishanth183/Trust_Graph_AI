@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { API_BASE } from '../config/api';
 import { 
   MessageSquare, 
   Camera, 
@@ -156,7 +157,7 @@ export default function CheckJobView({
       const headers = {};
       if (effectiveToken) headers['Authorization'] = `Bearer ${effectiveToken}`;
 
-      const res = await fetch('/api/analyze', {
+      const res = await fetch(`${API_BASE}/api/analyze`, {
         method: 'POST',
         headers,
         body: formData
@@ -199,7 +200,7 @@ export default function CheckJobView({
     try {
       const headers = {};
       if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
-      const url = `/api/report/${analysisResult.case_id}/download${authToken ? `?token=${encodeURIComponent(authToken)}` : ''}`;
+      const url = `${API_BASE}/api/report/${analysisResult.case_id}/download${authToken ? `?token=${encodeURIComponent(authToken)}` : ''}`;
       const res = await fetch(url, { headers });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));

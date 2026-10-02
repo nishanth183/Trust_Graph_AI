@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE } from '../config/api';
 import {
   Phone,
   CreditCard,
@@ -57,7 +58,7 @@ export default function ScamIntelView() {
   const fetchIntel = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/scam-intelligence');
+      const res = await fetch(`${API_BASE}/api/scam-intelligence`);
       if (res.ok) {
         const data = await res.json();
         setIntelData(data);
@@ -89,7 +90,7 @@ export default function ScamIntelView() {
     setLookupResult(null);
 
     try {
-      const res = await fetch('/api/scam-intelligence/lookup', {
+      const res = await fetch(`${API_BASE}/api/scam-intelligence/lookup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: q })
@@ -115,7 +116,7 @@ export default function ScamIntelView() {
 
     setReportSubmitting(true);
     try {
-      const res = await fetch('/api/scam-intelligence/report', {
+      const res = await fetch(`${API_BASE}/api/scam-intelligence/report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reportForm)

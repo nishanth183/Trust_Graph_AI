@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../config/api';
 import { 
   ShieldCheck, 
   AlertTriangle, 
@@ -132,7 +133,7 @@ export default function ResultView({ result, onViewGraph, onViewDNA, onReportCas
             <span>Evidence Graph</span>
           </button>
           <a
-            href={`/api/report/${case_id}/download`}
+            href={`${API_BASE}/api/report/${case_id}/download`}
             download={`TrustGraph_Report_${case_id}.pdf`}
             className="btn-secondary"
             style={{ fontSize: '13px', padding: '8px 14px', textDecoration: 'none' }}

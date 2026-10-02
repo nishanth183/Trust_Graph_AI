@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE } from '../config/api';
 import { Shield, Network, Dna, Lock, AlertTriangle, ExternalLink, BookOpen, Layers, Landmark, PhoneCall } from 'lucide-react';
 
 export default function AboutView() {
   const [registry, setRegistry] = useState([]);
 
   useEffect(() => {
-    fetch('/api/official-registry')
+    fetch(`${API_BASE}/api/official-registry`)
       .then(res => res.json())
       .then(data => {
         if (data.official_organizations) {

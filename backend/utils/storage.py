@@ -587,15 +587,21 @@ class StorageEngine:
         matched = []
 
         for p in data["phones"]:
-            if q in p.get("value", "").lower() or q in p.get("organization_claimed", "").lower():
+            val = (p.get("value") or "").lower()
+            org = (p.get("organization_claimed") or "").lower()
+            if q in val or q in org:
                 matched.append({**p, "type": "phone"})
 
         for u in data["upi_ids"]:
-            if q in u.get("value", "").lower() or q in u.get("organization_claimed", "").lower():
+            val = (u.get("value") or "").lower()
+            org = (u.get("organization_claimed") or "").lower()
+            if q in val or q in org:
                 matched.append({**u, "type": "upi"})
 
         for d in data["domains"]:
-            if q in d.get("value", "").lower() or q in d.get("reason", "").lower():
+            val = (d.get("value") or "").lower()
+            reason = (d.get("reason") or "").lower()
+            if q in val or q in reason:
                 matched.append({**d, "type": "domain"})
 
         return {

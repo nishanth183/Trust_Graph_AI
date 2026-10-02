@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE } from '../config/api';
 import { Cpu, Server, ShieldCheck, RefreshCw } from 'lucide-react';
 
 export default function SystemView() {
@@ -8,7 +9,7 @@ export default function SystemView() {
   const fetchHealth = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/health');
+      const res = await fetch(`${API_BASE}/api/health`);
       if (res.ok) {
         const data = await res.json();
         setHealth(data);

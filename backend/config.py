@@ -32,10 +32,36 @@ def _load_env_file():
 
 _load_env_file()
 
+def _get_cors_origins() -> list[str]:
+    origins = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ]
+    frontend_url = os.getenv("FRONTEND_URL", "").strip()
+    if frontend_url:
+        cleaned = frontend_url.rstrip("/")
+        if cleaned not in origins:
+            origins.append(cleaned)
+    allowed = os.getenv("ALLOWED_ORIGINS", "").strip()
+    if allowed:
+        for orig in allowed.split(","):
+            cleaned = orig.strip().rstrip("/")
+            if cleaned and cleaned not in origins:
+                origins.append(cleaned)
+    if "*" not in origins:
+        origins.append("*")
+    return origins
+
 class Settings(BaseModel):
     PROJECT_NAME: str = "TRUSTGRAPH AI"
     VERSION: str = "1.0.0"
     API_PREFIX: str = "/api"
+    PORT: int = int(os.getenv("PORT", "8000"))
+    FRONTEND_URL: str = os.getenv("FRONTEND_URL", "")
     DEMO_MODE: bool = os.getenv("DEMO_MODE", "true").lower() in ("true", "1", "yes")
     MONGODB_URI: str = os.getenv("MONGODB_URI", "mongodb://localhost:27017/trustgraph")
     NEO4J_URI: str = os.getenv("NEO4J_URI", "bolt://localhost:7687")
@@ -46,14 +72,7 @@ class Settings(BaseModel):
     ALLOWED_EXTENSIONS: list[str] = [".png", ".jpg", ".jpeg", ".pdf", ".txt"]
     ALLOWED_IMAGE_TYPES: list[str] = ["image/png", "image/jpeg", "image/jpg"]
     ALLOWED_DOC_TYPES: list[str] = ["application/pdf", "text/plain"]
-    CORS_ORIGINS: list[str] = [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-        "*"
-    ]
+    CORS_ORIGINS: list[str] = _get_cors_origins()
 
 settings = Settings()
+

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE } from '../config/api';
 import {
   Users,
   Shield,
@@ -30,7 +31,7 @@ export default function AdminDashboardView({ authToken, onSelectCase }) {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/users', {
+      const res = await fetch(`${API_BASE}/api/admin/users`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
       if (res.ok) {
@@ -52,7 +53,7 @@ export default function AdminDashboardView({ authToken, onSelectCase }) {
     if (userCases[userId]) return; // already cached
     setLoadingCases(userId);
     try {
-      const res = await fetch(`/api/admin/users/${userId}/cases`, {
+      const res = await fetch(`${API_BASE}/api/admin/users/${userId}/cases`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
       if (res.ok) {
