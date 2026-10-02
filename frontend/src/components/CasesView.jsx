@@ -10,10 +10,12 @@ import {
   MessageSquare, 
   FileText, 
   Globe, 
-  Camera,
-  ChevronRight,
-  Filter,
-  FolderOpen
+  Camera, 
+  ChevronRight, 
+  Filter, 
+  FolderOpen,
+  Trash2,
+  FileDown
 } from 'lucide-react';
 
 export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) {
@@ -28,11 +30,11 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
       const headers = {};
       if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
 
-      const res = await fetch('/api/cases', { headers });
+      const res = await fetch('/api/history', { headers });
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
-          const mapped = data.map((c, idx) => {
+          const mapped = data.map((c) => {
             const dateObj = c.created_at ? new Date(c.created_at) : new Date();
             const dateStr = dateObj.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
             
@@ -47,9 +49,9 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
             }
 
             return {
-              case_id: c.case_id || `TG-00${140 - idx}`,
-              source: c.input_metadata?.source_platform || 'Message',
-              organization: c.extracted_evidence?.organization || 'Government Department',
+              case_id: c.case_id,
+              source: c.input_type || c.input_metadata?.source_platform || 'Message',
+              organization: c.organization || c.extracted_evidence?.organization || 'Government Department',
               status,
               statusType,
               time: dateStr,
@@ -70,6 +72,54 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
       setCases([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeleteCase = async (caseId, e) => {
+    e.stopPropagation();
+    if (!window.confirm(`Are you sure you want to delete case ${caseId}? This action cannot be undone.`)) {
+      return;
+    }
+    try {
+      const headers = {};
+      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+      const res = await fetch(`/api/case/${caseId}`, {
+        method: 'DELETE',
+        headers
+      });
+      if (res.ok) {
+        setCases(prev => prev.filter(c => c.case_id !== caseId));
+      } else {
+        const data = await res.json().catch(() => ({}));
+        alert(data.detail || `Failed to delete case ${caseId}`);
+      }
+    } catch (err) {
+      alert(`Error deleting case: ${err.message}`);
+    }
+  };
+
+  const handleDownloadPdf = async (caseId, e) => {
+    e.stopPropagation();
+    try {
+      const headers = {};
+      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+      const res = await fetch(`/api/report/${caseId}/download`, { headers });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        alert(data.detail || "Failed to download report.");
+        return;
+      }
+      const blob = await res.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `TrustGraph_Report_${caseId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (err) {
+      alert(`Error downloading report: ${err.message}`);
     }
   };
 
@@ -322,14 +372,31 @@ export default function CasesView({ onSelectCase, onStartNewCheck, authToken }) 
                   {item.time}
                 </div>
 
-                {/* Action: View Button */}
-                <div style={{ minWidth: '70px', display: 'flex', justifyContent: 'flex-end', marginLeft: '12px' }}>
+                {/* Action Buttons: View, Download PDF, Delete */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'flex-end', marginLeft: '12px' }}>
                   <button
                     onClick={() => onSelectCase(item.raw_case)}
                     className="tg-btn-secondary"
-                    style={{ padding: '6px 14px', fontSize: '12px' }}
+                    style={{ padding: '6px 12px', fontSize: '12px' }}
+                    title="View case analysis"
                   >
                     <span>View</span>
+                  </button>
+                  <button
+                    onClick={(e) => handleDownloadPdf(item.case_id, e)}
+                    className="tg-btn-secondary"
+                    style={{ padding: '6px 10px', fontSize: '12px' }}
+                    title="Download official PDF report"
+                  >
+                    <FileDown size={14} />
+                  </button>
+                  <button
+                    onClick={(e) => handleDeleteCase(item.case_id, e)}
+                    className="tg-btn-ghost"
+                    style={{ padding: '6px 8px', fontSize: '12px', color: '#DC2626' }}
+                    title="Delete this case"
+                  >
+                    <Trash2 size={14} />
                   </button>
                 </div>
               </div>

@@ -39,9 +39,11 @@ class TestAPIEndpoints(unittest.TestCase):
         self.assertTrue(any(c["severity"] == "CRITICAL" for c in res["contradiction_findings"]))
 
     def test_case_retrieval(self):
+        from backend.utils.auth import create_token
+        token = create_token("USR-ADMIN-001", "admin", "admin")
         analysis = asyncio.run(analyze_recruitment(demo_case_id="case_2_suspicious_domain"))
         case_id = analysis["case_id"]
-        fetched = asyncio.run(get_case_details(case_id))
+        fetched = asyncio.run(get_case_details(case_id, authorization=f"Bearer {token}"))
         self.assertEqual(fetched["case_id"], case_id)
         self.assertEqual(fetched["verdict"], analysis["verdict"])
 

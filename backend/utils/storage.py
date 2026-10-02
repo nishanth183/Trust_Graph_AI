@@ -282,8 +282,22 @@ class StorageEngine:
     # ─── Case CRUD ────────────────────────────────────────────────────────────
 
     def save_case(self, case_id: str, case_data: Dict[str, Any]):
+        # Ensure mandatory case fields are always present
+        if "case_id" not in case_data:
+            case_data["case_id"] = case_id
+        if "analysis_id" not in case_data:
+            case_data["analysis_id"] = f"ANL-{case_id}"
+        if "input_type" not in case_data:
+            case_data["input_type"] = case_data.get("input_metadata", {}).get("input_type", "TEXT")
+        if "organization" not in case_data:
+            case_data["organization"] = case_data.get("extracted_evidence", {}).get("organization") or "Unknown Organization"
+        if "created_at" not in case_data:
+            case_data["created_at"] = datetime.now().isoformat()
+        if "user_id" not in case_data or not case_data["user_id"]:
+            case_data["user_id"] = "USR-ADMIN-001"
+
         self.cases[case_id] = case_data
-        self._record_audit("CASE_CREATED", {"case_id": case_id, "verdict": case_data.get("verdict")})
+        self._record_audit("CASE_CREATED", {"case_id": case_id, "verdict": case_data.get("verdict"), "user_id": case_data.get("user_id")})
         
         # If scam or high risk, index indicators to scam intelligence
         if case_data.get("verdict") == "SCAM":
@@ -302,22 +316,64 @@ class StorageEngine:
                 logger.warning(f"Failed to upsert case to MongoDB: {e}")
 
     def get_case(self, case_id: str) -> Optional[Dict[str, Any]]:
+        try:
+            if CASES_FILE.exists():
+                with open(CASES_FILE, "r", encoding="utf-8") as f:
+                    self.cases = json.load(f)
+        except Exception:
+            pass
         return self.cases.get(case_id)
 
     def list_cases(self, limit: int = 50) -> List[Dict[str, Any]]:
-        # Sort by timestamp desc
+        # Sync with disk if available
+        try:
+            if CASES_FILE.exists():
+                with open(CASES_FILE, "r", encoding="utf-8") as f:
+                    self.cases = json.load(f)
+        except Exception:
+            pass
         items = list(self.cases.values())
         items.sort(key=lambda x: x.get("created_at", ""), reverse=True)
         return items[:limit]
 
     def list_cases_by_user(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
         """Return only cases belonging to a specific user."""
+        try:
+            if CASES_FILE.exists():
+                with open(CASES_FILE, "r", encoding="utf-8") as f:
+                    self.cases = json.load(f)
+        except Exception:
+            pass
         items = [
             c for c in self.cases.values()
             if c.get("user_id") == user_id
         ]
         items.sort(key=lambda x: x.get("created_at", ""), reverse=True)
         return items[:limit]
+
+    def delete_case(self, case_id: str) -> bool:
+        """Permanently delete a case from memory, local storage, and MongoDB Atlas."""
+        # Ensure latest state loaded
+        try:
+            if CASES_FILE.exists():
+                with open(CASES_FILE, "r", encoding="utf-8") as f:
+                    self.cases = json.load(f)
+        except Exception:
+            pass
+
+        if case_id not in self.cases:
+            return False
+        del self.cases[case_id]
+        self._record_audit("CASE_DELETED", {"case_id": case_id})
+        self._save()
+
+        if self.is_mongo_connected and self.mongo_db is not None:
+            try:
+                self.mongo_db["cases"].delete_one({"case_id": case_id})
+                self.mongo_db["cases"].delete_one({"_id": case_id})
+            except Exception as e:
+                logger.warning(f"Failed to delete case {case_id} from MongoDB: {e}")
+        return True
 
     # ─── User CRUD ────────────────────────────────────────────────────────────
 

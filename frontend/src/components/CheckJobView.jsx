@@ -19,7 +19,9 @@ import {
   RefreshCw, 
   Upload,
   Layers,
-  Network
+  Network,
+  Clock,
+  FolderOpen
 } from 'lucide-react';
 import CytoscapeEvidenceGraph from './CytoscapeEvidenceGraph';
 
@@ -27,11 +29,12 @@ export default function CheckJobView({
   preloadedDemo, 
   onOpenReportModal, 
   initialResult,
+  onNavigateToHistory,
   theme = 'light',
   authToken 
 }) {
   // Step state: 1 = choose method, 2 = input details, 3 = loading, 4 = results
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(initialResult ? 4 : 1);
   const [selectedMethod, setSelectedMethod] = useState('message'); // 'message', 'photo', 'pdf', 'website'
 
   // Input states
@@ -177,6 +180,33 @@ export default function CheckJobView({
     setAnalysisResult(null);
     setErrorMessage(null);
     setCurrentStep(1);
+  };
+
+  const handleDownloadPdf = async (e) => {
+    if (e) e.preventDefault();
+    if (!analysisResult?.case_id) return;
+    try {
+      const headers = {};
+      if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+      const url = `/api/report/${analysisResult.case_id}/download${authToken ? `?token=${encodeURIComponent(authToken)}` : ''}`;
+      const res = await fetch(url, { headers });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        alert(data.detail || "Unable to download report.");
+        return;
+      }
+      const blob = await res.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `TrustGraph_Report_${analysisResult.case_id}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (err) {
+      alert(`Error downloading report: ${err.message}`);
+    }
   };
 
   return (
@@ -763,16 +793,27 @@ export default function CheckJobView({
               ← YOUR CHECK IS COMPLETE
             </div>
             
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <a
-                href={`/api/report/${analysisResult?.case_id}/download`}
-                download={`TrustGraph_Report_${analysisResult?.case_id}.pdf`}
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              {onNavigateToHistory && (
+                <button
+                  onClick={onNavigateToHistory}
+                  className="tg-btn-secondary"
+                  style={{ fontSize: '12px', padding: '6px 14px' }}
+                  title="View all your past checks"
+                >
+                  <FolderOpen size={14} />
+                  <span>My Checks</span>
+                </button>
+              )}
+              <button
+                onClick={handleDownloadPdf}
                 className="tg-btn-secondary"
-                style={{ fontSize: '12px', padding: '6px 14px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                style={{ fontSize: '12px', padding: '6px 14px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                title="Download verified PDF report"
               >
                 <FileDown size={14} />
                 <span>Save PDF Report</span>
-              </a>
+              </button>
               <button
                 onClick={handleReset}
                 className="tg-btn-secondary"
@@ -1464,7 +1505,17 @@ export default function CheckJobView({
           </div>
 
           {/* Bottom Call to Action */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', marginTop: '12px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '14px', marginTop: '12px' }}>
+            {onNavigateToHistory && (
+              <button
+                onClick={onNavigateToHistory}
+                className="tg-btn-secondary"
+                style={{ padding: '12px 24px' }}
+              >
+                <FolderOpen size={16} />
+                <span>View All My Checks</span>
+              </button>
+            )}
             <button
               onClick={handleReset}
               className="tg-btn-primary"

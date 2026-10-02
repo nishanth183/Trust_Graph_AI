@@ -108,6 +108,9 @@ class CaseAnalysisResponse(BaseModel):
     created_at: str
     user_id: Optional[str] = None
     username: Optional[str] = None
+    analysis_id: Optional[str] = None
+    input_type: Optional[str] = None
+    organization: Optional[str] = None
 
 class HealthResponse(BaseModel):
     status: str

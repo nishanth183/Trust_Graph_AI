@@ -153,6 +153,7 @@ export default function App() {
             preloadedDemo={preloadedDemoKey}
             initialResult={selectedCaseResult}
             onOpenReportModal={handleOpenReport}
+            onNavigateToHistory={() => setActiveTab('cases')}
             theme={theme}
             authToken={authUser?.token}
           />

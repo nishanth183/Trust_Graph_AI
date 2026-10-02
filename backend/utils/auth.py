@@ -97,3 +97,20 @@ def extract_user_from_header(authorization: Optional[str]) -> Optional[Dict[str,
         return None
     token = authorization[7:]
     return decode_token(token)
+
+
+def extract_user_from_request(request: Optional[Any] = None, authorization: Optional[str] = None) -> Optional[Dict[str, Any]]:
+    """Extract and verify authenticated user from Authorization header or signed token query param."""
+    header = authorization
+    if not header and request and hasattr(request, "headers"):
+        header = request.headers.get("authorization")
+    user = extract_user_from_header(header)
+    if user:
+        return user
+
+    if request and hasattr(request, "query_params"):
+        token = request.query_params.get("token")
+        if token:
+            return decode_token(token)
+
+    return None

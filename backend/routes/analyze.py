@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Optional
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Header, Request, status
 from fastapi.responses import JSONResponse
-from backend.utils.auth import extract_user_from_header
+from backend.utils.auth import extract_user_from_header, extract_user_from_request
 
 from backend.config import settings, UPLOAD_DIR
 from backend.schemas.requests import AnalyzeRequest
@@ -191,11 +191,25 @@ async def analyze_recruitment(
         "total_extracted": sum(1 for v in evidence.values() if v is not None and v != "" and v is not False and v != {})
     }
 
+    analysis_id = f"ANL-{case_id}"
+    extracted_org = evidence.get("organization") or "Unknown Organization"
+
+    # Associate case with logged-in user (if authenticated)
+    user_info = extract_user_from_request(request)
+    user_id = user_info["user_id"] if user_info else "USR-ANONYMOUS"
+    username = user_info["username"] if user_info else "anonymous"
+
     response_payload = {
         "case_id": case_id,
+        "user_id": user_id,
+        "username": username,
+        "created_at": created_at,
+        "input_type": input_type,
+        "organization": extracted_org,
         "verdict": risk_prediction["verdict"],
         "trust_score": risk_prediction["trust_score"],
         "risk_level": risk_prediction["risk_level"],
+        "analysis_id": analysis_id,
         "scam_probability": risk_prediction["scam_probability"],
         "genuine_probability": risk_prediction["genuine_probability"],
         "suspicious_probability": risk_prediction["suspicious_probability"],
@@ -218,15 +232,7 @@ async def analyze_recruitment(
             "source_platform": source_type
         },
         "demo_mode": settings.DEMO_MODE,
-        "created_at": created_at
     }
-
-    # Associate case with logged-in user (if authenticated)
-    auth_header = request.headers.get("authorization") if request else None
-    user_info = extract_user_from_header(auth_header)
-    if user_info:
-        response_payload["user_id"] = user_info["user_id"]
-        response_payload["username"] = user_info["username"]
 
     # Step 11: Save Case & Register Scam Indicators
     storage.save_case(case_id, response_payload)
@@ -234,23 +240,94 @@ async def analyze_recruitment(
     return response_payload
 
 @router.get("/case/{case_id}", response_model=CaseAnalysisResponse)
-async def get_case_details(case_id: str):
+async def get_case_details(
+    case_id: str,
+    request: Request = None,
+    authorization: Optional[str] = Header(None)
+):
+    # 1. Check authentication
+    user_info = extract_user_from_request(request, authorization)
+    if not user_info:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication required to view case details."
+        )
+
+    # 2. Find case
     case = storage.get_case(case_id)
     if not case:
         raise HTTPException(status_code=404, detail=f"Case with ID '{case_id}' not found.")
+
+    # 3. Security check: User must own the case or be admin
+    case_user_id = case.get("user_id")
+    if user_info.get("role") != "admin" and case_user_id != user_info.get("user_id"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access forbidden: You do not own this case."
+        )
+
+    # 4. Return case
     return case
 
+@router.delete("/case/{case_id}")
+async def delete_case(
+    case_id: str,
+    request: Request = None,
+    authorization: Optional[str] = Header(None)
+):
+    # 1. Check authentication
+    user_info = extract_user_from_request(request, authorization)
+    if not user_info:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication required to delete a case."
+        )
+
+    # 2. Find case
+    case = storage.get_case(case_id)
+    if not case:
+        raise HTTPException(status_code=404, detail=f"Case with ID '{case_id}' not found.")
+
+    # 3. Security check: User must own the case or be admin
+    case_user_id = case.get("user_id")
+    if user_info.get("role") != "admin" and case_user_id != user_info.get("user_id"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access forbidden: You cannot delete another user's case."
+        )
+
+    # 4. Delete case
+    deleted = storage.delete_case(case_id)
+    if not deleted:
+        raise HTTPException(status_code=500, detail="Failed to delete case.")
+
+    return {
+        "status": "SUCCESS",
+        "message": f"Case {case_id} deleted successfully."
+    }
+
 @router.get("/cases")
-async def list_cases(request: Request = None, limit: int = 50, authorization: Optional[str] = Header(None)):
-    """List cases. If authenticated, returns only the user's cases. Admins see all."""
-    auth_header = authorization or (request.headers.get("authorization") if request else None)
-    user_info = extract_user_from_header(auth_header)
-    if user_info:
-        if user_info.get("role") == "admin":
-            return storage.list_cases(limit=limit)
-        return storage.list_cases_by_user(user_info["user_id"], limit=limit)
-    # Unauthenticated: return empty list (require login)
-    return []
+@router.get("/history")
+async def list_cases(
+    request: Request = None,
+    limit: int = 50,
+    authorization: Optional[str] = Header(None)
+):
+    """
+    Returns only the authenticated user's verification history.
+    Admin users can access all cases.
+    """
+    user_info = extract_user_from_request(request, authorization)
+    if not user_info:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication required to access case history."
+        )
+
+    if user_info.get("role") == "admin":
+        return storage.list_cases(limit=limit)
+
+    return storage.list_cases_by_user(user_info["user_id"], limit=limit)
 
 @router.get("/demo-cases")
 async def list_demo_cases():
