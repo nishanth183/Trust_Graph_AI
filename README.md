@@ -1,3 +1,12 @@
+---
+title: TrustGraph AI Backend
+emoji: 🛡️
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+---
+
 # TRUSTGRAPH AI
 
 ### AI-Based Fake Government Job & Recruitment Scam Detection System
