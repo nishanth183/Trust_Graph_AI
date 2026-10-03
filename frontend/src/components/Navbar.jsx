@@ -1,9 +1,10 @@
 import React from 'react';
-import { Shield, Sun, Moon, Sparkles, PhoneCall, ChevronDown, User, LogOut, Settings } from 'lucide-react';
+import { Shield, Sun, Moon, Sparkles, PhoneCall, ChevronDown, User, LogOut, Settings, Menu, X } from 'lucide-react';
 
 export default function Navbar({ activeTab, setActiveTab, theme, onToggleTheme, onLoadDemo, authUser, onLogout }) {
   const [demoMenuOpen, setDemoMenuOpen] = React.useState(false);
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const isAdmin = authUser?.role === 'admin';
 
@@ -22,6 +23,9 @@ export default function Navbar({ activeTab, setActiveTab, theme, onToggleTheme, 
     const handleClick = (e) => {
       if (!e.target.closest('.demo-menu-container')) setDemoMenuOpen(false);
       if (!e.target.closest('.user-menu-container')) setUserMenuOpen(false);
+      if (!e.target.closest('.tg-mobile-drawer') && !e.target.closest('.tg-nav-mobile-toggle')) {
+        setMobileMenuOpen(false);
+      }
     };
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
@@ -82,7 +86,7 @@ export default function Navbar({ activeTab, setActiveTab, theme, onToggleTheme, 
       </div>
 
       {/* Navigation Links */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+      <div className="tg-nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
         {navLinks.map((link) => {
           const isActive = activeTab === link.id;
           return (
@@ -112,7 +116,7 @@ export default function Navbar({ activeTab, setActiveTab, theme, onToggleTheme, 
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         
         {/* Demo Preset Dropdown */}
-        <div className="demo-menu-container" style={{ position: 'relative' }}>
+        <div className="demo-menu-container tg-nav-hide-tablet" style={{ position: 'relative' }}>
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -184,7 +188,7 @@ export default function Navbar({ activeTab, setActiveTab, theme, onToggleTheme, 
         </div>
 
         {/* Cyber Helpline 1930 */}
-        <div style={{
+        <div className="tg-nav-hide-tablet" style={{
           display: 'flex',
           alignItems: 'center',
           gap: '6px',
@@ -248,10 +252,10 @@ export default function Navbar({ activeTab, setActiveTab, theme, onToggleTheme, 
               }}>
                 {isAdmin ? <Shield size={13} /> : <User size={13} />}
               </div>
-              <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <span className="tg-nav-hide-mobile" style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {authUser.full_name || authUser.username}
               </span>
-              <ChevronDown size={14} color="var(--text-muted)" />
+              <span className="tg-nav-hide-mobile"><ChevronDown size={14} color="var(--text-muted)" /></span>
             </button>
 
             {userMenuOpen && (
@@ -319,7 +323,161 @@ export default function Navbar({ activeTab, setActiveTab, theme, onToggleTheme, 
           </div>
         )}
 
+        {/* Mobile Hamburger Toggle Button (shown only <= 900px) */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setMobileMenuOpen(prev => !prev);
+            setDemoMenuOpen(false);
+            setUserMenuOpen(false);
+          }}
+          className="tg-btn-ghost tg-nav-mobile-toggle"
+          aria-label="Toggle navigation menu"
+          style={{ width: '38px', height: '38px', padding: 0, borderRadius: '8px' }}
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+
       </div>
+
+      {/* Mobile Navigation Drawer (shown only when mobileMenuOpen is true on <= 900px) */}
+      {mobileMenuOpen && (
+        <div
+          className="tg-mobile-drawer open"
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            width: '100%',
+            height: 'calc(100vh - 60px)',
+            maxHeight: 'calc(100dvh - 60px)',
+            backgroundColor: 'var(--bg-card)',
+            borderTop: '1px solid var(--border-card)',
+            boxShadow: 'var(--shadow-lg)',
+            padding: '24px 20px',
+            overflowY: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '18px',
+            zIndex: 1000
+          }}
+        >
+          {/* Navigation Links */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', paddingLeft: '8px' }}>
+              Menu
+            </span>
+            {navLinks.map((link) => {
+              const isActive = activeTab === link.id;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => {
+                    setActiveTab(link.id);
+                    setMobileMenuOpen(false);
+                  }}
+                  style={{
+                    background: isActive ? 'var(--color-primary-light)' : 'transparent',
+                    border: 'none',
+                    padding: '12px 16px',
+                    borderRadius: '10px',
+                    fontSize: '15px',
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? 'var(--color-primary)' : 'var(--text-primary)',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                  }}
+                >
+                  <span>{link.label}</span>
+                  {isActive && <span style={{ fontSize: '12px', color: 'var(--color-primary)' }}>●</span>}
+                </button>
+              );
+            })}
+          </div>
+
+          <div style={{ borderTop: '1px solid var(--border-subtle)', margin: '4px 0' }} />
+
+          {/* Quick Demo Preloaded Cases */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', paddingLeft: '8px' }}>
+              Quick Demo Cases
+            </span>
+            <button
+              onClick={() => { onLoadDemo('demo_case_01'); setMobileMenuOpen(false); }}
+              className="tg-btn-ghost"
+              style={{ justifyContent: 'flex-start', padding: '10px 12px', fontSize: '13px' }}
+            >
+              <span className="tg-pill tg-pill-verified" style={{ fontSize: '10px', padding: '2px 6px' }}>GENUINE</span>
+              <span>UPSC Civil Services</span>
+            </button>
+            <button
+              onClick={() => { onLoadDemo('demo_case_02'); setMobileMenuOpen(false); }}
+              className="tg-btn-ghost"
+              style={{ justifyContent: 'flex-start', padding: '10px 12px', fontSize: '13px' }}
+            >
+              <span className="tg-pill tg-pill-warning" style={{ fontSize: '10px', padding: '2px 6px' }}>SCAM</span>
+              <span>India Post GDS (UPI Fee)</span>
+            </button>
+            <button
+              onClick={() => { onLoadDemo('demo_case_rrb'); setMobileMenuOpen(false); }}
+              className="tg-btn-ghost"
+              style={{ justifyContent: 'flex-start', padding: '10px 12px', fontSize: '13px' }}
+            >
+              <span className="tg-pill tg-pill-caution" style={{ fontSize: '10px', padding: '2px 6px' }}>DOMAIN</span>
+              <span>Railway RRB (.online)</span>
+            </button>
+          </div>
+
+          <div style={{ borderTop: '1px solid var(--border-subtle)', margin: '4px 0' }} />
+
+          {/* Cyber Helpline 1930 */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '12px 14px',
+            backgroundColor: 'var(--bg-card-subtle)',
+            borderRadius: '12px',
+            border: '1px solid var(--border-subtle)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <PhoneCall size={16} color="var(--color-primary)" />
+              <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)' }}>Cybercrime Helpline</span>
+            </div>
+            <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--color-primary)' }}>1930</span>
+          </div>
+
+          {/* User Session & Logout */}
+          {authUser && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 14px',
+              backgroundColor: 'var(--bg-card-subtle)',
+              borderRadius: '12px',
+              marginTop: 'auto'
+            }}>
+              <div>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>{authUser.full_name}</div>
+                <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>@{authUser.username} · {authUser.role?.toUpperCase()}</div>
+              </div>
+              <button
+                onClick={() => { onLogout(); setMobileMenuOpen(false); }}
+                className="tg-btn-secondary"
+                style={{ fontSize: '12px', color: 'var(--color-danger)', borderColor: 'var(--color-danger)' }}
+              >
+                <LogOut size={13} />
+                <span>Sign Out</span>
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

@@ -373,14 +373,57 @@ body {
   animation: spin 1s linear infinite;
 }
 
-/* Responsive mobile adjustments */
-@media (max-width: 768px) {
+/* ==========================================================================
+   RESPONSIVE NAVIGATION BREAKPOINTS
+   ========================================================================== */
+
+/* Viewport baseline protection (prevents horizontal rubberbanding) */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Desktop defaults (> 900px) */
+.tg-nav-links-desktop {
+  display: flex !important;
+}
+.tg-nav-mobile-toggle {
+  display: none !important;
+}
+.tg-mobile-drawer {
+  display: none !important;
+}
+
+/* Tablet & Mobile navigation (<= 900px) */
+@media (max-width: 900px) {
+  .tg-nav-links-desktop {
+    display: none !important;
+  }
+  .tg-nav-mobile-toggle {
+    display: flex !important;
+  }
+  .tg-nav-hide-tablet {
+    display: none !important;
+  }
+  .tg-mobile-drawer.open {
+    display: flex !important;
+  }
+  nav {
+    padding: 0 16px !important;
+    height: 60px !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .tg-nav-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
   nav {
     padding: 0 12px !important;
     height: 56px !important;
-  }
-  nav > div:nth-child(2) {
-    display: none;
   }
 }
 

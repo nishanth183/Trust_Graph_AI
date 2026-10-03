@@ -228,5 +228,55 @@
       "verdict": "SCAM",
       "user_id": "USR-0007"
     }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-10-02T23:00:37.551155",
+    "details": {
+      "case_id": "TG-2026-000116",
+      "verdict": "GENUINE",
+      "user_id": "USR-ANONYMOUS"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-10-02T23:00:38.662146",
+    "details": {
+      "case_id": "TG-2026-000116",
+      "verdict": "SCAM",
+      "user_id": "USR-ANONYMOUS"
+    }
+  },
+  {
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T23:09:30.841479",
+    "details": {
+      "case_id": "TG-TEST-A1"
+    }
+  },
+  {
+    "action": "CASE_DELETED",
+    "timestamp": "2026-10-02T23:10:47.854795",
+    "details": {
+      "case_id": "TG-TEST-A1"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-10-03T07:47:46.905484",
+    "details": {
+      "case_id": "TG-2026-000119",
+      "verdict": "SCAM",
+      "user_id": "USR-ADMIN-001"
+    }
+  },
+  {
+    "action": "CASE_CREATED",
+    "timestamp": "2026-10-03T11:02:54.147350",
+    "details": {
+      "case_id": "TG-2026-000120",
+      "verdict": "SCAM",
+      "user_id": "USR-0007"
+    }
   }
 ]
